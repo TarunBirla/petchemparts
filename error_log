@@ -1,0 +1,7 @@
+[16-Jan-2026 08:22:01 UTC] PHP Fatal error:  Cannot redeclare App\Providers\AppServiceProvider::boot() in /home/nextecki/petchemparts.nexteck.uk/app/Providers/AppServiceProvider.php on line 36
+[16-Jan-2026 08:22:01 UTC] PHP Fatal error:  Cannot redeclare App\Providers\AppServiceProvider::boot() in /home/nextecki/petchemparts.nexteck.uk/app/Providers/AppServiceProvider.php on line 36
+[16-Jan-2026 08:22:02 UTC] PHP Fatal error:  Cannot redeclare App\Providers\AppServiceProvider::boot() in /home/nextecki/petchemparts.nexteck.uk/app/Providers/AppServiceProvider.php on line 36
+[14-Apr-2026 14:00:25 UTC] PHP Fatal error:  Trait "App\Http\Controllers\Illuminate\Http\Request" not found in /home/nextecki/petchemparts.nexteck.uk/app/Http/Controllers/FrontendController.php on line 22
+[14-Apr-2026 14:00:49 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/nextecki/petchemparts.nexteck.uk/app/Http/Controllers/FrontendController.php on line 21
+[14-Apr-2026 14:00:59 UTC] PHP Fatal error:  Trait "App\Http\Controllers\Illuminate\Http\Request" not found in /home/nextecki/petchemparts.nexteck.uk/app/Http/Controllers/FrontendController.php on line 22
+[14-Apr-2026 14:01:57 UTC] PHP Fatal error:  Trait "App\Http\Controllers\Illuminate\Http\Request" not found in /home/nextecki/petchemparts.nexteck.uk/app/Http/Controllers/FrontendController.php on line 24

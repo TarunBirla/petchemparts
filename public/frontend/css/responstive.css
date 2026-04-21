@@ -1,0 +1,292 @@
+#toggle {
+    width: 35px;
+    height: auto;
+}
+#toggle div {
+    width: 100%;
+    height: 2px;
+    background: #000;
+    margin: 0 0 5px;
+    transition: all 0.3s;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    float: right;
+}
+.two {
+    width: 90% !important;
+}
+.three {
+    width: 50% !important;
+}
+#toggle.on .one {
+    transform: rotate(50deg) translate(3px, 3px);
+}
+#toggle.on .two {
+    opacity: 0;
+}
+#toggle.on .three {
+    transform: rotate(-45deg) translate(8px, -8px);
+    width: 100% !important;
+}
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, 0.55);
+    border-color: transparent;
+    outline: none;
+    box-shadow: none;
+}
+.mob-view {
+    display: none !important;
+}
+.mobile-cart-sec {
+    display: none;
+}
+@media (max-width: 991px) {
+    .dask-view {
+        display: none !important;
+    }
+    .mob-view {
+        display: block !important;
+    }
+    .banner-overlay {
+        top: 65%;
+        text-align: center;
+    }
+    .banner-overlay h1 {
+        font-size: 36px;
+    }
+    .banner-overlay h4 {
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .banner-overlay p {
+        line-height: 22px;
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .owl-dots {
+        bottom: 30px;
+    }
+    .testimonial-sec .section-heading h3 {
+        text-align: center;
+    }
+    .testi-img img {
+        width: 160px !important;
+        height: 160px !important;
+        margin: 0 auto 30px;
+    }
+    .tesimonial-content p {
+        text-align: center;
+    }
+    .test-hed {
+        text-align: center;
+    }
+    .testimonial-area .owl-dots {
+        justify-content: center;
+        margin-left: 0;
+    }
+    .social-links ul {
+        gap: 20px;
+    }
+    .footer-links {
+        gap: 20px;
+        flex-flow: wrap;
+    }
+    .newsletter input {
+        padding: 20px 20px 20px 85px;
+    }
+    .copyright-list {
+        gap: 15px;
+        flex-direction: column;
+    }
+    .follow-sec {
+        padding: 30px 0;
+    }
+    .follow-sec .section-heading h3 {
+        display: none;
+    }
+    .instagram-sec {
+        padding: 30px 0;
+    }
+    .footerlinks-sec .col-lg-12 {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 30px;
+    }
+    .footerlinks-sec {
+        padding: 30px 0 50px;
+    }
+    .blog-list {
+        margin-bottom: 50px;
+    }
+    .blog-sec {
+        padding-bottom: 40px;
+    }
+    .e-com-list {
+        display: none;
+    }
+    .mobile-cart-sec {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: -2px;
+        transform: translateY(-50%);
+        z-index: 999;
+    }
+    .mobile-cart-sec .e-com-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .mobile-cart-sec .e-com-list li a {
+        background: black;
+        padding: 20px 17px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        box-shadow: 2px 5px 13px #0000005e;
+    }
+    .mobile-cart-sec .e-com-list li a img {
+        filter: invert(1);
+    }
+    .lang-list {
+        display: none;
+    }
+    .navbar-collapse {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        top: 60px;
+        left: 0;
+        z-index: 999999;
+        padding: 30px;
+        overflow-y: scroll;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    .navbar-nav {
+        margin-right: 0;
+        justify-content: center;
+    }
+    .pagination {
+        flex-flow: wrap;
+    }
+    .product-play-share .social-links ul {
+        justify-content: center;
+        gap: 20px;
+        flex-flow: wrap;
+    }
+    .lyrics-area p {
+        text-align: center;
+    }
+    .about-product {
+        text-align: center;
+    }
+    .related-product h3 {
+        text-align: center;
+    }
+    .product-img img {
+        height: auto;
+    }
+    .product-img {
+        padding-right: 0;
+    }
+    .product-details {
+        padding-top: 50px;
+    }
+    .check-text a {
+        margin-left: 10px;
+        line-height: 20px;
+        display: block;
+    }
+    .fst-pt {
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid #ddd;
+    }
+    .sequre-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .fst-pt p {
+        padding-right: 0px;
+    }
+    .snd-pt p {
+        padding-left: 0px;
+    }
+    .form-part .form-group {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .form-part .form-group label {
+        margin-bottom: 0.5rem;
+    }
+    .currency-area {
+        flex-direction: column;
+    }
+    .postcode-area {
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        gap: 25px;
+    }
+    .cart-area {
+        align-items: start;
+        flex-direction: column-reverse;
+        gap: 25px;
+    }
+    .pd-lern-more p {
+        font-size: 16px;
+    }
+    .sequre-list li {
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid #ddd;
+    }
+    .sequre-list li:last-child {
+        border-right: 0px;
+        border-bottom: 1px solid transparent;
+    }
+    .about-img {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    #about-img1 {
+        padding-left: 0;
+    }
+    #html_element {
+        display: table;
+        margin: 0 auto;
+    }
+    .right-btn a {
+        float: none;
+        margin: 40px auto 0;
+        display: table;
+    }
+    .cart-img-ct {
+        flex-direction: column;
+    }
+    .cart-item {
+        align-items: start;
+        flex-direction: column;
+    }
+    .cart-progress {
+        margin-top: 30px;
+    }
+    .dashcontent {
+        padding-left: 0px;
+        margin-top: 40px;
+    }
+    .profile-img-area {
+        flex-flow: wrap;
+    }
+    table {
+        overflow-x: scroll;
+    }
+    .wishlist-item {
+        flex-direction: column;
+    }
+    .wish-content ul {
+        padding: 0;
+        margin-top: 30px;
+    }
+    .signup-sec {
+        margin-bottom: 50px;
+    }
+}

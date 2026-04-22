@@ -71,6 +71,12 @@
           </div>
         </div>
     </li>
+    <li class="nav-item">
+    <a class="nav-link" href="{{ route('pdf.index') }}">
+        <i class="fas fa-file-pdf"></i>
+        <span>PDF</span>
+    </a>
+</li>
 
     {{-- Brands --}}
      <li class="nav-item">

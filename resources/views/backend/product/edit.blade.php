@@ -63,6 +63,30 @@
         </div>
 
         <div class="form-group">
+        <label>Part Number</label>
+        <input type="text" name="part_number" class="form-control" value="{{ $product->part_number }}">
+      </div>
+
+      <div class="form-group">
+        <label>Model Number</label>
+        <input type="text" name="model_number" class="form-control" value="{{ $product->model_number }}">
+      </div>
+      <div class="form-group">
+    <label>PDF</label>
+    <select name="pdf_id" class="form-control">
+        <option value="">-- Select PDF --</option>
+
+        @foreach($pdfs as $pdf)
+            <option value="{{ $pdf->id }}"
+                {{ isset($product) && $product->pdf_id == $pdf->id ? 'selected' : '' }}>
+                {{ $pdf->title }} / {{ $pdf->file }}
+            </option>
+        @endforeach
+
+    </select>
+</div>
+
+        <div class="form-group">
           <label for="price" class="col-form-label">Price <span class="text-danger">*</span></label>
                     <input id="price" type="number" step="0.01" name="price" placeholder="Enter price"  value="{{$product->price}}" class="form-control">
           @error('price')

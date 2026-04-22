@@ -15,84 +15,93 @@
     <div class="card-body">
       <div class="table-responsive">
         @if(count($products)>0)
-        <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>S.N.</th>
-              <th>Title</th>
-              <!-- <th>Category</th> -->
-              <th>Is Featured</th>
-              <th>Price</th>
-              <th>Photo</th>
-              <th>Status</th>
-              <th>Manufacturer</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-              <th>Title</th>
-              <th>Is Featured</th>
-              <th>Price</th>
-              <th>Photo</th>
-              <th>Status</th>
-              <th>Manufacturer</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
-          <tbody>
+          <table class="table table-hover table-bordered align-middle" id="product-dataTable">
 
-
-            @foreach($products as $product)
-            @php
-              $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
-              $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
-              @endphp
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->title}}</td>
-                    <td>{{(($product->is_featured==1)? 'Yes': 'No')}}</td>
-                    <td>£ {{$product->price}} /-</td>
-                    <!-- <td>
-                      @if($product->stock>0)
-                      <p class="badge badge-primary">{{$product->stock}}</p>
-                      @else
-                      <p class="badge badge-danger">{{$product->stock}}</p>
-                      @endif
-                    </td> -->
-                    <td>
-                        @if($product->photo)
-                            @php
-                              $photo=$photos = json_decode($product->photo);
-                            @endphp
-                            <img src="{{asset($photo[0])}}" class="img-fluid zoom" style="max-width:80px" alt="{{asset($photo[0])}}">
-                        @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
-                    </td>
-                    <td>
-                        @if($product->status=='active')
-                            <span class="badge badge-success">{{$product->status}}</span>
-                        @else
-                            <span class="badge badge-warning">{{$product->status}}</span>
-                        @endif
-                    </td>
-                    <td> {{ $product->manufacturer->name ?? '-' }}</td>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Part No</th>
+                    <th>Model No</th>
+                    <th>Manufacturer</th>
+                    <th>Category</th>
+                    <th>Pdf</th>
+                    <th>Brand</th>
+                    <!-- <th>Status</th> -->
+                    <th width="120">Action</th>
+                </tr>
+            </thead>
 
-                    <td>
-                        <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('product.destroy',[$product->id])}}">
-                      @csrf
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+            <tbody>
+            @foreach($products as $product)
+
+                @php
+                    $photos = json_decode($product->photo, true);
+                @endphp
+
+                <tr>
+                    <td>{{ $product->id }}</td>
+
+                    <td>{{ $product->title ?? '-' }}</td>
+
+                    <td>{{ $product->part_number ?? '-' }}</td>
+
+                    <td>{{ $product->model_number ?? '-' }}</td>
+                    {{-- Manufacturer --}}
+                        <td>
+                            {{ optional($product->manufacturer)->name ?? '-' }}
+                        </td>
+
+                        {{-- Category --}}
+                        <td>
+                            {{ optional($product->cat_info)->title ?? '-' }}
+                        </td>
+
+                        {{-- PDF --}}
+                        <td>
+                            @if($product->pdf)
+                                <a href="{{ asset($product->pdf->file) }}" target="_blank">
+                                    {{ basename($product->pdf->file) }}
+                                </a>
+                            @else
+                                -
+                            @endif
+                        </td>
+
+                        {{-- Brand --}}
+                        <td>
+                            {{ optional($product->brand)->title ?? '-' }}
+                        </td>
+
+                    
+
+                    <td class="text-center">
+                        <a href="{{route('product.edit',$product->id)}}"
+                           class="btn btn-sm btn-primary">
+                           <i class="fas fa-edit"></i>
+                        </a>
+
+                        <form method="POST"
+                              action="{{route('product.destroy',$product->id)}}"
+                              style="display:inline-block;">
+                            @csrf
+                            @method('delete')
+
+                            <button class="btn btn-sm btn-danger dltBtn"
+                                    data-id="{{$product->id}}">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
+
             @endforeach
-          </tbody>
+            </tbody>
+
         </table>
-        <span style="float:right">{{$products->links()}}</span>
+        <div class="d-flex justify-content-center mt-3">
+          {{ $products->links('pagination::bootstrap-4') }}
+      </div>
         @else
           <h6 class="text-center">No Products found!!! Please create Product</h6>
         @endif
@@ -105,9 +114,7 @@
   <link href="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
   <style>
-      div.dataTables_wrapper div.dataTables_paginate{
-          display: none;
-      }
+     
       .zoom {
         transition: transform .2s; /* Animation */
       }
@@ -115,6 +122,49 @@
       .zoom:hover {
         transform: scale(5);
       }
+      .pagination {
+    justify-content: center;
+}
+
+.page-item.active .page-link {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.page-link {
+    color: #4e73df;
+}
+.pagination {
+    justify-content: center;
+    gap: 6px;
+}
+
+.page-item .page-link {
+    border-radius: 8px !important;
+    padding: 8px 14px;
+    color: #4e73df;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.page-item .page-link:hover {
+    background: #4e73df;
+    color: #fff;
+    border-color: #4e73df;
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(45deg, #4e73df, #224abe);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.page-item.disabled .page-link {
+    color: #aaa;
+    background: #f8f9fc;
+}
   </style>
 @endpush
 

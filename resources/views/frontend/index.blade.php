@@ -1,1046 +1,1034 @@
 @extends('frontend.layouts.master')
 
-@section('title','Petchemparts || Terms & Conditions')
+@section('title', 'Petchemparts — Industrial & Petrochemical Parts Specialists')
 
 @section('main-content')
-<script src="https://cdn.tailwindcss.com"></script>
-    <style>
-    
-    .icon-hover {
-    padding: 8px;
-    border-radius: 50%;
-    transition: background 0.2s;
-}
 
-.icon-hover:hover {
-    background: #f1f5f9;
-}
-
-.badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: #2563eb;
-    color: #fff;
-    font-size: 11px;
-    min-width: 18px;
-    height: 18px;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-           font-family: "Poppins", sans-serif;
-            overflow-x: hidden;
-        }
-
-       .hero-section {
-           
-            position: relative;
-            height: 40vh;
-            min-height: 500px;
-            overflow: hidden;
-        }
-
-
-        /* Banner Slider */
-        .banner-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .slide.active {
-            opacity: 1;
-            z-index: 1;
-        }
-
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:transparent;
-            z-index: 1;
-        }
-
-        /* Page Turn Effect */
-        .slide.page-turn-out {
-            animation: pageTurnOut 1.2s ease-in-out forwards;
-            transform-origin: left center;
-        }
-
-        .slide.page-turn-in {
-            animation: pageTurnIn 1.2s ease-in-out forwards;
-            transform-origin: left center;
-        }
-
-        @keyframes pageTurnOut {
-            0% {
-                transform: perspective(2000px) rotateY(0deg);
-                opacity: 1;
-            }
-            50% {
-                transform: perspective(2000px) rotateY(-90deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: perspective(2000px) rotateY(-180deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes pageTurnIn {
-            0% {
-                transform: perspective(2000px) rotateY(180deg);
-                opacity: 0;
-            }
-            50% {
-                transform: perspective(2000px) rotateY(90deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: perspective(2000px) rotateY(0deg);
-                opacity: 1;
-            }
-        }
-
-        /* Content Overlay */
-        .content-overlay {
-            position: relative;
-            z-index: 10;
-          
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 2.5rem, 2.5rem);
-            font-weight: bold;
-            color: white;
-            text-align: center;
-            margin-bottom: 10px;
-            animation: fadeInUp 1s ease-out;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
-            margin-top:130px;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.5rem, 1.5rem, 1.5rem);
-            color: white;
-            text-align: center;
-            margin-bottom: 12px;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
-            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Search Bar */
-        .search-container {
-            max-width: 900px;
-            width: 100%;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
-        }
-
-        .search-wrapper {
-            background: white;
-            border-radius: 20px;
-            padding: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .search-box {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 1.2rem 1.5rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-btn {
-            background: linear-gradient(135deg, #3b82f6, #9333ea);
-            color: white;
-            padding: 1.2rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-        }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
-            width: 100%;
-            margin-top: 4.5rem;
-            animation: fadeInUp 1s ease-out 0.6s backwards;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1rem 1rem;
-            text-align: center;
-            color: white;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.95;
-        }
-
-        /* Navigation Dots */
-        .slider-nav {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.8rem;
-            z-index: 20;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .nav-dot.active {
-            background: white;
-            transform: scale(1.3);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                transform: translateY(-30px) translateX(20px);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .search-box {
-                flex-direction: row;
-            }
-
-            .search-btn {
-                width: auto;
-            }
-        }
-
-
-                /* Glass effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        /* Smooth dropdown animation */
-        .mega-enter {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.35s ease;
-        }
-
-        .group:hover .mega-enter {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Menu underline animation */
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            width: 0;
-            height: 2px;
-            background: #2563eb;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Icon hover */
-        .icon-hover {
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .icon-hover:hover {
-            transform: scale(1.15);
-            color: #2563eb;
-        }
-
-        /* Search glow */
-        .search-input:focus {
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
-        }
-
-    </style>
-
-
-
-<script>
-function toggleUserDropdown() {
-    document.getElementById('userDropdown').classList.toggle('hidden');
-}
-
-document.addEventListener('click', function (e) {
-    const dropdown = document.getElementById('userDropdown');
-    if (!e.target.closest('.relative')) {
-        dropdown?.classList.add('hidden');
+<style>
+    /* ===== HERO ===== */
+    .hero-section {
+        position: relative;
+        height: 580px;
+        overflow: visible;
+        margin-top: 0;
+        z-index: 1;
     }
-});
-</script>
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .hero-slide.active { opacity: 1; z-index: 1; }
+    .hero-slide::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.35) 100%);
+    }
+    .hero-content {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 0 0 80px;
+        max-width: 700px;
+    }
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(14,165,233,0.18);
+        border: 1px solid rgba(14,165,233,0.35);
+        color: #7DD3FC;
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(8px);
+        width: fit-content;
+    }
+    .hero-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        color: white;
+        line-height: 1.15;
+        margin-bottom: 18px;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-subtitle {
+        font-size: 16px;
+        color: #CBD5E1;
+        margin-bottom: 36px;
+        line-height: 1.65;
+        max-width: 520px;
+    }
+    .hero-cta-group {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+    .hero-btn-primary {
+        background: var(--primary);
+        color: white;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.25s;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        box-shadow: 0 8px 24px rgba(14,165,233,0.35);
+    }
+    .hero-btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px rgba(14,165,233,0.4);
+        color: white;
+    }
+    .hero-btn-outline {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        color: white;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255,255,255,0.25);
+        transition: all 0.25s;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .hero-btn-outline:hover {
+        background: rgba(255,255,255,0.18);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Hero dots */
+    .hero-dots {
+        position: absolute;
+        bottom: 28px;
+        left: 80px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+    .hero-dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255,255,255,0.35);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+    }
+    .hero-dot.active {
+        background: var(--primary);
+        width: 28px;
+    }
+
+    /* Hero stats floating card */
+    .hero-stats-card {
+        position: absolute;
+        bottom: 40px;
+        right: 60px;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 16px;
+        padding: 20px 28px;
+        z-index: 10;
+        display: flex;
+        gap: 32px;
+    }
+    .hero-stat {
+        text-align: center;
+        color: white;
+    }
+    .hero-stat-num {
+        font-family: 'Outfit', sans-serif;
+        font-size: 26px;
+        font-weight: 800;
+        color: white;
+        line-height: 1;
+    }
+    .hero-stat-num span { color: var(--primary); }
+    .hero-stat-label {
+        font-size: 12px;
+        color: #94A3B8;
+        margin-top: 4px;
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        .hero-content { padding: 0 24px; max-width: 100%; }
+        .hero-stats-card { display: none; }
+        .hero-dots { left: 24px; }
+        .hero-section { height: 480px; }
+    }
+
+    /* ===== SEARCH SECTION ===== */
+    .search-section {
+        background: white;
+        padding: 0;
+        position: relative;
+        z-index: 10;
+    }
+    .search-card {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        transform: translateY(-36px);
+    }
+    .search-inner {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        padding: 32px 36px;
+        border: 1px solid #E2E8F0;
+    }
+    .search-inner h2 {
+        font-size: 22px;
+        color: var(--dark);
+        margin-bottom: 20px;
+    }
+    .search-inner h2 span { color: var(--primary); }
+    .search-form-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .search-form-row input {
+        flex: 1;
+        height: 50px;
+        padding: 0 20px;
+        border: 2px solid #E2E8F0;
+        border-radius: 10px;
+        font-size: 14.5px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--dark);
+        transition: border-color 0.2s;
+        outline: none;
+    }
+    .search-form-row input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(14,165,233,0.10);
+    }
+    .search-form-row input::placeholder { color: #94A3B8; }
+    .search-submit-btn {
+        height: 50px;
+        padding: 0 32px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        transition: all 0.2s;
+    }
+    .search-submit-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 640px) {
+        .search-form-row { flex-direction: column; }
+        .search-submit-btn { width: 100%; justify-content: center; }
+        .search-inner { padding: 24px 20px; }
+    }
+
+    /* ===== BRANDS ===== */
+    .brands-section {
+        padding: 20px 0 48px;
+        background: var(--light);
+        overflow: hidden;
+    }
+    .section-label {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+    .section-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 800;
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .brands-track-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+    .brands-track-wrapper::before,
+    .brands-track-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 80px;
+        z-index: 2;
+    }
+    .brands-track-wrapper::before { left: 0; background: linear-gradient(to right, var(--light), transparent); }
+    .brands-track-wrapper::after { right: 0; background: linear-gradient(to left, var(--light), transparent); }
+
+    .brands-track {
+        display: flex;
+        gap: 16px;
+        transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .brand-chip {
+        flex-shrink: 0;
+        min-width: 180px;
+        height: 72px;
+        background: white;
+        border: 1.5px solid #E2E8F0;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 24px;
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--gray);
+        letter-spacing: 0.04em;
+        transition: all 0.2s;
+        cursor: default;
+        box-shadow: var(--shadow-sm);
+    }
+    .brand-chip:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    /* ===== CATEGORIES ===== */
+    .categories-section {
+        padding: 72px 0;
+        background: white;
+    }
+    .cats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+    @media (max-width: 1024px) { .cats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .cats-grid { grid-template-columns: 1fr; } }
+
+    .cat-card {
+        background: var(--light);
+        border: 1.5px solid #E2E8F0;
+        border-radius: 16px;
+        padding: 28px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    .cat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), #38BDF8);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s;
+    }
+    .cat-card:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-4px);
+        background: white;
+    }
+    .cat-card:hover::before { transform: scaleX(1); }
+
+    .cat-icon-wrap {
+        width: 52px;
+        height: 52px;
+        background: var(--primary-light);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 22px;
+        color: var(--primary);
+        transition: all 0.3s;
+    }
+    .cat-card:hover .cat-icon-wrap {
+        background: var(--primary);
+        color: white;
+    }
+    .cat-name {
+        font-family: 'Outfit', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 14px;
+        text-decoration: none;
+        display: block;
+    }
+    .cat-name:hover { color: var(--primary); }
+
+    .sub-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .sub-list a {
+        font-size: 13.5px;
+        color: var(--gray);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 0;
+        transition: color 0.2s;
+    }
+    .sub-list a::before {
+        content: '';
+        width: 4px;
+        height: 4px;
+        background: #CBD5E1;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .sub-list a:hover { color: var(--primary); }
+    .sub-list a:hover::before { background: var(--primary); }
+
+    .cat-footer {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid #E2E8F0;
+    }
+    .cat-footer a {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .cat-footer a:hover { gap: 9px; }
+
+    /* ===== PRODUCTS ===== */
+    .products-section {
+        padding: 72px 0;
+        background: var(--light);
+    }
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+    @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr; } }
+
+    .product-card {
+        background: white;
+        border: 1.5px solid #E2E8F0;
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s;
+    }
+    .product-card:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-4px);
+    }
+    .product-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+
+    .product-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11.5px;
+        color: #94A3B8;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .product-breadcrumb i { font-size: 9px; color: #CBD5E1; }
+
+    .product-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 8px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .product-desc {
+        font-size: 13px;
+        color: var(--gray);
+        line-height: 1.55;
+        margin-bottom: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+    }
+    .product-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 14px;
+    }
+    .product-meta-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12.5px;
+        color: #64748B;
+    }
+    .product-meta-row i { color: var(--primary); font-size: 11px; width: 14px; }
+    .meta-label { font-weight: 600; color: #94A3B8; }
+
+    .product-price {
+        font-family: 'Outfit', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 14px;
+    }
+    .product-price .orig-price {
+        font-size: 14px;
+        font-weight: 500;
+        color: #CBD5E1;
+        text-decoration: line-through;
+        margin-left: 6px;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 8px;
+    }
+    .btn-view {
+        width: 44px;
+        height: 44px;
+        background: var(--light);
+        border: 1.5px solid #E2E8F0;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray);
+        text-decoration: none;
+        font-size: 15px;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+    .btn-view:hover {
+        background: var(--primary-light);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+    .btn-quote {
+        flex: 1;
+        height: 44px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.2s;
+    }
+    .btn-quote:hover {
+        background: var(--primary-dark);
+        color: white;
+        box-shadow: 0 6px 16px rgba(14,165,233,0.3);
+    }
+
+    /* ===== TRUST BADGES ===== */
+    .trust-section {
+        background: var(--dark-2);
+        padding: 64px 0;
+    }
+    .trust-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+    }
+    @media (max-width: 768px) {
+        .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    .trust-card {
+        text-align: center;
+        padding: 32px 20px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        transition: all 0.3s;
+    }
+    .trust-card:hover {
+        background: rgba(14,165,233,0.08);
+        border-color: rgba(14,165,233,0.25);
+        transform: translateY(-4px);
+    }
+    .trust-icon {
+        width: 64px;
+        height: 64px;
+        background: rgba(14,165,233,0.15);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        font-size: 26px;
+        color: var(--primary);
+    }
+    .trust-card h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 6px;
+    }
+    .trust-card p { font-size: 13.5px; color: #64748B; margin: 0; }
+
+    /* ===== SHOW ALL BTN ===== */
+    .show-all-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .show-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 36px;
+        background: var(--primary);
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: all 0.25s;
+        box-shadow: 0 8px 24px rgba(14,165,233,0.25);
+    }
+    .show-all-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px rgba(14,165,233,0.35);
+        color: white;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 24px 48px;
+    }
+
+    /* Category icon mapping (visual variety) */
+    .cat-icons { --icons: '\f085','\f7d9','\f3cd','\f1e6','\f013','\f552'; }
+</style>
 
 
-
-   @if(count($banners) > 0)
-<section class="hero-section ">
-
-    <!-- Banner Slider -->
-    <div class="banner-slider">
-        @foreach($banners as $key => $banner)
-            <div
-                class="slide {{ $key == 0 ? 'active' : '' }}"
-                style="background-image: url('{{ $banner->photo }}')"
-            >
-                <div class="content-overlay">
-                    <h1 class="hero-title">
-                        {{ $banner->title }}
-                    </h1>
-
-                    @if($banner->description)
-                        <h6 class="hero-subtitle">
-                            {!! html_entity_decode($banner->description) !!}
-                        </h6>
-                    @endif
-
-                    <!-- Quick Stats (static – optional) -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">10k+</div>
-                            <div class="stat-label">Products</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">500+</div>
-                            <div class="stat-label">Brands</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Support</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Genuine</div>
-                        </div>
-                    </div>
-                </div>
+{{-- ===== HERO ===== --}}
+@if(count($banners) > 0)
+<section class="hero-section">
+    @foreach($banners as $key => $banner)
+    <div class="hero-slide {{ $key == 0 ? 'active' : '' }}"
+         style="background-image: url('{{ $banner->photo }}')">
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <i class="fas fa-certificate" style="font-size:11px;"></i>
+               {{ $banner->title }}
             </div>
-        @endforeach
+            <h1 class="hero-title">{{ $banner->title }}</h1>
+            @if($banner->description)
+            <p class="hero-subtitle">{!! html_entity_decode(strip_tags($banner->description)) !!}</p>
+            @endif
+            <div class="hero-cta-group">
+                <a href="{{ url('/shop') }}" class="hero-btn-primary">
+                    <i class="fas fa-search"></i> Browse Parts
+                </a>
+                <a href="{{ url('/frontend/contact') }}" class="hero-btn-outline">
+                    <i class="fas fa-file-alt"></i> Request Quote
+                </a>
+            </div>
+        </div>
     </div>
+    @endforeach
 
-    <!-- Floating Particles -->
-    <div class="particle" style="width:8px;height:8px;left:10%;top:20%;animation-delay:0s;"></div>
-    <div class="particle" style="width:6px;height:6px;left:80%;top:30%;animation-delay:2s;"></div>
-    <div class="particle" style="width:10px;height:10px;left:20%;top:70%;animation-delay:4s;"></div>
-    <div class="particle" style="width:7px;height:7px;left:90%;top:60%;animation-delay:1s;"></div>
-    <div class="particle" style="width:9px;height:9px;left:50%;top:15%;animation-delay:3s;"></div>
+   
 
-    <!-- Slider Navigation Dots -->
-    <div class="slider-nav">
+    <!-- Dots -->
+    <div class="hero-dots">
         @foreach($banners as $key => $banner)
-            <div
-                class="nav-dot {{ $key == 0 ? 'active' : '' }}"
-                data-slide="{{ $key }}"
-            ></div>
+        <button class="hero-dot {{ $key == 0 ? 'active' : '' }}" data-slide="{{ $key }}"></button>
         @endforeach
     </div>
-
 </section>
 @endif
 
 <script>
-// document.addEventListener("DOMContentLoaded", function () {
-
-//     const slides = document.querySelectorAll('.slide');
-//     const navDots = document.querySelectorAll('.nav-dot');
-//     let currentSlide = 0;
-//     let isTransitioning = false;
-
-//     function showSlide(index) {
-//         if (isTransitioning || index === currentSlide) return;
-//         isTransitioning = true;
-
-//         const current = slides[currentSlide];
-//         const next = slides[index];
-
-//         current.classList.add('page-turn-out');
-//         current.classList.remove('active');
-
-//         setTimeout(() => {
-//             next.classList.add('page-turn-in', 'active');
-
-//             setTimeout(() => {
-//                 current.classList.remove('page-turn-out');
-//                 next.classList.remove('page-turn-in');
-//                 currentSlide = index;
-//                 isTransitioning = false;
-//             }, 1200);
-//         }, 100);
-
-//         navDots.forEach((dot, i) => {
-//             dot.classList.toggle('active', i === index);
-//         });
-//     }
-
-//     // Auto slide
-//     let autoSlide = setInterval(() => {
-//         let nextIndex = (currentSlide + 1) % slides.length;
-//         showSlide(nextIndex);
-//     }, 5000);
-
-//     // Dot click
-//     navDots.forEach((dot, index) => {
-//         dot.addEventListener('click', () => {
-//             clearInterval(autoSlide);
-//             showSlide(index);
-//             autoSlide = setInterval(() => {
-//                 let nextIndex = (currentSlide + 1) % slides.length;
-//                 showSlide(nextIndex);
-//             }, 5000);
-//         });
-//     });
-
-// });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".nav-dot");
-  let current = 0;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-      dots[i].classList.toggle("active", i === index);
-    });
-    current = index;
-  }
-
-  // Auto slide
-  let interval = setInterval(() => {
-    showSlide((current + 1) % slides.length);
-  }, 4000);
-
-  // Dot click
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      clearInterval(interval);
-      showSlide(index);
-      interval = setInterval(() => {
-        showSlide((current + 1) % slides.length);
-      }, 4000);
-    });
-  });
-});
+(function(){
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    let cur = 0;
+    if (!slides.length) return;
+    function goTo(i) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = i % slides.length;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+    }
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 5000); }));
+    let timer = setInterval(() => goTo(cur + 1), 5000);
+})();
 </script>
 
 
-@php
-// MAIN CATEGORIES
-$categories = DB::table('categories')
-    ->where('status', 'active')
-    ->whereNull('parent_id')
-    ->get();
-
-// SUB CATEGORIES (GROUPED)
-$subcategories = DB::table('categories')
-    ->where('status', 'active')
-    ->whereNotNull('parent_id')
-    ->get()
-    ->groupBy('parent_id');
-@endphp
-
-<div class="container max-w-7xl mx-auto py-3 px-5">
-
-<h2 class="text-3xl font-bold text-center mb-4  text-gray-800">
-                Select by Part number or Manufacturer
-            </h2>
-
-    <form method="GET" action="{{ route('shop') }}">
-        <div class="row">
-
-            {{-- Manufacturer --}}
-            <div class="col-md-3 mb-3">
-                <select name="manufacturer_id" class="form-control">
-                    <option value="">-- Select Manufacturer --</option>
-                    @foreach($manufacturers as $m)
-                        <option value="{{ $m->id }}">{{ $m->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-                       {{-- Category --}}
-            <div class="col-md-3 mb-3">
-                <select name="category_id" id="category" class="form-control">
-                    <option value="">-- Select Category --</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-            
-            {{-- Sub Category --}}
-            <div class="col-md-3 mb-3">
-                <select name="subcategory_id" id="subcategory" class="form-control">
-                    <option value="">-- Select Sub Category --</option>
-                </select>
-            </div>
-
-
-            <div class="col-md-3">
-                <button class="btn btn-primary w-100 inline-flex items-center justify-center px-8 py-2
-             font-semibold rounded-full
-              bg-[#13A1F3] text-white
-              hover:bg-blue-700 transition shadow-lg">
-                    Search Products
-                </button>
-            </div>
-        
-
-
+{{-- ===== SEARCH CARD ===== --}}
+<div class="search-section">
+    <div class="search-card">
+        <div class="search-inner" data-aos="fade-up">
+            <h2><span>Select by Part</span>  Number or Manufacturer</h2>
+            <form method="GET" action="{{ route('shop') }}" style="position:relative;">
+                <div class="search-form-row">
+                    <input
+                        type="text"
+                        id="globalSearch"
+                        name="search"
+                        placeholder="🔍  Search by Part Number, Model, Product Name, or Brand..."
+                        autocomplete="off"
+                        value="{{ request('search') }}"
+                    >
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                        Search Products
+                    </button>
+                </div>
+                <div id="searchResult" style="
+                    position:absolute; top:calc(100% + 8px); left:0; right:0;
+                    background:white; border:1.5px solid #E2E8F0; border-radius:12px;
+                    box-shadow:0 16px 48px rgba(0,0,0,0.12); z-index:2000;
+                    display:none; max-height:320px; overflow-y:auto;
+                "></div>
+            </form>
         </div>
-    </form>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    const category = document.getElementById('category');
-    const subcategory = document.getElementById('subcategory');
-
-    category.addEventListener('change', function () {
-        const categoryId = this.value;
-
-        subcategory.innerHTML = '<option value="">Loading...</option>';
-
-        if (!categoryId) {
-            subcategory.innerHTML = '<option value="">-- Select Sub Category --</option>';
-            return;
-        }
-
-        fetch(`/get-subcategories/${categoryId}`)
-            .then(response => response.json())
-            .then(data => {
-                subcategory.innerHTML = '<option value="">-- Select Sub Category --</option>';
-
-                if (data.length === 0) {
-                    subcategory.innerHTML += '<option value="">No Subcategories</option>';
-                }
-
-                data.forEach(sub => {
-                    subcategory.innerHTML += `
-                        <option value="${sub.id}">
-                            ${sub.title}
-                        </option>
-                    `;
-                });
-            })
-            .catch(error => {
-                console.error(error);
-                subcategory.innerHTML = '<option value="">Error loading</option>';
-            });
-    });
-
-});
-</script>
-
-
-    <!-- Top Brands Carousel -->
-    <section class="py-4 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">
-                Trusted By Top Brands
-            </h2>
-
-            <!-- Carousel Wrapper -->
-            <div class="relative w-full overflow-hidden">
-    <!-- Track -->
-    <div
-        id="brandTrack"
-        class="flex gap-8 items-center transition-transform duration-700 ease-in-out"
-    >
-        @php
-            $brands = DB::table('brands')->where('status', 'active')->orderBy('title', 'asc')->get();
-        @endphp
-
-        @foreach($brands as $brand)
-            <div class="min-w-[200px] h-24 flex items-center justify-center bg-[#F9FAFB] rounded-xl shadow hover:shadow-md transition">
-                <span>{{ $brand->title }}</span>
-            </div>
-        @endforeach
     </div>
 </div>
 
-        </div>
-    </section>
-    <script>
-        const track = document.getElementById("brandTrack");
-        let index = 0;
-        const itemWidth = 232; // 200px + gap
-        const totalItems = track.children.length;
-
-        setInterval(() => {
-            index++;
-
-            track.style.transform = `translateX(-${index * itemWidth}px)`;
-
-            // Reset smoothly for infinite effect
-            if (index >= totalItems - 6) {
-                setTimeout(() => {
-                    track.style.transition = "none";
-                    track.style.transform = "translateX(0)";
-                    index = 0;
-                    setTimeout(() => {
-                        track.style.transition =
-                            "transform 700ms ease-in-out";
-                    }, 50);
-                }, 700);
+<script>
+$(document).on('keyup', '#globalSearch', function () {
+    const q = $(this).val();
+    if (q.length < 2) { $('#searchResult').hide().html(''); return; }
+    $.ajax({
+        url: "{{ route('product.search') }}", type: "GET", data: { q },
+        success: (data) => {
+            let html = '';
+            if (data.length) {
+                data.forEach(item => {
+                    html += `<a href="/shop?search=${encodeURIComponent(item.title)}" style="display:flex;align-items:center;gap:10px;padding:11px 18px;text-decoration:none;color:#1E293B;font-size:13.5px;border-bottom:1px solid #F8FAFC;transition:background 0.15s;" onmouseover="this.style.background='#F0F9FF'" onmouseout="this.style.background=''">
+                        <i class="fas fa-cog" style="color:#0EA5E9;font-size:13px;"></i>
+                        <span style="flex:1;">${item.title}</span>
+                        ${item.part_number ? `<span style="background:#F1F5F9;color:#64748B;font-size:11px;padding:2px 8px;border-radius:4px;">${item.part_number}</span>` : ''}
+                    </a>`;
+                });
+            } else {
+                html = `<div style="padding:16px 18px;color:#94A3B8;font-size:13.5px;">No results found for "<strong>${q}</strong>"</div>`;
             }
-        }, 2500);
-    </script>
+            $('#searchResult').html(html).show();
+        }
+    });
+});
+$(document).click(e => { if (!$(e.target).closest('#globalSearch, #searchResult').length) $('#searchResult').hide(); });
+</script>
 
 
-    <!-- Popular Categories -->
-    @php
-$categories = DB::table('categories')
-    ->where('status', 'active')
-    ->whereNull('parent_id')   // only MAIN categories
-     ->limit(4)
-    ->get();
+{{-- ===== BRANDS ===== --}}
+<section class="brands-section">
+    <div class="section-label">Our Partners</div>
+    <h2 class="section-title">Trusted By Top Brands</h2>
+    <div class="brands-track-wrapper">
+        <div id="brandTrack" class="brands-track">
+            @php $brands = DB::table('brands')->where('status','active')->orderBy('title','asc')->get(); @endphp
+            @foreach($brands as $brand)
+            <div class="brand-chip">{{ $brand->title }}</div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<script>
+(function(){
+    const track = document.getElementById('brandTrack');
+    if (!track) return;
+    const itemW = 196;
+    let idx = 0;
+    const total = track.children.length;
+    setInterval(() => {
+        idx++;
+        track.style.transform = `translateX(-${idx * itemW}px)`;
+        if (idx >= total - 5) {
+            setTimeout(() => {
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(0)';
+                idx = 0;
+                setTimeout(() => track.style.transition = 'transform 700ms cubic-bezier(0.25,0.1,0.25,1)', 50);
+            }, 700);
+        }
+    }, 2500);
+})();
+</script>
 
-$subcategories = DB::table('categories')
-    ->where('status', 'active')
-    ->whereNotNull('parent_id')
-    ->get()
-    ->groupBy('parent_id');   // group by main category
+
+{{-- ===== CATEGORIES ===== --}}
+@php
+$categories = DB::table('categories')->where('status','active')->whereNull('parent_id')->limit(4)->get();
+$subcategories = DB::table('categories')->where('status','active')->whereNotNull('parent_id')->get()->groupBy('parent_id');
 @endphp
 
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">
-            Popular Categories
-        </h2>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            @foreach($categories as $category)
-                <div class="category-card bg-white rounded-2xl shadow-lg overflow-hidden hover-lift">
-
-                    <!-- Icon Area -->
-                   <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
-                        <!--@if(!empty($category->photo))-->
-                        <!--    <img-->
-                        <!--        src="{{ asset($category->photo) }}"-->
-                        <!--        alt="{{ $category->title }}"-->
-                        <!--        class="w-full h-full object-cover"-->
-                        <!--    >-->
-                        <!--@else-->
-                            <!-- fallback image -->
-                        <!--    <img-->
-                        <!--        src="{{ asset('images/category-placeholder.png') }}"-->
-                        <!--        alt="No Image"-->
-                        <!--        class="w-24 h-24 opacity-60"-->
-                        <!--    >-->
-                        <!--@endif-->
-                    </div>
-
-
-                    <!-- Content -->
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-4 text-gray-800 uppercase">
-                            <a href="{{ route('product-cat', $category->slug) }}">
-                                
-                            {{ $category->title }}
-                            </a>
-                        </h3>
-
-                        <!-- Subcategories -->
-                        <ul class="space-y-2 text-gray-600 mb-6">
-                            @if(isset($subcategories[$category->id]))
-                                @foreach($subcategories[$category->id]->take(4) as $sub)
-<li>
-        <a href="{{ route('product-sub-cat', [
-        'slug' => $category->slug,
-        'sub_slug' => $sub->slug
-    ]) }}"
-
-       class="hover:text-[#13A1F3] transition">
-        {{ $sub->title }}
-    </a>
-</li>
-
-                                @endforeach
-                            @else
-                                <li class="text-gray-400 text-sm">
-                                    No subcategories
-                                </li>
-                            @endif
-                        </ul>
-
-
-                        
-
-
-                    </div>
-                </div>
-            @endforeach
-
+<section class="categories-section">
+    <div class="section-header">
+        <div class="section-label">Browse by Type</div>
+        <h2 class="section-title" style="margin-bottom:0;">Popular Categories</h2>
+    </div>
+    <div class="cats-grid">
+        @php
+        $catIcons = ['fa-cogs', 'fa-bolt', 'fa-tint', 'fa-thermometer-half', 'fa-wrench', 'fa-industry', 'fa-cube', 'fa-filter'];
+        @endphp
+        @foreach($categories as $i => $category)
+        <div class="cat-card" data-aos="fade-up" data-aos-delay="{{ $i * 80 }}">
+            <div class="cat-icon-wrap">
+                <i class="fas {{ $catIcons[$i % count($catIcons)] }}"></i>
+            </div>
+            <a href="{{ route('product-cat', $category->slug) }}" class="cat-name">
+                {{ $category->title }}
+            </a>
+            <ul class="sub-list">
+                @if(isset($subcategories[$category->id]))
+                    @foreach($subcategories[$category->id]->take(5) as $sub)
+                    <li>
+                        <a href="{{ route('product-sub-cat', ['slug' => $category->slug, 'sub_slug' => $sub->slug]) }}">
+                            {{ $sub->title }}
+                        </a>
+                    </li>
+                    @endforeach
+                    @if(count($subcategories[$category->id]) > 5)
+                    <li style="font-size:12px; color:#94A3B8; padding: 4px 0 0 10px;">
+                        +{{ count($subcategories[$category->id]) - 5 }} more
+                    </li>
+                    @endif
+                @else
+                    <li style="font-size:13px; color:#CBD5E1;">No subcategories</li>
+                @endif
+            </ul>
+            <div class="cat-footer">
+                <a href="{{ route('product-cat', $category->slug) }}">
+                    View all <i class="fas fa-arrow-right" style="font-size:11px;"></i>
+                </a>
+            </div>
         </div>
-        
-<div class="flex justify-center mt-6">
-    <a href="/frontend/showcategory"
-       class="inline-flex items-center justify-center px-8 py-2
-              text-lg font-semibold rounded-full
-              bg-[#13A1F3] text-white
-              hover:bg-blue-700 transition shadow-lg">
-        Show All →
-    </a>
-</div>
-
+        @endforeach
+    </div>
+    <div class="show-all-wrap">
+        <a href="/frontend/showcategory" class="show-all-btn">
+            View All Categories <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 </section>
 
 
-
-    <!-- Popular Products -->
-    <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-
-        <!-- Heading -->
-        <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">
-            Popular Products
-        </h2>
-
-       
-        @php
+{{-- ===== PRODUCTS ===== --}}
+@php
 $products = DB::table('products')
     ->leftJoin('categories as parent_cat', 'products.cat_id', '=', 'parent_cat.id')
     ->leftJoin('categories as child_cat', 'products.child_cat_id', '=', 'child_cat.id')
+    ->leftJoin('manufacturers', 'products.manufacturer_id', '=', 'manufacturers.id')
+    ->leftJoin('pdfs', 'products.pdf_id', '=', 'pdfs.id')
     ->where('products.status', 'active')
     ->orderBy('products.id', 'DESC')
-    ->select(
-        'products.*',
-        'parent_cat.title as category_name',
-        'child_cat.title as subcategory_name'
-    )
-     ->limit(4)
+    ->select('products.*', 'parent_cat.title as category_name', 'child_cat.title as subcategory_name', 'manufacturers.name as manufacturer_name','pdfs.file as pdf_file')
+    ->limit(8)
     ->get();
 @endphp
 
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            @foreach($products as $product)
-                @php
-                    $photos = json_decode($product->photo, true);
-                    $image = $photos[0] ?? 'frontend/img/no-image.png';
-
-                    $discountedPrice = $product->discount > 0
-                        ? $product->price - ($product->price * $product->discount / 100)
-                        : $product->price;
-                @endphp
-
-                <!-- Product Card -->
-                <div class="bg-gray-50 rounded-2xl p-2 hover:shadow-xl transition">
-
-                    <!-- Image -->
-                   <div class="h-48 bg-white rounded-xl mb-2 overflow-hidden relative">
-    <!--<img -->
-    <!--    src="{{ asset($image) }}"-->
-    <!--    alt="{{ $product->title }}"-->
-    <!--    class="w-full h-full object-cover transition duration-300 hover:scale-105"-->
-    <!-->
-
-    <!--@if($product->discount > 0)-->
-    <!--    <span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full">-->
-    <!--        -{{ $product->discount }}%-->
-    <!--    </span>-->
-    <!--@endif-->
-</div>
-<div class="text-xs text-gray-500 mb-1">
-    @if($product->category_name)
-        <span class="font-semibold text-gray-700">
-            {{ $product->category_name }}
-        </span>
-    @endif
-
-    @if($product->subcategory_name)
-        <span class="mx-1">›</span>
-        <span class="text-gray-500">
-            {{ $product->subcategory_name }}
-        </span>
-    @endif
-</div>
-
-
-
-                    <!-- Title -->
-                    <h3 class="font-bold text-lg mb-1 text-gray-800">
-                        {{ $product->title }}
-                    </h3>
-
-                    <!-- Short Description -->
-                    <p class="text-sm text-gray-500 mb-2">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($product->summary ?? ''), 60) }}
-                    </p>
-
-                    <!-- Price -->
-                    <div class="mb-2">
-                        @if($product->discount > 0)
-                            <!--<span class="text-sm line-through text-gray-400">-->
-                            <!--    £{{ number_format($product->price, 2) }}-->
-                            <!--</span>-->
-                            <span class="text-2xl font-bold text-[#13A1F3] ml-2">
-                                £{{ number_format($discountedPrice, 2) }}
-                            </span>
-                        @else
-                            <span class="text-2xl font-bold text-[#13A1F3]">
-                                £{{ number_format($product->price, 2) }}
-                            </span>
-                        @endif
-                    </div>
-
-                    <!-- Button -->
-                      <div class="flex gap-3 mt-3">
-    <a href="{{ route('product-detail', $product->slug) }}"
-       class="w-1/4 text-center bg-[#13A1F3] text-white py-2 rounded-xl font-semibold hover:shadow-lg transition">
-        View
-    </a>
-
-    <a href="{{ route('add-to-cart', $product->slug) }}"
-       class="w-3/4 text-center bg-[#0EA5E9] text-white py-2 rounded-xl font-semibold hover:shadow-lg transition">
-        Request for Quote
-    </a>
-</div>
-
-
+<section class="products-section">
+    <div class="section-header">
+        <div class="section-label">Our Inventory</div>
+        <h2 class="section-title" style="margin-bottom:0;">Latest Products</h2>
+    </div>
+    <div class="products-grid">
+        @foreach($products as $i => $product)
+        @php
+            $photos = json_decode($product->photo, true);
+            $image = $photos[0] ?? 'frontend/img/no-image.png';
+            $discountedPrice = $product->discount > 0
+                ? $product->price - ($product->price * $product->discount / 100)
+                : $product->price;
+        @endphp
+        <div class="product-card" data-aos="fade-up" data-aos-delay="{{ ($i % 4) * 80 }}">
+            <div class="product-card-body">
+                <!-- Breadcrumb -->
+                <div class="product-breadcrumb">
+                    @if($product->category_name)
+                    <span>{{ $product->category_name }}</span>
+                    @endif
+                    @if($product->subcategory_name)
+                    <i class="fas fa-chevron-right"></i>
+                    <span>{{ $product->subcategory_name }}</span>
+                    @endif
                 </div>
-            @endforeach
 
+                <!-- Title -->
+                <div class="product-title">{{ $product->title }}</div>
+
+                <!-- Desc -->
+                @if($product->summary)
+                <div class="product-desc">{{ \Illuminate\Support\Str::limit(strip_tags($product->summary), 80) }}</div>
+                @endif
+
+                <!-- Meta -->
+                <div class="product-meta">
+                    @if($product->manufacturer_name)
+                    <div class="product-meta-row">
+                        <i class="fas fa-industry"></i>
+                        <span class="meta-label">Manufacturer:</span>
+                        <span>{{ $product->manufacturer_name }}</span>
+                    </div>
+                    @endif
+                    @if($product->part_number)
+                    <div class="product-meta-row">
+                        <i class="fas fa-barcode"></i>
+                        <span class="meta-label">Part No:</span>
+                        <span>{{ $product->part_number }}</span>
+                    </div>
+                    @endif
+                    @if($product->model_number)
+                    <div class="product-meta-row">
+                        <i class="fas fa-tag"></i>
+                        <span class="meta-label">Model:</span>
+                        <span>{{ $product->model_number }}</span>
+                    </div>
+                    @endif
+                    @if($product->pdf_file)
+                        <div class="product-meta-row">
+                            <i class="fas fa-file-pdf"></i>
+
+                            <a href="{{ asset($product->pdf_file) }}" target="_blank" class="meta-label">
+                                  {{ basename($product->pdf_file) }}
+                            </a>
+                        </div>
+                        @endif
+                </div>
+
+                <!-- Price -->
+                <div class="product-price">
+                    £{{ number_format($discountedPrice, 2) }}
+                    @if($product->discount > 0)
+                    <span class="orig-price">£{{ number_format($product->price, 2) }}</span>
+                    @endif
+                </div>
+
+                <!-- Actions -->
+                <div class="product-actions">
+                    <a href="{{ route('product-detail', $product->slug) }}" class="btn-view" title="View Details">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{{ route('add-to-cart', $product->slug) }}" class="btn-quote">
+                        <i class="fas fa-file-invoice"></i>
+                        Request Quote
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="flex justify-center mt-6">
-    <a href="/frontend/showproduct"
-       class="inline-flex items-center justify-center px-8 py-2
-              text-lg font-semibold rounded-full
-              bg-[#13A1F3] text-white
-              hover:bg-blue-700 transition shadow-lg">
-        Show All →
-    </a>
-</div>
+        @endforeach
+    </div>
+    <div class="show-all-wrap">
+        <a href="/frontend/showproduct" class="show-all-btn">
+            View All Products <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
 </section>
 
 
-    <!-- Trust Badges -->
-    <section class="py-16 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 text-center">
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#13A1F3] rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">100% Genuine</h3>
-                    <p class="text-gray-400">Authentic Products</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#13A1F3] rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">20 Years</h3>
-                    <p class="text-gray-400">Industry Experience</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#13A1F3] rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">100% Verified</h3>
-                    <p class="text-gray-400">Quality Assured</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#13A1F3] rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Secure Payment</h3>
-                    <p class="text-gray-400">Safe Transactions</p>
-                </div>
-            </div>
+{{-- ===== TRUST BADGES ===== --}}
+<section class="trust-section">
+    <div class="trust-grid">
+        <div class="trust-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>100% Genuine</h3>
+            <p>All parts sourced from authorized suppliers. Guaranteed authentic.</p>
         </div>
-    </section>
+        <div class="trust-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="trust-icon"><i class="fas fa-award"></i></div>
+            <h3>20+ Years</h3>
+            <p>Two decades of industry expertise serving global clients.</p>
+        </div>
+        <div class="trust-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="trust-icon"><i class="fas fa-check-double"></i></div>
+            <h3>Quality Verified</h3>
+            <p>Every part is thoroughly inspected before dispatch.</p>
+        </div>
+        <div class="trust-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="trust-icon"><i class="fas fa-headset"></i></div>
+            <h3>Expert Support</h3>
+            <p>Our team is available 7 days a week to assist you.</p>
+        </div>
+    </div>
+</section>
 
-    <!-- Footer -->
-    
-                <div class="border-t border-gray-700 pt-8 max-w-7xl mx-auto">
-                <div class=" rounded-lg p-6 mb-6">
-                    <h5 class="text-black font-bold mb-3">Legal Disclaimer</h5>
-                    <p class="text-sm text-black leading-relaxed">
-                        Petchemparts is not an authorized dealer, agent or affiliate of any of the designer, brands, or manufacturer; the products of which are offered for sale on www.petchemparts.com. All trademarks, brand names, and logos mentioned are used for identification purposes only and are registered trademarks of their respective owners who reserve the rights of ownership. The use of trademark, brand name or product on our website is not intended to suggest that the company, trademark or brand is affiliated to or endorses our website. All products are 100% genuine and legally purchased from authorized sources.
-                    </p>
-                </div>
-                
-                <!-- Payment Methods -->
-                <div class="flex flex-wrap items-center justify-center gap-4 mb-6">
-                    <div class="bg-white rounded px-3 py-2">
-                        <span class="text-gray-800 font-semibold text-sm">VISA</span>
-                    </div>
-                    <div class="bg-white rounded px-3 py-2">
-                        <span class="text-gray-800 font-semibold text-sm">MasterCard</span>
-                    </div>
-                    <div class="bg-white rounded px-3 py-2">
-                        <span class="text-gray-800 font-semibold text-sm">PayPal</span>
-                    </div>
-                    <div class="bg-white rounded px-3 py-2">
-                        <span class="text-gray-800 font-semibold text-sm">Amex</span>
-                    </div>
-                </div>
-                
-                
-            </div>
-            
-            
-  
-
-    <script>
-        // Back to top button functionality
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible');
-            } else {
-                backToTop.classList.add('opacity-0', 'invisible');
-                backToTop.classList.remove('opacity-100', 'visible');
-            }
-        });
-        
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Mobile menu toggle (if needed)
-        // Add your mobile menu logic here
-    </script>
-    
-    @endsection
+@endsection

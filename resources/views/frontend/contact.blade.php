@@ -1,178 +1,382 @@
-
 @extends('frontend.layouts.master')
 
 @section('title','Petchemparts || Contact Us')
 
 @section('main-content')
-<script src="https://cdn.tailwindcss.com"></script>
-
 
 <style>
+    /* ── PAGE HERO ── */
+    .pg-hero {
+        background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 60%, #0EA5E9 100%);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+    .pg-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230EA5E9' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .pg-hero-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+        z-index: 2;
+    }
+    .pg-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: #94A3B8;
+        margin-bottom: 20px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .pg-breadcrumb a { color: #94A3B8; text-decoration: none; }
+    .pg-breadcrumb a:hover { color: #0EA5E9; }
+    .pg-breadcrumb i { font-size: 10px; }
+    .pg-hero h1 {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 14px;
+        line-height: 1.1;
+    }
+    .pg-hero p {
+        font-size: 17px;
+        color: #94A3B8;
+        max-width: 560px;
+        line-height: 1.65;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
 
-    .theme-bg { background-color: #13A1F3; }
-    .theme-text { color: #13A1F3; }
-    .theme-border { border-color: #13A1F3; }
+    /* ── CONTACT LAYOUT ── */
+    .contact-section {
+        padding: 72px 0 80px;
+        background: #F8FAFC;
+    }
+    .contact-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 36px;
+        align-items: start;
+    }
+    @media (max-width: 1024px) {
+        .contact-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── FORM CARD ── */
+    .contact-form-card {
+        background: #fff;
+        border: 1.5px solid #E2E8F0;
+        border-radius: 20px;
+        padding: 40px 44px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    }
+    @media (max-width: 640px) { .contact-form-card { padding: 28px 20px; } }
+
+    .form-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: #0F172A;
+        margin-bottom: 28px;
+    }
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+    @media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 6px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        letter-spacing: 0.02em;
+    }
+    .form-group label span { color: #EF4444; margin-left: 2px; }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #E2E8F0;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+        background: #F8FAFC;
+        transition: all 0.2s;
+        outline: none;
+    }
+    .form-control-custom:focus {
+        border-color: #0EA5E9;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(14,165,233,0.08);
+    }
+    .form-control-custom::placeholder { color: #94A3B8; }
+    textarea.form-control-custom { resize: vertical; min-height: 130px; }
+
+    .submit-btn {
+        width: 100%;
+        padding: 14px 24px;
+        background: #0EA5E9;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s;
+        margin-top: 8px;
+    }
+    .submit-btn:hover {
+        background: #0284C7;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(14,165,233,0.30);
+    }
+
+    /* ── SIDEBAR CARDS ── */
+    .contact-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .info-card {
+        background: #fff;
+        border: 1.5px solid #E2E8F0;
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .info-card-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1.5px solid #F1F5F9;
+    }
+
+    .info-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 18px;
+    }
+    .info-item:last-child { margin-bottom: 0; }
+    .info-icon {
+        width: 40px;
+        height: 40px;
+        background: #E0F2FE;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+        color: #0EA5E9;
+    }
+    .info-text {}
+    .info-text strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #94A3B8;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin-bottom: 3px;
+    }
+    .info-text span {
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.6;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .info-text a {
+        font-size: 14px;
+        color: #334155;
+        text-decoration: none;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .info-text a:hover { color: #0EA5E9; }
+
+    /* Hours table */
+    .hours-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #F1F5F9;
+        font-size: 13.5px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: #475569; font-weight: 500; }
+    .hours-row .time { color: #0F172A; font-weight: 600; }
+    .hours-row .closed { color: #EF4444; font-weight: 600; }
+
+    /* Social icons */
+    .social-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+    }
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        background: #E0F2FE;
+        color: #0EA5E9;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .social-btn:hover {
+        background: #0EA5E9;
+        color: #fff;
+        transform: translateY(-2px);
+    }
 </style>
 
-    <!-- Hero Section -->
-    <div class="theme-bg text-white py-20 mt-[80px]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
-            <p class="text-xl text-gray-100 max-w-3xl mx-auto">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+<!-- Hero -->
+<div class="pg-hero">
+    <div class="pg-hero-inner">
+        <div class="pg-breadcrumb">
+            <a href="{{ url('/') }}">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span style="color:#fff;">Contact Us</span>
         </div>
+        <h1>Get In Touch</h1>
+        <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
     </div>
+</div>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <!-- Contact Form -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                                <input type="text" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                                <input type="text" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                       placeholder="Doe">
-                            </div>
-                        </div>
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-inner">
 
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                            <input type="email" 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                   placeholder="john.doe@example.com">
-                        </div>
+        <!-- Form -->
+        <div class="contact-form-card">
+            <div class="form-title">Send Us a Message</div>
+            <form>
+                @csrf
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name <span>*</span></label>
+                        <input type="text" class="form-control-custom" placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name <span>*</span></label>
+                        <input type="text" class="form-control-custom" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address <span>*</span></label>
+                    <input type="email" class="form-control-custom" placeholder="john.doe@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control-custom" placeholder="+44 123 456 7890">
+                </div>
+                <div class="form-group">
+                    <label>Company / Organisation</label>
+                    <input type="text" class="form-control-custom" placeholder="Your Company Ltd.">
+                </div>
+                <div class="form-group">
+                    <label>Subject <span>*</span></label>
+                    <input type="text" class="form-control-custom" placeholder="How can we help?">
+                </div>
+                <div class="form-group">
+                    <label>Message <span>*</span></label>
+                    <textarea class="form-control-custom" placeholder="Tell us more about your inquiry, part numbers needed, quantity etc..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Message
+                </button>
+            </form>
+        </div>
 
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                            <input type="tel" 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                   placeholder="+44 123 456 7890">
-                        </div>
+        <!-- Sidebar -->
+        <div class="contact-sidebar">
 
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
-                            <input type="text" 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                   placeholder="How can we help?">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                            <textarea rows="6" 
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                      placeholder="Tell us more about your inquiry..."></textarea>
-                        </div>
-
-                        <button class="w-full theme-bg text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition">
-                            Send Message
-                        </button>
+            <!-- Contact Info -->
+            <div class="info-card">
+                <div class="info-card-title">Contact Information</div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <strong>Phone</strong>
+                        <a href="tel:+441234440530">+44 123 444 0530</a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <strong>Email</strong>
+                        <a href="mailto:sales@petchemparts.com">sales@petchemparts.com</a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <strong>Address</strong>
+                        <span>Suite 211 Sterling House,<br>Langston Road, Loughton<br>IG10 3TS, United Kingdom</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Contact Information -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-md p-8 mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 theme-bg rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Phone</h4>
-                                <p class="text-gray-600">+44 123 456 7890</p>
-                                <p class="text-gray-600">+44 098 765 4321</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 theme-bg rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Email</h4>
-                                <p class="text-gray-600">info@yourstore.com</p>
-                                <p class="text-gray-600">support@yourstore.com</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 theme-bg rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Address</h4>
-                                <p class="text-gray-600">123 Business Street</p>
-                                <p class="text-gray-600">London, UK W1A 1AA</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 theme-bg rounded-full flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Business Hours</h4>
-                                <p class="text-gray-600">Monday - Friday: 9AM - 6PM</p>
-                                <p class="text-gray-600">Saturday: 10AM - 4PM</p>
-                                <p class="text-gray-600">Sunday: Closed</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Business Hours -->
+            <div class="info-card">
+                <div class="info-card-title">Business Hours</div>
+                <div class="hours-row">
+                    <span class="day">Monday – Friday</span>
+                    <span class="time">9:00 – 19:00</span>
                 </div>
-
-                <!-- Social Media -->
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Follow Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-12 h-12 theme-bg rounded-full flex items-center justify-center hover:opacity-90 transition">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 theme-bg rounded-full flex items-center justify-center hover:opacity-90 transition">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 theme-bg rounded-full flex items-center justify-center hover:opacity-90 transition">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"></path>
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 theme-bg rounded-full flex items-center justify-center hover:opacity-90 transition">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
-                            </svg>
-                        </a>
-                    </div>
+                <div class="hours-row">
+                    <span class="day">Saturday</span>
+                    <span class="time">9:00 – 17:00</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Sunday</span>
+                    <span class="time">10:00 – 16:00</span>
                 </div>
             </div>
+
+            <!-- Social -->
+            <div class="info-card">
+                <div class="info-card-title">Follow Us</div>
+                <div class="social-row">
+                    <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
         </div>
-
-       
     </div>
-
+</section>
 
 @endsection

@@ -16,6 +16,7 @@
     use App\Http\Controllers\NotificationController;
     use App\Http\Controllers\ManufacturerController;
     use App\Http\Controllers\HomeController;
+    use App\Http\Controllers\PdfController;
     use \UniSharp\LaravelFilemanager\Lfm;
 use App\Models\Category;
     // CACHE CLEAR ROUTE
@@ -118,7 +119,7 @@ Route::get('/get-subcategories/{id}', function ($id) {
             //
             Route::get('product-play/{slug}', [FrontendController::class, 'productPlay'])->name('product-play');
         //
-            Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
+            // Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
             Route::get('/product-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
             Route::get('/product-sub-cat/{slug}/{sub_slug}', [FrontendController::class, 'productSubCat'])->name('product-sub-cat');
             Route::get('/product-brand/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
@@ -199,6 +200,8 @@ Route::get('/get-subcategories/{id}', function ($id) {
         // Product
         Route::resource('/product', 'ProductController');
         Route::resource('manufacturer', ManufacturerController::class);
+        Route::resource('pdf', PdfController::class); // ✅ ADD THIS
+
         // Ajax for sub category
         Route::post('/category/{id}/child', 'CategoryController@getChildByParent');
         // POST category
@@ -262,3 +265,6 @@ Route::get('/get-subcategories/{id}', function ($id) {
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
+
+Route::get('/product/search', [FrontendController::class, 'productSearch'])
+    ->name('product.search');

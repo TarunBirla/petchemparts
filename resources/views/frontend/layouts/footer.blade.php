@@ -1,132 +1,416 @@
+{{-- resources/views/frontend/layouts/footer.blade.php --}}
+
 <style>
-     body{
-           font-family: "Poppins", sans-serif;
-            
-        }
+    /* ===== FOOTER ===== */
+    .site-footer {
+        background: var(--dark);
+        color: #94A3B8;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin-top: 0;
+    }
+
+    .footer-top {
+        border-bottom: 1px solid #1E293B;
+        padding: 64px 0 48px;
+    }
+
+    .footer-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+    }
+
+    @media (max-width: 1024px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* Brand column */
+    .footer-brand-logo { height: 44px; margin-bottom: 16px; }
+    .footer-brand-desc {
+        font-size: 14px;
+        line-height: 1.75;
+        color: #64748B;
+        max-width: 320px;
+        margin-bottom: 24px;
+    }
+    .footer-social {
+        display: flex;
+        gap: 10px;
+    }
+    .footer-social a {
+        width: 38px;
+        height: 38px;
+        background: #1E293B;
+        color: #94A3B8;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 15px;
+        transition: all 0.2s;
+    }
+    .footer-social a:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    /* Column headings */
+    .footer-col-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+        letter-spacing: 0.02em;
+        position: relative;
+        padding-bottom: 12px;
+    }
+    .footer-col-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 32px;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+    }
+
+    /* Footer links */
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-links a {
+        color: #64748B;
+        text-decoration: none;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.2s;
+    }
+    .footer-links a::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        background: #334155;
+        border-radius: 50%;
+        flex-shrink: 0;
+        transition: background 0.2s;
+    }
+    .footer-links a:hover {
+        color: var(--primary);
+        padding-left: 4px;
+    }
+    .footer-links a:hover::before { background: var(--primary); }
+
+    /* Contact items */
+    .footer-contact-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 16px;
+    }
+    .footer-contact-icon {
+        width: 34px;
+        height: 34px;
+        background: #1E293B;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--primary);
+        font-size: 14px;
+    }
+    .footer-contact-text {
+        font-size: 13.5px;
+        color: #64748B;
+        line-height: 1.6;
+    }
+    .footer-contact-text strong {
+        display: block;
+        color: #CBD5E1;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    /* Newsletter */
+    .footer-newsletter {
+        margin-top: 4px;
+    }
+    .newsletter-form {
+        display: flex;
+        gap: 0;
+        border: 1px solid #1E293B;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 12px;
+        background: #1E293B;
+    }
+    .newsletter-form input {
+        flex: 1;
+        padding: 11px 14px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 13px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        outline: none;
+    }
+    .newsletter-form input::placeholder { color: #475569; }
+    .newsletter-form button {
+        background: var(--primary);
+        border: none;
+        color: white;
+        padding: 0 16px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--primary-dark); }
+
+    /* Hours */
+    .hours-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13.5px;
+        padding: 8px 0;
+        border-bottom: 1px solid #1E293B;
+        color: #64748B;
+    }
+    .hours-row:last-of-type { border-bottom: none; }
+    .hours-row .day { color: #94A3B8; font-weight: 500; }
+    .hours-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 12px;
+        background: rgba(14,165,233,0.1);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(14,165,233,0.2);
+    }
+
+    /* Bottom bar */
+    .footer-bottom {
+        padding: 20px 24px;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .footer-bottom-text {
+        font-size: 13px;
+        color: #475569;
+    }
+    .footer-payment-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .payment-badge {
+        background: #1E293B;
+        color: #94A3B8;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 6px;
+        letter-spacing: 0.04em;
+        border: 1px solid #334155;
+    }
+
+    /* Disclaimer */
+    .footer-disclaimer {
+        background: #0A0F1A;
+        padding: 20px 24px;
+    }
+    .footer-disclaimer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        font-size: 12px;
+        color: #334155;
+        line-height: 1.7;
+    }
+    .footer-disclaimer-inner strong { color: #475569; }
+
+    /* Back to top */
+    #backToTop {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        width: 46px;
+        height: 46px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        z-index: 500;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        box-shadow: 0 8px 20px rgba(14,165,233,0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #backToTop.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    #backToTop:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+    }
 </style>
 
-<footer class="bg-gray-800 text-gray-300 py-12">
-    <div class="max-w-7xl mx-auto px-4">
+<footer class="site-footer">
+    <div class="footer-top">
+        <div class="footer-grid">
 
-        <!-- Footer Grid -->
-        <div class="grid md:grid-cols-4 gap-8 mb-10">
+            <!-- Brand Column -->
+            <div>
+                <img src="/brands/logo.png" alt="Petchemparts" class="footer-brand-logo">
+                <p class="footer-brand-desc">
+                    A leading supplier of genuine industrial & petrochemical parts. Trusted by engineers and procurement teams across the UK and globally.
+                </p>
+                <div class="footer-social">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="text-white font-bold text-lg mb-4">Quick Links</h4>
-                <!--<ul class="space-y-2">-->
-                <!--    <li><a href="/" class="hover:text-white transition">Your Account</a></li>-->
-                <!--    <li><a href="{{ url('/frontend/aboutus') }}" class="hover:text-white transition">About Us</a></li>-->
-                <!--    <li><a href="{{ url('/frontend/termcondition') }}" class="hover:text-white transition">Terms & Conditions</a></li>-->
-                <!--    <li><a href="/" class="hover:text-white transition">Delivery</a></li>-->
-                <!--    <li><a href="{{ url('/frontend/contact') }}" class="hover:text-white transition">Contact Us</a></li>-->
-                <!--</ul>-->
-                
-                                <ul class="space-y-2">
-                    <li><a href="/" class="hover:text-white transition">Your Account</a></li>
-                    <li><a href="/" class="hover:text-white transition">About Us</a></li>
-                    <li><a href="/" class="hover:text-white transition">Terms & Conditions</a></li>
-                    <li><a href="/" class="hover:text-white transition">Delivery</a></li>
-                    <li><a href="/" class="hover:text-white transition">Contact Us</a></li>
+                <h4 class="footer-col-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/">Your Account</a></li>
+                    <li><a href="{{ url('/frontend/aboutus') }}">About Us</a></li>
+                    <li><a href="{{ url('/frontend/termcondition') }}">Terms & Conditions</a></li>
+                    <li><a href="{{ url('/frontend/contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url('/shop') }}">Shop All Parts</a></li>
+                    <li><a href="{{ url('/frontend/contact') }}">Request a Quote</a></li>
                 </ul>
             </div>
 
             <!-- Contact Info -->
             <div>
-                <h4 class="text-white font-bold text-lg mb-4">Contact Info</h4>
-                <ul class="space-y-4 text-sm">
+                <h4 class="footer-col-title">Contact Info</h4>
 
-                    <li class="flex gap-3">
-                        <svg class="w-5 h-5 text-[#13A1F3] mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        <span>
-                            Suite 211 Sterling House,<br>
-                            Langston Road, Loughton<br>
-                            IG10 3TS, United Kingdom
-                        </span>
-                    </li>
-
-                    <li class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-[#13A1F3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1"/>
-                        </svg>
-                        <span>+44 123 444 0530</span>
-                    </li>
-
-                    <li class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-[#13A1F3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        <span>sales@petchemparts.com</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Business Hours -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-4">Business Hours</h4>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-[#13A1F3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span>7 Days a week</span>
-                    </li>
-                    <li class="pl-7">9:00 AM – 7:00 PM</li>
-                    <li class="pt-4">
-                        <a href="{{ url('/frontend/contact') }}"
-                           class="block bg-[#13A1F3] text-white text-center px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                            Request Quote
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Social + Newsletter -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-4">Follow Us</h4>
-
-                <div class="flex space-x-4 mb-6">
-                    @foreach(['facebook','twitter','linkedin','youtube'] as $icon)
-                        <a href="#" class="w-10 h-10 bg-[#13A1F3] rounded-lg flex items-center justify-center hover:opacity-80 transition">
-                            <i class="fab fa-{{ $icon }} text-white"></i>
-                        </a>
-                    @endforeach
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="footer-contact-text">
+                        <strong>Address</strong>
+                        Suite 211 Sterling House, Langston Road,<br>Loughton, IG10 3TS, UK
+                    </div>
                 </div>
 
-                <h4 class="text-white font-bold text-sm mb-2">Newsletter</h4>
-                <p class="text-sm mb-3">Subscribe for updates</p>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="footer-contact-text">
+                        <strong>Phone</strong>
+                        +44 123 444 0530
+                    </div>
+                </div>
 
-                <form class="flex">
-                    <input type="email" required
-                           placeholder="Your email"
-                           class="flex-1 px-4 py-2 rounded-l-lg text-gray-900 focus:outline-none">
-                    <button type="submit"
-                            class="bg-[#13A1F3] px-2 py-2 rounded-r-lg hover:shadow-lg transition text-white">
-                        →
-                    </button>
-                </form>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="footer-contact-text">
+                        <strong>Email</strong>
+                        sales@petchemparts.com
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hours & Newsletter -->
+            <div>
+                <h4 class="footer-col-title">Business Hours</h4>
+                <div class="hours-row"><span class="day">Monday – Friday</span><span>9:00 – 19:00</span></div>
+                <div class="hours-row"><span class="day">Saturday</span><span>9:00 – 17:00</span></div>
+                <div class="hours-row"><span class="day">Sunday</span><span>10:00 – 16:00</span></div>
+                <div class="hours-badge">
+                    <i class="fas fa-circle" style="font-size:7px;"></i>
+                    Currently Open
+                </div>
+
+                <div class="footer-newsletter" style="margin-top:24px;">
+                    <p style="font-size:13px; color:#64748B; margin-bottom:0;">Subscribe for updates & offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="border-top:1px solid #1E293B;">
+        <div class="footer-bottom">
+            <p class="footer-bottom-text">
+                &copy; {{ date('Y') }} <strong style="color:#64748B;">Petchemparts</strong> — A Brand Unit of Pearloon Business Services Ltd. (UK)
+            </p>
+            <div class="footer-payment-badges">
+                <span class="payment-badge">VISA</span>
+                <span class="payment-badge">Mastercard</span>
+                <span class="payment-badge">PayPal</span>
+                <span class="payment-badge">Amex</span>
+                <span class="payment-badge">Bank Transfer</span>
             </div>
         </div>
+    </div>
 
-        <!-- Bottom -->
-        <div class="border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-            © {{ date('Y') }} Petchemparts — A Brand Unit of Pearloon Business Services Ltd. (UK)
+    <!-- Disclaimer -->
+    <div class="footer-disclaimer">
+        <div class="footer-disclaimer-inner">
+            <strong>Legal Disclaimer:</strong> Petchemparts is not an authorized dealer, agent or affiliate of any of the designers, brands, or manufacturers whose products are offered for sale on www.petchemparts.com. All trademarks, brand names, and logos are used for identification purposes only and are registered trademarks of their respective owners. All products are 100% genuine and legally purchased from authorized sources.
         </div>
-
     </div>
 </footer>
 
 <!-- Back to Top -->
-<button id="backToTop"
-        class="fixed bottom-8 right-8 bg-[#13A1F3] text-white p-4 rounded-full shadow-xl
-               opacity-0 invisible transition-all duration-300">
-    ↑
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
 </button>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 700, once: true, offset: 60 });
+
+    window.addEventListener('scroll', () => {
+        document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
+    });
+</script>
+@stack('scripts')
+</body>
+</html>

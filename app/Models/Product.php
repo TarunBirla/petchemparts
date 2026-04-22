@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
+use App\Models\Pdf;
 class Product extends Model
 {
-    protected $fillable=['title','slug','summary','description','url','sold_by','country','name_of_manufacture','address_of_manufacture','cat_id','child_cat_id','price','brand_id','discount','status','photo','size','stock','is_featured','condition','manufacturer_id'];
+    protected $fillable=['title','slug','summary','description','url','sold_by','country','name_of_manufacture','address_of_manufacture','cat_id','child_cat_id','price','brand_id','discount','status','photo','size','stock','is_featured','condition','manufacturer_id','pdf_id','part_number','model_number'];
 
     public function cat_info(){
         return $this->hasOne('App\Models\Category','id','cat_id');
@@ -49,6 +50,12 @@ class Product extends Model
 {
     return $this->belongsTo(Manufacturer::class);
 }
+
+public function pdf()
+{
+    return $this->belongsTo(Pdf::class);
+}
+
 
 
 }

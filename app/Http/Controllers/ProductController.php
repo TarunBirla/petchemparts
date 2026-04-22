@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Manufacturer;
+use App\Models\Pdf;
 
 use Illuminate\Support\Str;
 
@@ -28,8 +29,9 @@ class ProductController extends Controller
         $brand=Brand::get();
         $category=Category::where('is_parent',1)->get();
          $manufacturers = Manufacturer::where('status','active')->get();
+           $pdfs = Pdf::where('status','active')->get(); // ✅ ADD
         // $category=Category::where('is_parent',1)->get();
-        return view('backend.product.create')->with('categories',$category)->with('brands',$brand)->with('manufacturers',$manufacturers);
+        return view('backend.product.create')->with('categories',$category)->with('brands',$brand)->with('manufacturers',$manufacturers)->with('pdfs',$pdfs); // ✅ ADD;
     }
     
     public function store(Request $request)
@@ -54,6 +56,9 @@ class ProductController extends Controller
             'condition'=>'required',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric',
+            'part_number' => 'nullable|string|max:255',
+             'model_number' => 'nullable|string|max:255',
+             'pdf_id' => 'nullable|exists:pdfs,id',
            
         ]);
 
@@ -106,10 +111,11 @@ class ProductController extends Controller
         $category = Category::where('is_parent',1)->get();
         $items = Product::where('id',$id)->get();
         $manufacturers = Manufacturer::where('status','active')->get();
+           $pdfs = Pdf::where('status','active')->get(); // ✅ ADD
 
         return view('backend.product.edit')->with('product',$product)
                     ->with('brands',$brand)
-                    ->with('categories',$category)->with('items',$items)->with('manufacturers',$manufacturers);
+                    ->with('categories',$category)->with('items',$items)->with('manufacturers',$manufacturers)->with('pdfs',$pdfs); // ✅ ADD;
     }
 
     public function update(Request $request, $id)
@@ -134,7 +140,10 @@ class ProductController extends Controller
             'status'=>'required|in:active,inactive',
             'condition'=>'required',
             'price'=>'required|numeric',
-            'discount'=>'nullable|numeric'
+            'discount'=>'nullable|numeric',
+            'part_number' => 'nullable|string|max:255',
+             'model_number' => 'nullable|string|max:255',
+             'pdf_id' => 'nullable|exists:pdfs,id',
         ]);
         
         $data=$request->all();

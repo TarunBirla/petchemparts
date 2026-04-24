@@ -15,6 +15,7 @@ class Product extends Model
     public function sub_cat_info(){
         return $this->hasOne('App\Models\Category','id','child_cat_id');
     }
+    
     public static function getAllProduct(){
         return Product::with(['cat_info','sub_cat_info'])->orderBy('id','desc')->paginate(10);
     }
@@ -43,12 +44,13 @@ class Product extends Model
         return $this->hasMany(Wishlist::class)->whereNotNull('cart_id');
     }
 
-    public function brand(){
-        return $this->hasOne(Brand::class,'id','brand_id');
-    }
-    public function manufacturer()
-{
-    return $this->belongsTo(Manufacturer::class);
+  
+public function brand(){
+    return $this->belongsTo(Brand::class, 'brand_id');
+}
+
+public function manufacturer(){
+    return $this->belongsTo(Manufacturer::class, 'manufacturer_id');
 }
 
 public function pdf()

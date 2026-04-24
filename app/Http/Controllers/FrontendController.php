@@ -254,11 +254,19 @@ class FrontendController extends Controller
         return view('frontend.pages.contact');
     }
 
-    public function productDetail($slug)
-    {
-        $product_detail = Product::getProductBySlug($slug);
-        return view('frontend.pages.product_detail')->with('product_detail', $product_detail);
+ public function productDetail($slug)
+{
+    $product_detail = Product::with(['cat_info','brand','manufacturer'])
+        ->where('slug', $slug)
+        ->first();
+
+    // 🔥 DEBUG
+    if(!$product_detail){
+        dd('Product not found');
     }
+
+    return view('frontend.pages.product_detail', compact('product_detail'));
+}
 
     public function productPlay($slug)
     {

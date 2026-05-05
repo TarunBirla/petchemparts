@@ -254,19 +254,19 @@ class FrontendController extends Controller
         return view('frontend.pages.contact');
     }
 
- public function productDetail($slug)
-{
-    $product_detail = Product::with(['cat_info','brand','manufacturer'])
-        ->where('slug', $slug)
-        ->first();
+    public function productDetail($slug)
+    {
+        $product_detail = Product::with(['cat_info', 'brand', 'manufacturer'])
+            ->where('slug', $slug)
+            ->first();
 
-    // 🔥 DEBUG
-    if(!$product_detail){
-        dd('Product not found');
+        // 🔥 DEBUG
+        if (!$product_detail) {
+            dd('Product not found');
+        }
+
+        return view('frontend.pages.product_detail', compact('product_detail'));
     }
-
-    return view('frontend.pages.product_detail', compact('product_detail'));
-}
 
     public function productPlay($slug)
     {
@@ -430,16 +430,38 @@ class FrontendController extends Controller
     }
 
 
-    public function productBrand(Request $request)
+    public function productBrand(Request $request, $slug)
     {
-        $products = Brand::getProductByBrand($request->slug);
-        $recent_products = Product::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
-        if (request()->is('e-shop.loc/product-grids')) {
-            return view('frontend.pages.product-grids')->with('products', $products->products)->with('recent_products', $recent_products);
-        } else {
-            return view('frontend.pages.product-lists')->with('products', $products->products)->with('recent_products', $recent_products);
+        // 🔥 Step 1: get brand
+        $brand = DB::table('brands')->where('slug', $slug)->first();
+
+        if (!$brand) {
+            abort(404);
         }
 
+        // 🔥 Step 2: filter products
+        $query = Product::where('status', 'active')
+            ->where('brand_id', $brand->id);
+
+        // 🔥 Step 3: SEARCH ADD (important)
+        if ($request->search) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('title', 'like', "%$s%")
+                    ->orWhere('part_number', 'like', "%$s%")
+                    ->orWhere('model_number', 'like', "%$s%");
+            });
+        }
+
+        // 🔥 Step 4: pagination
+        $products = $query->paginate(12)->appends($request->all());
+
+        $recent_products = Product::where('status', 'active')
+            ->latest()
+            ->limit(3)
+            ->get();
+
+        return view('frontend.pages.product-lists', compact('products', 'recent_products', 'brand'));
     }
     public function productCat(Request $request)
     {

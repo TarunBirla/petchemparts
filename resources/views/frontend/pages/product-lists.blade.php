@@ -598,7 +598,7 @@
     $allCategories = App\Models\Category::getAllParentWithChild();
     $currentCategorySlug = request()->route('slug') ?? null;
     $currentSubSlug = request()->route('sub_slug') ?? null;
-    $currentBrandSlug = request()->route('brand_slug') ?? null;
+    $currentBrandSlug = request()->route('slug') ?? null;
 
     // Current category & subcategory object
     $currentCategory = $currentCategorySlug

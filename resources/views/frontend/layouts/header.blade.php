@@ -1,133 +1,152 @@
-<!-- ══════════════════════════════════════════════
-     HEADER — Terracotta & Cream Design System
-     Colors: #C25A2A · #FFFFFF · #F6F1E9
-     Font: Plus Jakarta Sans (already loaded)
-══════════════════════════════════════════════ -->
+{{-- ══════════════════════════════════════════════════════
+     PETCHEMPARTS — PROFESSIONAL HEADER
+     Colors: #C25A2A (terra) · #FFFFFF (white) · #F6F1E9 (cream)
+     Font: Plus Jakarta Sans
+══════════════════════════════════════════════════════ --}}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
-/* ── ROOT TOKENS ── */
 :root {
-    --terra:      #C25A2A;
-    --terra-dk:   #A34921;
-    --terra-lt:   #D97B50;
-    --terra-dim:  rgba(194, 90, 42, 0.10);
-    --terra-glow: rgba(194, 90, 42, 0.22);
-    --cream:      #F6F1E9;
-    --cream-dk:   #EDE6D8;
-    --cream-dkr:  #DDD4C0;
-    --white:      #FFFFFF;
-    --ink:        #1A0F08;
-    --ink-2:      #3D2516;
-    --ink-3:      #6B3F22;
-    --mist:       #8C6E5A;
-    --fog:        #B89880;
-    --sep:        rgba(194, 90, 42, 0.15);
-    --font:       'Plus Jakarta Sans', sans-serif;
+    --T:     #C25A2A;
+    --T-dk:  #9E4420;
+    --T-lt:  #D97040;
+    --T-xs:  rgba(194,90,42,0.08);
+    --T-sm:  rgba(194,90,42,0.14);
+    --T-md:  rgba(194,90,42,0.22);
+    --T-gl:  rgba(194,90,42,0.30);
+    --CR:    #F6F1E9;
+    --CR-dk: #EDE5D8;
+    --CR-dr: #D9CEBC;
+    --WH:    #FFFFFF;
+    --INK:   #1C0E06;
+    --INK2:  #2E1A0E;
+    --MID:   #7A5840;
+    --FOG:   #A8896E;
+    --FN:    'Plus Jakarta Sans', sans-serif;
+    --sh-sm: 0 2px 12px rgba(28,14,6,0.08);
+    --sh-md: 0 8px 32px rgba(28,14,6,0.12);
+    --sh-lg: 0 20px 60px rgba(28,14,6,0.16);
 }
 
-/* ── TOPBAR ── */
-.hdr-topbar {
-    background: var(--ink);
-    height: 38px;
+* { box-sizing: border-box; }
+
+/* ─── TOPBAR ─────────────────────────────────────── */
+.pc-topbar {
+    background: var(--INK);
+    height: 36px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(194,90,42,0.25);
+    border-bottom: 1px solid rgba(194,90,42,0.20);
 }
-.hdr-topbar-inner {
-    max-width: 1280px;
+.pc-topbar-inner {
+    max-width: 1360px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 28px;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 16px;
-    font-size: 12px;
-    color: var(--fog);
-    font-family: var(--font);
+    gap: 0;
+    font-family: var(--FN);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--FOG);
     letter-spacing: 0.01em;
 }
-.hdr-topbar-inner a {
-    color: var(--fog);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.hdr-topbar-inner a:hover { color: var(--terra-lt); }
-.hdr-top-sep {
-    width: 1px;
-    height: 12px;
-    background: rgba(194,90,42,0.3);
-    flex-shrink: 0;
-}
-.hdr-top-socials {
-    margin-left: auto;
-    display: flex;
-    gap: 16px;
-}
-.hdr-top-socials a {
-    font-size: 11px;
-    color: var(--fog);
-    transition: color 0.2s;
-}
-.hdr-top-socials a:hover { color: var(--terra-lt); }
-
-/* ── MAIN HEADER ── */
-.hdr-main {
-    background: var(--white);
-    border-bottom: 1px solid var(--cream-dk);
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: box-shadow 0.3s;
-}
-.hdr-main.scrolled {
-    box-shadow: 0 4px 24px rgba(194, 90, 42, 0.10);
-}
-.hdr-main-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-    height: 70px;
+.pc-top-item {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 6px;
+    padding: 0 14px;
+    border-right: 1px solid rgba(194,90,42,0.18);
+    height: 36px;
+    white-space: nowrap;
+}
+.pc-top-item:first-child { padding-left: 0; }
+.pc-top-item i { color: var(--T-lt); font-size: 10px; }
+.pc-top-item a { color: var(--FOG); text-decoration: none; transition: color .18s; }
+.pc-top-item a:hover { color: var(--T-lt); }
+.pc-top-socials {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+.pc-top-socials a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--FOG);
+    font-size: 11px;
+    text-decoration: none;
+    border-left: 1px solid rgba(194,90,42,0.18);
+    transition: all .18s;
+}
+.pc-top-socials a:hover { color: var(--T-lt); background: rgba(194,90,42,0.10); }
+
+/* ─── MAIN HEADER ────────────────────────────────── */
+.pc-header {
+    background: var(--WH);
+    border-bottom: 1px solid var(--CR-dk);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow .25s;
+}
+.pc-header.is-scrolled {
+    box-shadow: 0 4px 28px rgba(194,90,42,0.12);
+}
+.pc-header-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 0;
 }
 
 /* Logo */
-.hdr-logo img {
-    height: 46px;
+.pc-logo {
+    flex-shrink: 0;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+}
+.pc-logo img {
+    height: 44px;
     width: auto;
-    object-fit: contain;
     display: block;
 }
 
-/* Page Nav Links */
-.hdr-nav {
+/* Page Nav */
+.pc-nav {
     display: flex;
     align-items: center;
     gap: 2px;
-    margin-left: 16px;
+    font-family: var(--FN);
 }
-.hdr-nav a {
-    padding: 7px 14px;
+.pc-nav a {
+    padding: 8px 14px;
     font-size: 13.5px;
     font-weight: 600;
-    color: var(--ink-2);
+    color: var(--INK2);
     text-decoration: none;
     border-radius: 8px;
-    font-family: var(--font);
-    transition: all 0.2s;
-    white-space: nowrap;
     letter-spacing: 0.01em;
+    transition: all .18s;
+    white-space: nowrap;
 }
-.hdr-nav a:hover {
-    color: var(--terra);
-    background: var(--terra-dim);
+.pc-nav a:hover {
+    color: var(--T);
+    background: var(--T-xs);
 }
 
-/* Right actions */
-.hdr-actions {
+/* Actions */
+.pc-actions {
     margin-left: auto;
     display: flex;
     align-items: center;
@@ -135,419 +154,665 @@
     flex-shrink: 0;
 }
 
-/* Cart / Request button */
-.hdr-cart-btn {
+/* Request quote button */
+.pc-cart-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: var(--terra-dim);
-    color: var(--terra-dk);
+    gap: 9px;
+    background: var(--T-xs);
+    color: var(--T-dk);
     text-decoration: none;
     padding: 9px 18px;
-    border-radius: 10px;
+    border-radius: 9px;
     font-size: 13.5px;
     font-weight: 700;
-    font-family: var(--font);
-    border: 1.5px solid rgba(194,90,42,0.2);
-    transition: all 0.22s;
+    font-family: var(--FN);
+    border: 1.5px solid var(--T-md);
+    transition: all .22s;
+    white-space: nowrap;
 }
-.hdr-cart-btn:hover {
-    background: var(--terra);
-    color: var(--white);
-    border-color: var(--terra);
-    box-shadow: 0 6px 18px var(--terra-glow);
+.pc-cart-btn:hover {
+    background: var(--T);
+    color: var(--WH);
+    border-color: var(--T);
+    box-shadow: 0 6px 20px var(--T-gl);
     transform: translateY(-1px);
 }
-.hdr-cart-badge {
-    background: var(--terra);
-    color: var(--white);
-    font-size: 10.5px;
+.pc-cart-badge {
+    background: var(--T);
+    color: var(--WH);
+    font-size: 10px;
     font-weight: 800;
-    min-width: 18px;
-    height: 18px;
-    border-radius: 9px;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 5px;
-    font-family: var(--font);
-    transition: background 0.2s;
+    transition: background .2s;
 }
-.hdr-cart-btn:hover .hdr-cart-badge {
-    background: rgba(255,255,255,0.25);
+.pc-cart-btn:hover .pc-cart-badge {
+    background: rgba(255,255,255,0.28);
 }
 
-/* User wrap */
-.hdr-user-wrap { position: relative; }
-.hdr-user-btn {
+/* User */
+.pc-user-wrap { position: relative; }
+.pc-user-btn {
     display: flex;
     align-items: center;
     gap: 9px;
     background: none;
-    border: 1.5px solid var(--cream-dk);
-    padding: 6px 12px 6px 6px;
+    border: 1.5px solid var(--CR-dk);
+    padding: 5px 12px 5px 5px;
     border-radius: 50px;
     cursor: pointer;
-    font-family: var(--font);
-    transition: all 0.2s;
+    font-family: var(--FN);
+    transition: all .2s;
 }
-.hdr-user-btn:hover {
-    border-color: var(--terra);
-    background: var(--terra-dim);
+.pc-user-btn:hover {
+    border-color: var(--T);
+    background: var(--T-xs);
 }
-.hdr-avatar {
-    width: 32px;
-    height: 32px;
+.pc-avatar {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--terra);
+    border: 2.5px solid var(--T);
     display: block;
+    flex-shrink: 0;
 }
-.hdr-user-name {
+.pc-uname {
     font-size: 13.5px;
     font-weight: 700;
-    color: var(--ink);
+    color: var(--INK);
     max-width: 110px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.pc-user-btn .fa-chevron-down {
+    font-size: 9px;
+    color: var(--FOG);
+    transition: transform .22s;
+}
+.pc-user-btn.open .fa-chevron-down { transform: rotate(180deg); }
 
 /* User dropdown */
-#userDropdown {
+#pcUserDrop {
     position: absolute;
     right: 0;
     top: calc(100% + 10px);
-    width: 200px;
-    background: var(--white);
-    border: 1.5px solid var(--cream-dk);
+    width: 210px;
+    background: var(--WH);
+    border: 1.5px solid var(--CR-dk);
     border-radius: 14px;
-    box-shadow: 0 16px 48px rgba(194,90,42,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: var(--sh-lg);
     z-index: 9999;
     overflow: hidden;
-    animation: hdrDropIn 0.18s ease;
-}
-#userDropdown.hidden { display: none; }
-.hdr-dropdown-header {
-    background: var(--cream);
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--cream-dk);
-}
-.hdr-dropdown-header-name {
-    font-size: 13.5px;
-    font-weight: 800;
-    color: var(--ink);
-    font-family: var(--font);
+    transform-origin: top right;
+    transform: scale(0.95) translateY(-6px);
+    opacity: 0;
     pointer-events: none;
+    transition: all .2s cubic-bezier(0.16,1,0.3,1);
+}
+#pcUserDrop.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+.pc-drop-head {
+    background: var(--CR);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--CR-dk);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 }
-.hdr-dropdown-header-name i { color: var(--terra); font-size: 14px; }
-#userDropdown a {
+.pc-drop-head i { color: var(--T); font-size: 14px; }
+.pc-drop-head span {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--INK);
+    font-family: var(--FN);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#pcUserDrop a {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 11px 16px;
     font-size: 13.5px;
     font-weight: 600;
-    color: var(--ink-2);
+    color: var(--INK2);
     text-decoration: none;
-    font-family: var(--font);
-    border-bottom: 1px solid var(--cream);
-    transition: background 0.15s, color 0.15s;
+    font-family: var(--FN);
+    border-bottom: 1px solid var(--CR);
+    transition: all .15s;
 }
-#userDropdown a:last-child { border-bottom: none; }
-#userDropdown a:hover { background: var(--cream); color: var(--terra); }
-#userDropdown a i { font-size: 13px; color: var(--terra); width: 16px; }
-#userDropdown a.hdr-logout { color: #C0392B; }
-#userDropdown a.hdr-logout i { color: #C0392B; }
-#userDropdown a.hdr-logout:hover { background: #FEF2F2; color: #C0392B; }
+#pcUserDrop a:last-child { border-bottom: none; }
+#pcUserDrop a i { font-size: 13px; color: var(--T); width: 16px; text-align: center; }
+#pcUserDrop a:hover { background: var(--CR); color: var(--T); }
+#pcUserDrop a.pc-logout { color: #C0392B; }
+#pcUserDrop a.pc-logout i { color: #C0392B; }
+#pcUserDrop a.pc-logout:hover { background: #FEF2F2; color: #C0392B; }
 
 /* Login button */
-.hdr-login-btn {
+.pc-login-btn {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--terra);
-    color: var(--white) !important;
+    background: var(--T);
+    color: var(--WH) !important;
     text-decoration: none;
     padding: 10px 22px;
-    border-radius: 10px;
+    border-radius: 9px;
     font-size: 13.5px;
     font-weight: 700;
-    font-family: var(--font);
-    transition: all 0.22s;
+    font-family: var(--FN);
+    transition: all .22s;
     white-space: nowrap;
-    letter-spacing: 0.01em;
 }
-.hdr-login-btn:hover {
-    background: var(--terra-dk);
+.pc-login-btn:hover {
+    background: var(--T-dk);
     transform: translateY(-1px);
-    box-shadow: 0 8px 22px var(--terra-glow);
-    color: var(--white) !important;
+    box-shadow: 0 8px 22px var(--T-gl);
+    color: var(--WH) !important;
 }
 
-@keyframes hdrDropIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── CATEGORY NAV BAR ── */
-.hdr-catbar {
-    background: var(--cream);
-    border-bottom: 1.5px solid var(--cream-dkr);
+/* ─── MEGA MENU NAV BAR ──────────────────────────── */
+.pc-megabar {
+    background: var(--CR);
+    border-bottom: 2px solid var(--CR-dr);
     position: relative;
     z-index: 999;
 }
-.hdr-catbar-inner {
-    max-width: 1280px;
+.pc-megabar-inner {
+    max-width: 1360px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 28px;
     display: flex;
     align-items: center;
-    overflow-x: auto;
-    scrollbar-width: none;
-    justify-content: center;
-    gap: 2px;
+    gap: 0;
 }
-.hdr-catbar-inner::-webkit-scrollbar { display: none; }
 
-.hdr-cat-item {
-    position: relative;
+.pc-cat-item {
+    position: static;
     flex-shrink: 0;
 }
-.hdr-cat-link {
+.pc-cat-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 13px 16px;
+    gap: 6px;
+    padding: 14px 18px;
+    font-family: var(--FN);
     font-size: 12.5px;
     font-weight: 700;
-    color: var(--ink-2);
+    color: var(--INK2);
     text-decoration: none;
-    font-family: var(--font);
-    letter-spacing: 0.06em;
-    border-bottom: 2.5px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    cursor: pointer;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    position: relative;
 }
-.hdr-cat-link i { font-size: 9px; opacity: 0.5; }
-.hdr-cat-item:hover .hdr-cat-link {
-    color: var(--terra);
-    border-bottom-color: var(--terra);
+.pc-cat-btn i {
+    font-size: 9px;
+    color: var(--FOG);
+    transition: transform .22s;
+}
+.pc-cat-item:hover .pc-cat-btn,
+.pc-cat-item.active .pc-cat-btn {
+    color: var(--T);
+    border-bottom-color: var(--T);
+}
+.pc-cat-item:hover .pc-cat-btn i,
+.pc-cat-item.active .pc-cat-btn i {
+    transform: rotate(180deg);
+    color: var(--T);
 }
 
-/* Sub-menu */
-.hdr-sub-menu {
-    position: absolute;
-    top: 100%;
+/* ─── MEGA DROPDOWN ──────────────────────────────── */
+.pc-mega {
+    position: fixed;
+    top: var(--mega-top, 144px);
     left: 0;
-    min-width: 230px;
-    background: var(--white);
-    border: 1.5px solid var(--cream-dk);
-    border-radius: 0 14px 14px 14px;
-    box-shadow: 0 20px 52px rgba(194,90,42,0.12), 0 4px 16px rgba(0,0,0,0.06);
-    display: none;
-    z-index: 2000;
-    animation: hdrDropIn 0.18s ease;
-    max-height: 320px;
+    right: 0;
+    z-index: 998;
+    padding: 0 28px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all .22s cubic-bezier(0.16,1,0.3,1);
+}
+.pc-mega.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.pc-mega-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    background: var(--WH);
+    border: 1.5px solid var(--CR-dk);
+    border-top: 3px solid var(--T);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 24px 60px rgba(28,14,6,0.14);
+    overflow: hidden;
+    display: flex;
+}
+
+/* Left: Category title panel */
+.pc-mega-left {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--CR);
+    border-right: 1px solid var(--CR-dk);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.pc-mega-cat-name {
+    font-family: var(--FN);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--INK);
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+.pc-mega-cat-desc {
+    font-size: 12px;
+    color: var(--FOG);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+.pc-mega-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--T);
+    color: var(--WH);
+    text-decoration: none;
+    font-family: var(--FN);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 16px;
+    border-radius: 8px;
+    letter-spacing: 0.03em;
+    transition: all .2s;
+    width: fit-content;
+    margin-top: auto;
+}
+.pc-mega-view-all:hover {
+    background: var(--T-dk);
+    gap: 10px;
+}
+
+/* Right: Subcategories grid */
+.pc-mega-right {
+    flex: 1;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 6px;
+    align-content: start;
+    max-height: 380px;
     overflow-y: auto;
 }
-.hdr-cat-item:hover .hdr-sub-menu { display: block; }
-.hdr-sub-menu a {
+.pc-mega-right::-webkit-scrollbar { width: 4px; }
+.pc-mega-right::-webkit-scrollbar-thumb { background: var(--CR-dr); border-radius: 4px; }
+
+.pc-sub-link {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 18px;
+    padding: 10px 14px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-family: var(--FN);
     font-size: 13px;
     font-weight: 600;
-    color: var(--ink-2);
-    text-decoration: none;
-    font-family: var(--font);
-    border-bottom: 1px solid var(--cream);
-    transition: all 0.15s;
+    color: var(--INK2);
+    border: 1px solid transparent;
+    transition: all .18s;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.hdr-sub-menu a:last-child { border-bottom: none; }
-.hdr-sub-menu a::before {
+.pc-sub-link::before {
     content: '';
-    width: 5px;
-    height: 5px;
-    background: var(--cream-dkr);
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
+    background: var(--CR-dr);
     flex-shrink: 0;
-    transition: background 0.15s;
+    transition: background .18s, transform .18s;
 }
-.hdr-sub-menu a:hover {
-    background: var(--cream);
-    color: var(--terra);
-    padding-left: 22px;
+.pc-sub-link:hover {
+    background: var(--T-xs);
+    border-color: var(--T-md);
+    color: var(--T);
+    transform: translateX(3px);
 }
-.hdr-sub-menu a:hover::before { background: var(--terra); }
+.pc-sub-link:hover::before {
+    background: var(--T);
+    transform: scale(1.3);
+}
 
-/* ── DIVIDER ACCENT LINE ── */
-.hdr-accent-line {
+/* Empty state */
+.pc-mega-empty {
+    grid-column: 1/-1;
+    padding: 32px 0;
+    text-align: center;
+    color: var(--FOG);
+    font-size: 13px;
+    font-family: var(--FN);
+}
+
+/* Backdrop */
+.pc-mega-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(28,14,6,0.25);
+    z-index: 997;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s;
+}
+.pc-mega-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ─── ACCENT LINE ────────────────────────────────── */
+.pc-accent-line {
     height: 3px;
-    background: linear-gradient(90deg, var(--terra-dk), var(--terra), var(--terra-lt), transparent);
+    background: linear-gradient(90deg, var(--T-dk) 0%, var(--T) 40%, var(--T-lt) 70%, transparent 100%);
 }
 
-/* Mobile */
+/* ─── MOBILE ─────────────────────────────────────── */
 @media (max-width: 768px) {
-    .hdr-nav { display: none !important; }
-    .hdr-user-name { display: none; }
-    .hdr-topbar { display: none; }
-    .hdr-main-inner { gap: 12px; }
-    .hdr-catbar-inner { justify-content: flex-start; }
+    .pc-nav { display: none; }
+    .pc-uname { display: none; }
+    .pc-topbar { display: none; }
+    .pc-megabar-inner { overflow-x: auto; }
+    .pc-megabar-inner::-webkit-scrollbar { display: none; }
+    .pc-mega { padding: 0 12px; }
+    .pc-mega-inner { flex-direction: column; }
+    .pc-mega-left { width: 100%; border-right: none; border-bottom: 1px solid var(--CR-dk); }
+    .pc-mega-right { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 
-<!-- ── ACCENT LINE ── -->
-<div class="hdr-accent-line"></div>
+<!-- ── ACCENT ── -->
+<div class="pc-accent-line"></div>
 
 <!-- ── TOPBAR ── -->
-<div class="hdr-topbar">
-    <div class="hdr-topbar-inner">
-        <i class="fas fa-phone-alt" style="color:var(--terra-lt); font-size:10px;"></i>
-        <span>+44 123 444 0530</span>
-        <div class="hdr-top-sep"></div>
-        <i class="fas fa-clock" style="color:var(--terra-lt); font-size:10px;"></i>
-        <span>7 Days a week · 9:00 AM – 7:00 PM</span>
-        <div class="hdr-top-sep"></div>
-        <i class="fas fa-envelope" style="color:var(--terra-lt); font-size:10px;"></i>
-        <a href="mailto:sales@petchemparts.com">sales@petchemparts.com</a>
-        <div class="hdr-top-socials">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+<div class="pc-topbar">
+    <div class="pc-topbar-inner">
+        <div class="pc-top-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+44 123 444 0530</span>
+        </div>
+        <div class="pc-top-item">
+            <i class="fas fa-clock"></i>
+            <span>Mon–Sun · 9:00 AM – 7:00 PM</span>
+        </div>
+        <div class="pc-top-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:sales@petchemparts.com">sales@petchemparts.com</a>
+        </div>
+        <div class="pc-top-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Loughton, IG10 3TS, UK</span>
+        </div>
+        <div class="pc-top-socials">
+            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
 </div>
 
 <!-- ── MAIN HEADER ── -->
-<header class="hdr-main" id="mainHeader">
-    <div class="hdr-main-inner">
+<header class="pc-header" id="pcHeader">
+    <div class="pc-header-inner">
 
-        <!-- Logo -->
-        <a href="/" class="hdr-logo" style="flex-shrink:0;">
+        <a href="/" class="pc-logo">
             <img src="/brands/logo.png" alt="Petchemparts">
         </a>
 
-        <!-- Page Nav -->
-        <nav class="hdr-nav">
+        <nav class="pc-nav">
             <a href="{{ url('/') }}">Home</a>
             <a href="{{ url('/frontend/aboutus') }}">About Us</a>
             <a href="{{ url('/frontend/termcondition') }}">Terms & Conditions</a>
             <a href="{{ url('/frontend/contact') }}">Contact Us</a>
         </nav>
 
-        <!-- Actions -->
-        <div class="hdr-actions">
-
-            <!-- Cart -->
-            <a href="{{ url('/checkout') }}" class="hdr-cart-btn">
-                <i class="fas fa-file-alt" style="font-size:13px;"></i>
-                Request
-                <span class="hdr-cart-badge">{{ Helper::cartCount() }}</span>
+        <div class="pc-actions">
+            <a href="{{ url('/checkout') }}" class="pc-cart-btn">
+                <i class="fas fa-file-invoice" style="font-size:13px;"></i>
+                Request Quote
+                <span class="pc-cart-badge">{{ Helper::cartCount() }}</span>
             </a>
 
-            <!-- User -->
             @if(auth()->check())
-                <div class="hdr-user-wrap">
-                    <button class="hdr-user-btn" onclick="toggleUserDropdown()" type="button">
-                        <img class="hdr-avatar"
+                <div class="pc-user-wrap">
+                    <button class="pc-user-btn" id="pcUserBtn" type="button">
+                        <img class="pc-avatar"
                              src="{{ auth()->user()->photo ?? asset('backend/img/avatar.png') }}"
                              alt="{{ auth()->user()->name }}">
-                        <span class="hdr-user-name">{{ auth()->user()->name }}</span>
-                        <i class="fas fa-chevron-down" style="font-size:9px; color:var(--mist);"></i>
+                        <span class="pc-uname">{{ auth()->user()->name }}</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
-
-                    <div id="userDropdown" class="hidden">
-                        <div class="hdr-dropdown-header">
-                            <span class="hdr-dropdown-header-name">
-                                <i class="fas fa-user-circle"></i>
-                                {{ auth()->user()->name }}
-                            </span>
+                    <div id="pcUserDrop">
+                        <div class="pc-drop-head">
+                            <i class="fas fa-user-circle"></i>
+                            <span>{{ auth()->user()->name }}</span>
                         </div>
                         <a href="{{ url('/user/order') }}">
-                            <i class="fas fa-th-large"></i>
-                            Dashboard
+                            <i class="fas fa-th-large"></i> Dashboard
                         </a>
-                        <a href="{{ route('user.logout') }}" class="hdr-logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
+                        <a href="{{ route('user.logout') }}" class="pc-logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </div>
                 </div>
             @else
-                <a href="/user/login" class="hdr-login-btn">
+                <a href="/user/login" class="pc-login-btn">
                     <i class="fas fa-sign-in-alt" style="font-size:12px;"></i>
                     Login
                 </a>
             @endif
-
         </div>
+
     </div>
 </header>
 
-<!-- ── CATEGORY NAV BAR ── -->
+<!-- ── MEGA MENU BAR ── -->
 @php
-    $categories = DB::table('categories')
+    $navCategories = DB::table('categories')
         ->where('status', 'active')
         ->whereNull('parent_id')
-        ->limit(5)
+        ->orderBy('title','asc')
         ->get();
 
-    $subcategories = DB::table('categories')
+    $allSubcategories = DB::table('categories')
         ->where('status', 'active')
         ->whereNotNull('parent_id')
+        ->orderBy('title','asc')
         ->get()
         ->groupBy('parent_id');
 @endphp
 
-<nav class="hdr-catbar">
-    <div class="hdr-catbar-inner">
-        @foreach($categories as $category)
-            <div class="hdr-cat-item">
-                <a href="{{ route('product-cat', $category->slug) }}" class="hdr-cat-link">
-                    {{ $category->title }}
-                    @if(isset($subcategories[$category->id]))
+<nav class="pc-megabar" id="pcMegabar">
+    <div class="pc-megabar-inner">
+        @foreach($navCategories as $cat)
+            <div class="pc-cat-item" data-cat-id="{{ $cat->id }}">
+                <button class="pc-cat-btn" type="button">
+                    {{ $cat->title }}
+                    @if(isset($allSubcategories[$cat->id]))
                         <i class="fas fa-chevron-down"></i>
                     @endif
-                </a>
-
-                @if(isset($subcategories[$category->id]))
-                    <div class="hdr-sub-menu">
-                        @foreach($subcategories[$category->id] as $sub)
-                            <a href="{{ route('product-sub-cat', [
-                                'slug'     => $category->slug,
-                                'sub_slug' => $sub->slug
-                            ]) }}">
-                                {{ $sub->title }}
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
+                </button>
             </div>
         @endforeach
     </div>
 </nav>
 
+<!-- ── MEGA DROPDOWN PANEL ── -->
+<div class="pc-mega-backdrop" id="pcBackdrop"></div>
+
+<div class="pc-mega" id="pcMega">
+    <div class="pc-mega-inner">
+        <div class="pc-mega-left">
+            <div class="pc-mega-cat-name" id="pcMegaName">Category</div>
+            <div class="pc-mega-cat-desc" id="pcMegaDesc">Browse all products in this category</div>
+            <a href="#" class="pc-mega-view-all" id="pcMegaLink">
+                View All <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="pc-mega-right" id="pcMegaSubs">
+            <!-- filled by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Subcategory data for JS -->
 <script>
-    // Scroll shadow
-    window.addEventListener('scroll', () => {
-        document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 8);
+const PC_SUBS = {
+    @foreach($navCategories as $cat)
+    "{{ $cat->id }}": {
+        name: "{{ addslashes($cat->title) }}",
+        slug: "{{ $cat->slug }}",
+        link: "{{ route('product-cat', $cat->slug) }}",
+        subs: [
+            @if(isset($allSubcategories[$cat->id]))
+                @foreach($allSubcategories[$cat->id] as $sub)
+                { title: "{{ addslashes($sub->title) }}", link: "{{ route('product-sub-cat', ['slug' => $cat->slug, 'sub_slug' => $sub->slug]) }}" },
+                @endforeach
+            @endif
+        ]
+    },
+    @endforeach
+};
+
+(function() {
+    const header = document.getElementById('pcHeader');
+    const megabar = document.getElementById('pcMegabar');
+    const mega    = document.getElementById('pcMega');
+    const backdrop= document.getElementById('pcBackdrop');
+    const megaName= document.getElementById('pcMegaName');
+    const megaDesc= document.getElementById('pcMegaDesc');
+    const megaLink= document.getElementById('pcMegaLink');
+    const megaSubs= document.getElementById('pcMegaSubs');
+    const userBtn = document.getElementById('pcUserBtn');
+    const userDrop= document.getElementById('pcUserDrop');
+    let activeItem = null;
+
+    function setMegaTop() {
+        const barRect = megabar.getBoundingClientRect();
+        mega.style.top = (barRect.bottom) + 'px';
+    }
+
+    function openMega(catId, item) {
+        const data = PC_SUBS[catId];
+        if (!data) return;
+
+        // Deactivate previous
+        if (activeItem) activeItem.classList.remove('active');
+        activeItem = item;
+        item.classList.add('active');
+
+        megaName.textContent = data.name;
+        megaDesc.textContent = 'Browse all products in ' + data.name;
+        megaLink.href = data.link;
+
+        let html = '';
+        if (data.subs.length > 0) {
+            data.subs.forEach(s => {
+                html += `<a href="${s.link}" class="pc-sub-link">${s.title}</a>`;
+            });
+        } else {
+            html = `<div class="pc-mega-empty"><i class="fas fa-folder-open" style="font-size:24px;margin-bottom:8px;display:block;"></i>No subcategories found.</div>`;
+        }
+        megaSubs.innerHTML = html;
+
+        setMegaTop();
+        mega.classList.add('visible');
+        backdrop.classList.add('visible');
+    }
+
+    function closeMega() {
+        mega.classList.remove('visible');
+        backdrop.classList.remove('visible');
+        if (activeItem) activeItem.classList.remove('active');
+        activeItem = null;
+    }
+
+    // Attach hover to each cat item
+    document.querySelectorAll('.pc-cat-item').forEach(item => {
+        const catId = item.dataset.catId;
+        const hasSubs = PC_SUBS[catId] && PC_SUBS[catId].subs.length >= 0;
+
+        item.addEventListener('mouseenter', () => {
+            openMega(catId, item);
+        });
     });
 
-    // User dropdown
-    function toggleUserDropdown() {
-        document.getElementById('userDropdown').classList.toggle('hidden');
-    }
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.hdr-user-wrap')) {
-            const dd = document.getElementById('userDropdown');
-            if (dd) dd.classList.add('hidden');
+    // Keep open when hovering mega panel
+    mega.addEventListener('mouseenter', () => {});
+    document.getElementById('pcMegabar').addEventListener('mouseleave', (e) => {
+        if (!mega.contains(e.relatedTarget)) {
+            // check if going into mega panel
         }
     });
+
+    // Close when mouse leaves both megabar and mega panel
+    let leaveTimer;
+    function scheduleClose() { leaveTimer = setTimeout(closeMega, 120); }
+    function cancelClose()   { clearTimeout(leaveTimer); }
+
+    document.getElementById('pcMegabar').addEventListener('mouseleave', scheduleClose);
+    document.getElementById('pcMegabar').addEventListener('mouseenter', cancelClose);
+    mega.addEventListener('mouseleave', scheduleClose);
+    mega.addEventListener('mouseenter', cancelClose);
+    backdrop.addEventListener('mouseenter', closeMega);
+
+    // Backdrop click
+    backdrop.addEventListener('click', closeMega);
+
+    // Scroll shadow
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('is-scrolled', window.scrollY > 8);
+        if (mega.classList.contains('visible')) setMegaTop();
+    }, { passive: true });
+
+    // User dropdown
+    if (userBtn) {
+        userBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userBtn.classList.toggle('open');
+            userDrop.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.pc-user-wrap')) {
+                userBtn.classList.remove('open');
+                userDrop.classList.remove('open');
+            }
+        });
+    }
+})();
 </script>

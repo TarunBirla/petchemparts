@@ -922,7 +922,7 @@ $products = DB::table('products')
         @endphp
         <div class="product-card" data-aos="fade-up" data-aos-delay="{{ ($i % 4) * 80 }}">
             <div class="product-card-body">
-                <!-- Breadcrumb -->
+            
                 <div class="product-breadcrumb">
                     @if($product->category_name)
                     <span>{{ $product->category_name }}</span>
@@ -941,7 +941,7 @@ $products = DB::table('products')
                 <div class="product-desc">{{ \Illuminate\Support\Str::limit(strip_tags($product->summary), 80) }}</div>
                 @endif
 
-                <!-- Meta -->
+            
                 <div class="product-meta">
                     @if($product->manufacturer_name)
                     <div class="product-meta-row">

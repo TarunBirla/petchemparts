@@ -16,7 +16,7 @@ class CartController extends Controller
     }
 
     
-    public function addToCart(Request $request)
+    public function addToCart(Request $request ,$slug)
     {
         if (empty($request->slug)) {
             return back()->with('error', 'Invalid product');

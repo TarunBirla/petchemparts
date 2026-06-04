@@ -1,4 +1,6 @@
+
 <style>
+
 
 </style>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -24,7 +26,7 @@
     </div> -->
 
     <li class="nav-item"> 
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-image"></i>
         <span>Banners</span>
       </a>
@@ -45,7 +47,7 @@
 
     <!-- Categories -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="true" aria-controls="categoryCollapse">
+        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="true" aria-controls="categoryCollapse">
           <i class="fas fa-sitemap"></i>
           <span>Category</span>
         </a>
@@ -59,7 +61,7 @@
       </li>
     {{-- Products --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse" aria-expanded="true" aria-controls="productCollapse">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#productCollapse" aria-expanded="true" aria-controls="productCollapse">
           <i class="fas fa-cubes"></i>
           <span>Products Management</span>
         </a>
@@ -80,7 +82,7 @@
 
     {{-- Brands --}}
      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true" aria-controls="brandCollapse">
+        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true" aria-controls="brandCollapse">
           <i class="fas fa-table"></i>
           <span>Brands</span>
         </a>

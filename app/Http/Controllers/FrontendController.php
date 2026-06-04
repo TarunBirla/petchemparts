@@ -595,6 +595,7 @@ class FrontendController extends Controller
         return view('frontend.pages.login');
     }
     public function loginSubmit(Request $request)
+
     {
         $data = $request->all();
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 'active'])) {

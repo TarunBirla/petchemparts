@@ -77,7 +77,9 @@ Route::get('/get-subcategories/{id}', function ($id) {
 
 
 
-    Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart');
+    // Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])
+    ->name('add-to-cart');
     Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::get('storage-link',[AdminController::class,'storageLink'])->name('storage.link');
     Route::post('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.updated');

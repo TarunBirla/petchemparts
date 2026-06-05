@@ -1,97 +1,126 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light topbar mb-4 static-top" style="background: var(--surface); border-bottom: 1px solid var(--border); height: 64px; padding: 0 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.3); position: relative; z-index: 100;">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link  rounded-circle mr-3">
-      <i class="fa fa-bars"></i>
+    <!-- Sidebar Toggle -->
+    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3 d-md-none"
+            style="color:var(--muted); width:36px; height:36px; background:var(--surface-2); border:1px solid var(--border) !important; border-radius:8px !important; display:flex; align-items:center; justify-content:center; padding:0 !important;">
+        <i class="fa fa-bars" style="font-size:13px;"></i>
     </button>
-    <!-- <a href="{{route('storage.link')}}"  class="btn btn-outline-warning btn-sm mr-3">
-        Storage Link
-    </a>
-    <a href="{{route('cache.clear')}}"  class="btn btn-outline-danger btn-sm mr-3">
-      Cache Clear
-    </a> -->
 
-    <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <!-- Brand name on mobile -->
+    <span class="d-md-none" style="font-family:var(--font-d); font-weight:800; font-size:15px; color:var(--text); margin-right:auto; letter-spacing:0.02em;">
+        Petchemparts
+    </span>
 
-      <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-      <li class="nav-item dropdown no-arrow d-sm-none">
-        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-search fa-fw"></i>
-        </a>
-        <!-- Dropdown - Messages -->
-        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-          <form class="form-inline mr-auto w-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
+    <!-- Right Nav -->
+    <ul class="navbar-nav ml-auto align-items-center" style="gap:6px;">
 
+        <!-- Home Link -->
+        <li class="nav-item">
+            <a href="{{route('home')}}" target="_blank"
+               class="topbar-icon-btn"
+               style="width:36px; height:36px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; text-decoration:none; transition:all 0.2s;"
+               title="View Site"
+               onmouseover="this.style.background='var(--accent-dim)'; this.style.borderColor='rgba(0,194,255,0.3)'; this.style.color='var(--accent)'"
+               onmouseout="this.style.background='var(--surface-2)'; this.style.borderColor='var(--border)'; this.style.color='var(--muted)'">
+                <i class="fas fa-external-link-alt" style="font-size:12px;"></i>
+            </a>
+        </li>
 
+        <!-- Messages -->
+        <li class="nav-item dropdown no-arrow mx-1" id="messageT" data-url="{{route('messages.five')}}">
+            @include('backend.message.message')
+        </li>
 
-      {{-- Home page --}}
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="{{route('home')}}" target="_blank" data-toggle="tooltip" data-placement="bottom" title="home"  role="button">
-          <i class="fas fa-home fa-fw"></i>
-        </a>
-      </li>
+        <!-- Divider -->
+        <div class="topbar-divider d-none d-sm-block"
+             style="border-left:1px solid var(--border); height:28px; margin:0 10px;"></div>
 
-      <!-- Nav Item - Alerts -->
-      {{--  <li class="nav-item dropdown no-arrow mx-1">
-       @include('backend.notification.show')
-      </li> --}}
+        <!-- User Dropdown -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#"
+               id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+               style="display:flex; align-items:center; gap:10px; padding:4px 8px; border-radius:10px; transition:background 0.2s;"
+               onmouseover="this.style.background='var(--surface-2)'"
+               onmouseout="this.style.background='transparent'">
 
-      <!-- Nav Item - Messages -->
-      <li class="nav-item dropdown no-arrow mx-1" id="messageT" data-url="{{route('messages.five')}}">
-        @include('backend.message.message')
-      </li>
+                <!-- Avatar -->
+                <div style="position:relative;">
+                    @if(Auth()->user()->photo)
+                        <img src="{{Auth()->user()->photo}}"
+                             style="width:34px; height:34px; border-radius:8px; object-fit:cover; border:2px solid var(--border-2);">
+                    @else
+                        <img src="{{asset('backend/img/avatar.png')}}"
+                             style="width:34px; height:34px; border-radius:8px; object-fit:cover; border:2px solid var(--border-2);">
+                    @endif
+                    <!-- Online dot -->
+                    <span style="position:absolute; bottom:-1px; right:-1px; width:9px; height:9px; background:var(--green); border-radius:50%; border:2px solid var(--surface);"></span>
+                </div>
 
-      <div class="topbar-divider d-none d-sm-block"></div>
+                <!-- Name + role -->
+                <span class="d-none d-lg-flex flex-column" style="line-height:1.2; align-items:flex-start;">
+                    <span style="font-family:var(--font-d); font-size:13.5px; font-weight:700; color:var(--text);">
+                        {{Auth()->user()->name}}
+                    </span>
+                    <span style="font-family:var(--font-m); font-size:9.5px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">
+                        Administrator
+                    </span>
+                </span>
 
-      <!-- Nav Item - User Information -->
-      <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth()->user()->name}}</span>
-          @if(Auth()->user()->photo)
-            <img class="img-profile rounded-circle" src="{{Auth()->user()->photo}}">
-          @else
-            <img class="img-profile rounded-circle" src="{{asset('backend/img/avatar.png')}}">
-          @endif
-        </a>
-        <!-- Dropdown - User Information -->
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="{{route('admin-profile')}}">
-            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            Profile
-          </a>
-          <a class="dropdown-item" href="{{route('change.password.form')}}">
-            <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-            Change Password
-          </a>
-          <a class="dropdown-item" href="{{route('settings')}}">
-            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-            Settings
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{ __('Logout') }}
+                <i class="fas fa-chevron-down d-none d-lg-block" style="font-size:9px; color:var(--dim); margin-left:2px;"></i>
             </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div>
-      </li>
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown"
+                 style="background:var(--surface-2); border:1px solid var(--border-2); border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,0.6); padding:8px; min-width:210px; margin-top:8px;">
+
+                <!-- User info header -->
+                <div style="padding:12px 14px 14px; border-bottom:1px solid var(--border); margin-bottom:6px;">
+                    <div style="font-family:var(--font-d); font-size:14px; font-weight:700; color:var(--text);">{{Auth()->user()->name}}</div>
+                    <div style="font-family:var(--font-m); font-size:10px; color:var(--muted); letter-spacing:0.08em;">{{Auth()->user()->email ?? 'admin@petchemparts.com'}}</div>
+                </div>
+
+                <a class="dropdown-item" href="{{route('admin-profile')}}"
+                   style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:var(--muted); font-family:var(--font-b); text-decoration:none; transition:all 0.15s;"
+                   onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'"
+                   onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'">
+                    <i class="fas fa-user-circle" style="font-size:13px; width:16px; color:var(--dim);"></i>
+                    My Profile
+                </a>
+
+                <a class="dropdown-item" href="{{route('change.password.form')}}"
+                   style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:var(--muted); font-family:var(--font-b); text-decoration:none; transition:all 0.15s;"
+                   onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'"
+                   onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'">
+                    <i class="fas fa-key" style="font-size:13px; width:16px; color:var(--dim);"></i>
+                    Change Password
+                </a>
+
+                <a class="dropdown-item" href="{{route('settings')}}"
+                   style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:var(--muted); font-family:var(--font-b); text-decoration:none; transition:all 0.15s;"
+                   onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'"
+                   onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'">
+                    <i class="fas fa-cog" style="font-size:13px; width:16px; color:var(--dim);"></i>
+                    Settings
+                </a>
+
+                <div style="border-top:1px solid var(--border); margin:6px 0;"></div>
+
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                   style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:var(--red); font-family:var(--font-b); text-decoration:none; transition:all 0.15s;"
+                   onmouseover="this.style.background='rgba(255,71,87,0.1)'"
+                   onmouseout="this.style.background='transparent'">
+                    <i class="fas fa-sign-out-alt" style="font-size:13px; width:16px;"></i>
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                    @csrf
+                </form>
+            </div>
+        </li>
 
     </ul>
-
-  </nav>
+</nav>

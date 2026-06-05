@@ -1,280 +1,197 @@
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar"
+    style="background: var(--surface) !important; border-right: 1px solid var(--border); width: 260px; min-height: 100vh; position: relative; overflow: hidden; overflow-y: auto;">
 
-<style>
+    <!-- Background glow -->
+    <div style="position:absolute; top:0; left:-60px; right:-60px; height:260px; background:radial-gradient(ellipse at 50% 0%, rgba(0,194,255,0.07) 0%, transparent 70%); pointer-events:none; z-index:0;"></div>
 
+    <!-- ── BRAND ── -->
+    <a class="sidebar-brand" href="{{route('admin')}}"
+       style="display:flex; flex-direction:column; align-items:flex-start; padding:22px 20px; border-bottom:1px solid var(--border); text-decoration:none; position:relative; z-index:1;">
+        <!-- Accent line -->
+        <div style="position:absolute; bottom:0; left:20px; right:20px; height:1px; background:linear-gradient(90deg, var(--accent), transparent);"></div>
 
-</style>
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
-      <div class="sidebar-brand-icon rotate-n-15" style="color:black">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3" style="color:black">Welcome Admin Dashboard</div>
+        <div style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; background:var(--accent-dim); border:1px solid rgba(0,194,255,0.25); border-radius:10px; color:var(--accent); font-size:17px; margin-bottom:10px; transition:all 0.3s;">
+            <i class="fas fa-industry"></i>
+        </div>
+        <div style="font-family:var(--font-d); font-size:14px; font-weight:800; color:var(--text); line-height:1.2; letter-spacing:0.01em;">
+            Petchemparts
+        </div>
+        <div style="font-family:var(--font-m); font-size:9.5px; color:var(--muted); letter-spacing:0.14em; text-transform:uppercase; margin-top:3px;">
+            Admin Dashboard
+        </div>
     </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-    <li class="nav-item active">
-      <a class="nav-link" href="{{route('admin')}}">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+    <!-- ── DASHBOARD ── -->
+    <li class="nav-item active" style="position:relative; z-index:1; margin-top:8px;">
+        <a class="nav-link" href="{{route('admin')}}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--accent); font-size:13.5px; font-weight:600; font-family:var(--font-b); margin:1px 8px; border-radius:10px; background:var(--accent-dim); text-decoration:none; position:relative;">
+            <span style="position:absolute; left:0; top:20%; bottom:20%; width:3px; background:var(--accent); border-radius:0 3px 3px 0;"></span>
+            <i class="fas fa-tachometer-alt" style="font-size:13px; width:18px; text-align:center; color:var(--accent);"></i>
+            <span>Dashboard</span>
+        </a>
     </li>
 
-    <hr class="sidebar-divider">
+    <hr style="border-top:1px solid var(--border); margin:8px 16px;">
 
-    <!-- <div class="sidebar-heading">
-        Banner
-    </div> -->
+    <!-- ── BANNERS ── -->
+    @include('backend.layouts.sidebar-item', [
+        'id'     => 'collapseTwo',
+        'icon'   => 'fa-image',
+        'label'  => 'Banners',
+        'links'  => [
+            ['url' => route('banner.index'),  'text' => 'All Banners'],
+            ['url' => route('banner.create'), 'text' => 'Add Banner'],
+        ]
+    ])
 
-    <li class="nav-item"> 
-      <a class="nav-link collapsed"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-image"></i>
-        <span>Banners</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Banner Options:</h6>
-          <a class="collapse-item" href="{{route('banner.index')}}">Banners</a>
-          <a class="collapse-item" href="{{route('banner.create')}}">Add Banners</a>
-        </div>
-      </div>
+    <!-- ── CATEGORIES ── -->
+    @include('backend.layouts.sidebar-item', [
+        'id'     => 'categoryCollapse',
+        'icon'   => 'fa-sitemap',
+        'label'  => 'Categories',
+        'links'  => [
+            ['url' => route('category.index'),  'text' => 'All Categories'],
+            ['url' => route('category.create'), 'text' => 'Add Category'],
+        ]
+    ])
+
+    <!-- ── PRODUCTS ── -->
+    @include('backend.layouts.sidebar-item', [
+        'id'     => 'productCollapse',
+        'icon'   => 'fa-cubes',
+        'label'  => 'Products',
+        'links'  => [
+            ['url' => route('product.index'),  'text' => 'All Products'],
+            ['url' => route('product.create'), 'text' => 'Add Product'],
+        ]
+    ])
+
+    <!-- ── PDF (single link) ── -->
+    <li class="nav-item" style="position:relative; z-index:1;">
+        <a class="nav-link" href="{{ route('pdf.index') }}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; position:relative;"
+           onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'; this.querySelector('i').style.color='var(--accent)'"
+           onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'; this.querySelector('i').style.color='var(--dim)'">
+            <i class="fas fa-file-pdf" style="font-size:13px; width:18px; text-align:center; color:var(--dim); transition:color 0.2s;"></i>
+            <span>PDF Files</span>
+        </a>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-        <!-- Heading -->
-        <!-- <div class="sidebar-heading">
-            PaintingStudio
-        </div> -->
 
-    <!-- Categories -->
-    <li class="nav-item">
-        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="true" aria-controls="categoryCollapse">
-          <i class="fas fa-sitemap"></i>
-          <span>Category</span>
+    <!-- ── BRANDS ── -->
+    @include('backend.layouts.sidebar-item', [
+        'id'     => 'brandCollapse',
+        'icon'   => 'fa-copyright',
+        'label'  => 'Brands',
+        'links'  => [
+            ['url' => route('brand.index'),  'text' => 'All Brands'],
+            ['url' => route('brand.create'), 'text' => 'Add Brand'],
+        ]
+    ])
+
+    <!-- ── MANUFACTURERS (single link) ── -->
+    <li class="nav-item" style="position:relative; z-index:1;">
+        <a class="nav-link" href="{{ route('manufacturer.index') }}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; position:relative;"
+           onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'; this.querySelector('i').style.color='var(--accent)'"
+           onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'; this.querySelector('i').style.color='var(--dim)'">
+            <i class="fas fa-industry" style="font-size:13px; width:18px; text-align:center; color:var(--dim); transition:color 0.2s;"></i>
+            <span>Manufacturers</span>
         </a>
-        <div id="categoryCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Category Options:</h6>
-            <a class="collapse-item" href="{{route('category.index')}}">Category</a>
-            <a class="collapse-item" href="{{route('category.create')}}">Add Category</a>
-          </div>
-        </div>
-      </li>
-    {{-- Products --}}
-    <li class="nav-item">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#productCollapse" aria-expanded="true" aria-controls="productCollapse">
-          <i class="fas fa-cubes"></i>
-          <span>Products Management</span>
-        </a>
-        <div id="productCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Product Options:</h6>
-            <a class="collapse-item" href="{{route('product.index')}}">Products</a>
-            <a class="collapse-item" href="{{route('product.create')}}">Add Product</a>
-          </div>
-        </div>
     </li>
-    <li class="nav-item">
-    <a class="nav-link" href="{{ route('pdf.index') }}">
-        <i class="fas fa-file-pdf"></i>
-        <span>PDF</span>
-    </a>
-</li>
 
-    {{-- Brands --}}
-     <li class="nav-item">
-        <a class="nav-link collapsed"  data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true" aria-controls="brandCollapse">
-          <i class="fas fa-table"></i>
-          <span>Brands</span>
-        </a>
-        <div id="brandCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Brand Options:</h6>
-            <a class="collapse-item" href="{{route('brand.index')}}">Brands</a>
-            <a class="collapse-item" href="{{route('brand.create')}}">Add Brand</a>
-          </div>
-        </div>
-    </li> 
-    
-    <li class="nav-item">
-    <a class="nav-link" href="{{ route('manufacturer.index') }}">
-        <i class="fas fa-industry"></i>
-        <span>Manufacturers</span>
-    </a>
-</li>
-
-
-    {{-- Shipping --}}
-    <!--<li class="nav-item">-->
-    <!--    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shippingCollapse" aria-expanded="true" aria-controls="shippingCollapse">-->
-    <!--      <i class="fas fa-truck"></i>-->
-    <!--      <span>Shipping</span>-->
-    <!--    </a>-->
-    <!--    <div id="shippingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">-->
-    <!--      <div class="bg-white py-2 collapse-inner rounded">-->
-    <!--        <h6 class="collapse-header">Shipping Options:</h6>-->
-    <!--        <a class="collapse-item" href="{{route('shipping.index')}}">Shipping</a>-->
-    <!--        <a class="collapse-item" href="{{route('shipping.create')}}">Add Shipping</a>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--</li>-->
-
-    <!--Orders -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('order.index')}}">
-            <i class="fas fa-hammer fa-chart-area"></i>
+    <!-- ── ORDERS (single link) ── -->
+    <li class="nav-item" style="position:relative; z-index:1;">
+        <a class="nav-link" href="{{route('order.index')}}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; position:relative;"
+           onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'; this.querySelector('i').style.color='var(--accent)'"
+           onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'; this.querySelector('i').style.color='var(--dim)'">
+            <i class="fas fa-shopping-bag" style="font-size:13px; width:18px; text-align:center; color:var(--dim); transition:color 0.2s;"></i>
             <span>Orders</span>
         </a>
     </li>
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('order.index')}}">
-            <i class="fas fa-hammer fa-chart-area"></i>
-            <span>Transaction History</span>
-        </a>
-    </li> -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('order.index')}}">
-            <i class="fas fa-hammer fa-chart-area"></i>
-            <span>My Payment Details</span>
-        </a>
-    </li> -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('order.index')}}">
-            <i class="fas fa-hammer fa-chart-area"></i>
-            <span> Logistics Details</span>
-        </a>
-    </li> -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('order.index')}}">
-            <i class="fas fa-hammer fa-chart-area"></i>
-            <span> Shipping Tracking</span>
-        </a>
-    </li> -->
-   
-   
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#termsCollapse" aria-expanded="true" aria-controls="categoryCollapse">
-          <i class="fas fa-sitemap"></i>
-          <span>Terms And Condition</span>
-        </a>
-        <div id="termsCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Terms and Condition Options:</h6>
-            <a class="collapse-item" href="{{route('terms.index')}}">Terms And Condition</a>
-            <a class="collapse-item" href="{{route('terms.create')}}">Add Terms And Condition</a>
-          </div>
-        </div>
-    </li> -->
-    
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#aboutCollapse" aria-expanded="true" aria-controls="aboutCollapse">
-          <i class="fas fa-sitemap"></i>
-          <span>About US</span>
-        </a>
-        <div id="aboutCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">About US Options:</h6>
-            <a class="collapse-item" href="{{route('about.index')}}">About US</a>
-            <a class="collapse-item" href="{{route('about.create')}}">Add About US</a>
-          </div>
-        </div>
-    </li> -->
-    <!-- Reviews -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('review.index')}}">
-            <i class="fas fa-comments"></i>
-            <span>Reviews</span></a>
-    </li> -->
-    
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+    <hr style="border-top:1px solid var(--border); margin:8px 16px;">
 
-    <!-- Heading -->
-    <!-- <div class="sidebar-heading">
-      Posts
-    </div> -->
+    <!-- ── BLOGS ── -->
+    @include('backend.layouts.sidebar-item', [
+        'id'     => 'postCollapse',
+        'icon'   => 'fa-rss',
+        'label'  => 'Blogs',
+        'links'  => [
+            ['url' => route('post.index'),  'text' => 'All Blogs'],
+            ['url' => route('post.create'), 'text' => 'Add Blog'],
+        ]
+    ])
 
-    <!-- Posts -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCollapse" aria-expanded="true" aria-controls="postCollapse">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Blogs</span>
-      </a>
-      <div id="postCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Blogs Options:</h6>
-          <a class="collapse-item" href="{{route('post.index')}}">Blogs</a>
-          <a class="collapse-item" href="{{route('post.create')}}">Add Blog</a>
-        </div>
-      </div>
-    </li>
+    <hr style="border-top:1px solid var(--border); margin:8px 16px;">
 
-     <!-- Category -->
-     <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCategoryCollapse" aria-expanded="true" aria-controls="postCategoryCollapse">
-          <i class="fas fa-sitemap fa-folder"></i>
-          <span>Category</span>
-        </a>
-        <div id="postCategoryCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Category Options:</h6>
-            <a class="collapse-item" href="{{route('post-category.index')}}">Category</a>
-            <a class="collapse-item" href="{{route('post-category.create')}}">Add Category</a>
-          </div>
-        </div>
-      </li> -->
-
-      <!-- Tags -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tagCollapse" aria-expanded="true" aria-controls="tagCollapse">
-            <i class="fas fa-tags fa-folder"></i>
-            <span>Tags</span>
-        </a>
-        <div id="tagCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tag Options:</h6>
-            <a class="collapse-item" href="{{route('post-tag.index')}}">Tag</a>
-            <a class="collapse-item" href="{{route('post-tag.create')}}">Add Tag</a>
-            </div>
-        </div>
-    </li> -->
-
-      <!-- Comments -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="{{route('comment.index')}}">
-            <i class="fas fa-comments fa-chart-area"></i>
-            <span>Comments</span>
-        </a>
-      </li> -->
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-     <!-- Heading -->
-    <div class="sidebar-heading">
+    <!-- ── GENERAL SETTINGS HEADING ── -->
+    <div style="font-family:var(--font-m); font-size:9px; font-weight:500; color:var(--dim); letter-spacing:0.18em; text-transform:uppercase; padding:10px 20px 6px; position:relative; z-index:1;">
         General Settings
     </div>
-    <!-- <li class="nav-item">
-      <a class="nav-link" href="{{route('coupon.index')}}">
-          <i class="fas fa-table"></i>
-          <span> Gift Coupon</span></a>
-    </li> -->
-     <!-- Users -->
-     <li class="nav-item">
-        <a class="nav-link" href="{{route('users.index')}}">
-            <i class="fas fa-users"></i>
-            <span>Users</span></a>
-    </li>
-     <!-- General settings -->
-     <li class="nav-item">
-        <a class="nav-link" href="{{route('settings')}}">
-            <i class="fas fa-cog"></i>
-            <span>Settings</span></a>
+
+    <!-- ── USERS ── -->
+    <li class="nav-item" style="position:relative; z-index:1;">
+        <a class="nav-link" href="{{route('users.index')}}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; position:relative;"
+           onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'; this.querySelector('i').style.color='var(--accent)'"
+           onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'; this.querySelector('i').style.color='var(--dim)'">
+            <i class="fas fa-users" style="font-size:13px; width:18px; text-align:center; color:var(--dim); transition:color 0.2s;"></i>
+            <span>Users</span>
+        </a>
     </li>
 
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    <!-- ── SETTINGS ── -->
+    <li class="nav-item" style="position:relative; z-index:1;">
+        <a class="nav-link" href="{{route('settings')}}"
+           style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; position:relative;"
+           onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'; this.querySelector('i').style.color='var(--accent)'"
+           onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'; this.querySelector('i').style.color='var(--dim)'">
+            <i class="fas fa-cog" style="font-size:13px; width:18px; text-align:center; color:var(--dim); transition:color 0.2s;"></i>
+            <span>Settings</span>
+        </a>
+    </li>
+
+    <!-- ── COLLAPSE TOGGLE BUTTON ── -->
+    <div class="text-center d-none d-md-inline" style="padding:16px 0 20px; position:relative; z-index:1;">
+        <button id="sidebarToggle"
+                style="background:var(--surface-2); border:1px solid var(--border); border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; color:var(--muted); cursor:pointer; transition:all 0.2s;"
+                onmouseover="this.style.background='var(--accent-dim)'; this.style.borderColor='rgba(0,194,255,0.3)'; this.style.color='var(--accent)'"
+                onmouseout="this.style.background='var(--surface-2)'; this.style.borderColor='var(--border)'; this.style.color='var(--muted)'">
+        </button>
     </div>
 
 </ul>
+
+{{-- ──────────────────────────────────────────────────────────
+     REUSABLE SIDEBAR ACCORDION ITEM
+     Save this as: resources/views/backend/partials/sidebar-item.blade.php
+     ────────────────────────────────────────────────────────── --}}
+{{--
+@props(['id', 'icon', 'label', 'links'])
+
+<li class="nav-item" style="position:relative; z-index:1;">
+    <a class="nav-link collapsed" data-toggle="collapse" data-target="#{{ $id }}"
+       aria-expanded="false" aria-controls="{{ $id }}"
+       style="display:flex; align-items:center; gap:11px; padding:11px 12px; color:var(--muted); font-size:13.5px; font-weight:500; font-family:var(--font-b); margin:1px 8px; border-radius:10px; text-decoration:none; transition:all 0.2s; cursor:pointer;"
+       onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'"
+       onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'">
+        <i class="fas {{ $icon }}" style="font-size:13px; width:18px; text-align:center; color:var(--dim);"></i>
+        <span style="flex:1;">{{ $label }}</span>
+        <i class="fas fa-chevron-right" style="font-size:9px; color:var(--dim); transition:transform 0.2s;"></i>
+    </a>
+    <div id="{{ $id }}" class="collapse" data-parent="#accordionSidebar">
+        <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:10px; margin:4px 8px 8px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,0.3);">
+            @foreach($links as $link)
+            <a href="{{ $link['url'] }}"
+               style="display:flex; align-items:center; gap:8px; padding:9px 12px; border-radius:7px; font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; font-family:var(--font-b); transition:all 0.15s;"
+               onmouseover="this.style.background='var(--accent-dim)'; this.style.color='var(--accent)'"
+               onmouseout="this.style.background='transparent'; this.style.color='var(--muted)'">
+                <span style="width:5px; height:5px; background:var(--dim); border-radius:50%; flex-shrink:0; transition:background 0.2s;"></span>
+                {{ $link['text'] }}
+            </a>
+            @endforeach
+        </div>
+    </div>
+</li>
+--}}

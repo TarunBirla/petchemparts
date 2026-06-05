@@ -10293,10 +10293,10 @@ a:focus {
   color: #858796;
 }
 
-.sidebar {
+/* .sidebar {
   width: 6.5rem;
   min-height: 100vh;
-}
+} */
 
 .sidebar .nav-item {
   position: relative;
@@ -10451,7 +10451,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 14rem !important;
+    width: 17rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;

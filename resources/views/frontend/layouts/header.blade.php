@@ -228,7 +228,7 @@
 .pc-uname {
     font-size: 13.5px;
     font-weight: 700;
-    color: var(--INK);
+    color: var(--T);
     max-width: 110px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -276,7 +276,7 @@
 .pc-drop-head span {
     font-size: 13.5px;
     font-weight: 800;
-    color: var(--INK);
+    color: var(--T);
     font-family: var(--FN);
     overflow: hidden;
     text-overflow: ellipsis;

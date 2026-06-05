@@ -247,6 +247,21 @@
             <i class="fas fa-cog"></i>
             <span>Settings</span></a>
     </li>
+    <li class="nav-item">
+    <a class="nav-link text-danger"
+       href="{{ route('logout') }}"
+       onclick="event.preventDefault(); document.getElementById('sidebar-logout-form').submit();">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+    </a>
+
+    <form id="sidebar-logout-form"
+          action="{{ route('logout') }}"
+          method="POST"
+          style="display:none;">
+        @csrf
+    </form>
+</li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

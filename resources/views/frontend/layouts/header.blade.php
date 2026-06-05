@@ -1,820 +1,727 @@
-{{-- ══════════════════════════════════════════════════════
-     PETCHEMPARTS — PROFESSIONAL HEADER
-     Colors: #C25A2A (terra) · #FFFFFF (white) · #F6F1E9 (cream)
-     Font: Plus Jakarta Sans
-══════════════════════════════════════════════════════ --}}
+{{-- resources/views/frontend/layouts/header.blade.php --}}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-<style>
-:root {
-   
-    --T:     #00D4FF;
-    --T-dk:  #0056B9;
-    --T-lt:  #4DBAF7;
-    
-    --T-xs:  rgba(76, 98, 171, 0.08);
-    --T-sm:  rgba(47, 90, 198, 0.14);
-    --T-md:  rgba(38, 89, 208, 0.22);
-    --T-gl:  rgba(105, 134, 221, 0.3);
-    --CR:    #F6F1E9;
-    --CR-dk: #EDE5D8;
-    --CR-dr: #D9CEBC;
-    --WH:    #FFFFFF;
-    --INK:   #FFFFFF;
-    --INK2:  #408dcc;
-    --MID:   #497cdc;
-    --FOG:   #1568e4;
-    --FN:    'Poppins', sans-serif;
-    --sh-sm: 0 2px 12px rgba(28,14,6,0.08);
-    --sh-md: 0 8px 32px rgba(28,14,6,0.12);
-    --sh-lg: 0 20px 60px rgba(28,14,6,0.16);
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-* { box-sizing: border-box; }
+    <style>
+        /* ==============================
+           GLOBAL RESET & VARIABLES
+        ============================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── TOPBAR ─────────────────────────────────────── */
-.pc-topbar {
-    background: var(--INK);
-    height: 36px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(76, 98, 171, 0.08);
-}
-.pc-topbar-inner {
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 28px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    font-family: var(--FN);
-    font-size: 11.5px;
-    font-weight: 500;
-    color: var(--FOG);
-    letter-spacing: 0.01em;
-}
-.pc-top-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 14px;
-    border-right: 1px solid rgba(76, 98, 171, 0.08);
-    height: 36px;
-    white-space: nowrap;
-}
-.pc-top-item:first-child { padding-left: 0; }
-.pc-top-item i { color: var(--T-lt); font-size: 10px; }
-.pc-top-item a { color: var(--FOG); text-decoration: none; transition: color .18s; }
-.pc-top-item a:hover { color: var(--T-lt); }
-.pc-top-socials {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
-.pc-top-socials a {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--FOG);
-    font-size: 11px;
-    text-decoration: none;
-    border-left: 1px solid rgba(76, 98, 171, 0.08);
-    transition: all .18s;
-}
-.pc-top-socials a:hover { color: var(--T-lt); background: rgba(76, 98, 171, 0.08); }
+        :root {
+            --primary:       #0EA5E9;
+            --primary-dark:  #0284C7;
+            --primary-light: #BAE6FD;
+            --primary-xlight:#F0F9FF;
+            --accent:        #0369A1;
+            --white:         #FFFFFF;
+            --gray-50:       #F8FAFC;
+            --gray-100:      #F1F5F9;
+            --gray-200:      #E2E8F0;
+            --gray-300:      #CBD5E1;
+            --gray-400:      #94A3B8;
+            --gray-500:      #64748B;
+            --gray-700:      #334155;
+            --gray-900:      #0F172A;
+            --dark:          #0F172A;
+            --shadow-sm:     0 1px 3px rgba(14,165,233,0.08), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md:     0 4px 16px rgba(14,165,233,0.12), 0 2px 6px rgba(0,0,0,0.06);
+            --shadow-lg:     0 12px 40px rgba(14,165,233,0.16), 0 4px 12px rgba(0,0,0,0.08);
+            --radius-sm:     6px;
+            --radius-md:     10px;
+            --radius-lg:     16px;
+            --radius-xl:     24px;
+            --font-display:  'Outfit', sans-serif;
+            --font-body:     'Plus Jakarta Sans', sans-serif;
+            --transition:    all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-/* ─── MAIN HEADER ────────────────────────────────── */
-.pc-header {
-    background: var(--WH);
-    border-bottom: 1px solid var(--CR-dk);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: box-shadow .25s;
-}
-.pc-header.is-scrolled {
-    box-shadow: 0 4px 28px rgba(76, 98, 171, 0.08)
-}
-.pc-header-inner {
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 28px;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--gray-50);
+            color: var(--gray-700);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* Logo */
-.pc-logo {
-    flex-shrink: 0;
-    margin-right: 40px;
-    display: flex;
-    align-items: center;
-}
-.pc-logo img {
-    height: 44px;
-    width: auto;
-    display: block;
-}
+        /* ==============================
+           ANNOUNCEMENT BAR
+        ============================== */
+        .announce-bar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 8px 0;
+            font-size: 13px;
+            overflow: hidden;
+        }
+        .announce-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .announce-scroll {
+            flex: 1;
+            display: flex;
+            gap: 48px;
+            white-space: nowrap;
+            overflow: hidden;
+            mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .announce-scroll-inner {
+            display: inline-flex;
+            gap: 48px;
+            animation: marquee 28s linear infinite;
+        }
+        .announce-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        .announce-item i { font-size: 11px; opacity: 0.85; }
+        .announce-right {
+            display: flex;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        .announce-right a {
+            color: rgba(255,255,255,0.88);
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        .announce-right a:hover { color: white; }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 640px) { .announce-right { display: none; } }
 
-/* Page Nav */
-.pc-nav {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    font-family: var(--FN);
-}
-.pc-nav a {
-    padding: 8px 14px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--INK2);
-    text-decoration: none;
-    border-radius: 8px;
-    letter-spacing: 0.01em;
-    transition: all .18s;
-    white-space: nowrap;
-}
-.pc-nav a:hover {
-    color: var(--T);
-    background: var(--T-xs);
-}
+        /* ==============================
+           MAIN HEADER
+        ============================== */
+        .site-header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        .header-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            height: 70px;
+        }
 
-/* Actions */
-.pc-actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-}
+        /* Logo */
+        .header-logo {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 10px;
+        }
+        .header-logo img { height: 38px; }
+        .header-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        .logo-name {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--gray-900);
+            letter-spacing: -0.01em;
+        }
+        .logo-tag {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
 
-/* Request quote button */
-.pc-cart-btn {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    background: var(--T-xs);
-    color: var(--T-dk);
-    text-decoration: none;
-    padding: 9px 18px;
-    border-radius: 9px;
-    font-size: 13.5px;
-    font-weight: 700;
-    font-family: var(--FN);
-    border: 1.5px solid var(--T-md);
-    transition: all .22s;
-    white-space: nowrap;
-}
-.pc-cart-btn:hover {
-    background: var(--T);
-    color: var(--WH);
-    border-color: var(--T);
-    box-shadow: 0 6px 20px var(--T-gl);
-    transform: translateY(-1px);
-}
-.pc-cart-badge {
-    background: var(--T);
-    color: var(--WH);
-    font-size: 10px;
-    font-weight: 800;
-    min-width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5px;
-    transition: background .2s;
-}
-.pc-cart-btn:hover .pc-cart-badge {
-    background: rgba(255,255,255,0.28);
-}
+        /* Search bar */
+        .header-search {
+            flex: 1;
+            max-width: 480px;
+            position: relative;
+        }
+        .header-search-input {
+            width: 100%;
+            height: 42px;
+            background: var(--gray-100);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 100px;
+            padding: 0 44px 0 44px;
+            font-size: 13.5px;
+            font-family: var(--font-body);
+            color: var(--gray-900);
+            outline: none;
+            transition: var(--transition);
+        }
+        .header-search-input:focus {
+            background: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+        }
+        .header-search-input::placeholder { color: var(--gray-400); }
+        .header-search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: 13px;
+            pointer-events: none;
+        }
+        .header-search-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 100px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .header-search-btn:hover { background: var(--primary-dark); }
 
-/* User */
-.pc-user-wrap { position: relative; }
-.pc-user-btn {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    background: none;
-    border: 1.5px solid var(--CR-dk);
-    padding: 5px 12px 5px 5px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: var(--FN);
-    transition: all .2s;
-}
-.pc-user-btn:hover {
-    border-color: var(--T);
-    background: var(--T-xs);
-}
-.pc-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2.5px solid var(--T);
-    display: block;
-    flex-shrink: 0;
-}
-.pc-uname {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--T);
-    max-width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.pc-user-btn .fa-chevron-down {
-    font-size: 9px;
-    color: var(--FOG);
-    transition: transform .22s;
-}
-.pc-user-btn.open .fa-chevron-down { transform: rotate(180deg); }
+        /* Search suggestions dropdown */
+        .header-search-drop {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            display: none;
+            overflow: hidden;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .hsd-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 16px;
+            color: var(--gray-700);
+            font-size: 13.5px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.15s;
+        }
+        .hsd-item:last-child { border-bottom: none; }
+        .hsd-item:hover { background: var(--primary-xlight); color: var(--primary-dark); }
+        .hsd-item i { color: var(--primary); font-size: 12px; }
+        .hsd-pn {
+            margin-left: auto;
+            font-size: 11px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
 
-/* User dropdown */
-#pcUserDrop {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 10px);
-    width: 210px;
-    background: var(--WH);
-    border: 1.5px solid var(--CR-dk);
-    border-radius: 14px;
-    box-shadow: var(--sh-lg);
-    z-index: 9999;
-    overflow: hidden;
-    transform-origin: top right;
-    transform: scale(0.95) translateY(-6px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all .2s cubic-bezier(0.16,1,0.3,1);
-}
-#pcUserDrop.open {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-}
-.pc-drop-head {
-    background: var(--CR);
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--CR-dk);
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-.pc-drop-head i { color: var(--T); font-size: 14px; }
-.pc-drop-head span {
-    font-size: 13.5px;
-    font-weight: 800;
-    color: var(--T);
-    font-family: var(--FN);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-#pcUserDrop a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 16px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--INK2);
-    text-decoration: none;
-    font-family: var(--FN);
-    border-bottom: 1px solid var(--CR);
-    transition: all .15s;
-}
-#pcUserDrop a:last-child { border-bottom: none; }
-#pcUserDrop a i { font-size: 13px; color: var(--T); width: 16px; text-align: center; }
-#pcUserDrop a:hover { background: var(--CR); color: var(--T); }
-#pcUserDrop a.pc-logout { color: #C0392B; }
-#pcUserDrop a.pc-logout i { color: #C0392B; }
-#pcUserDrop a.pc-logout:hover { background: #FEF2F2; color: #C0392B; }
+        /* Header right actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .h-action {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
+            background: var(--white);
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+        .h-action:hover {
+            border-color: var(--primary);
+            background: var(--primary-xlight);
+            color: var(--primary);
+        }
+        .h-action-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--primary);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid white;
+        }
+        .btn-quote {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 18px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-quote:hover {
+            background: var(--primary-dark);
+            color: white;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        .h-menu-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            color: var(--gray-700);
+            cursor: pointer;
+        }
 
-/* Login button */
-.pc-login-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--T);
-    color: var(--WH) !important;
-    text-decoration: none;
-    padding: 10px 22px;
-    border-radius: 9px;
-    font-size: 13.5px;
-    font-weight: 700;
-    font-family: var(--FN);
-    transition: all .22s;
-    white-space: nowrap;
-}
-.pc-login-btn:hover {
-    background: var(--T-dk);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 22px var(--T-gl);
-    color: var(--WH) !important;
-}
+        @media (max-width: 1024px) { .header-search { max-width: 340px; } }
+        @media (max-width: 768px) {
+            .header-search { display: none; }
+            .btn-quote span { display: none; }
+            .btn-quote { padding: 0 12px; }
+            .h-menu-toggle { display: flex; }
+        }
 
-/* ─── MEGA MENU NAV BAR ──────────────────────────── */
-.pc-megabar {
-    background: var(--CR);
-    border-bottom: 2px solid var(--CR-dr);
-    position: relative;
-    z-index: 999;
-}
-.pc-megabar-inner {
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 28px;
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
+        /* ==============================
+           NAV BAR
+        ============================== */
+        .site-nav {
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            height: 46px;
+        }
 
-.pc-cat-item {
-    position: static;
-    flex-shrink: 0;
-}
-.pc-cat-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 14px 18px;
-    font-family: var(--FN);
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--INK2);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border-bottom: 3px solid transparent;
-    transition: all .2s;
-    cursor: pointer;
-    white-space: nowrap;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    position: relative;
-}
-.pc-cat-btn i {
-    font-size: 9px;
-    color: var(--FOG);
-    transition: transform .22s;
-}
-.pc-cat-item:hover .pc-cat-btn,
-.pc-cat-item.active .pc-cat-btn {
-    color: var(--T);
-    border-bottom-color: var(--T);
-}
-.pc-cat-item:hover .pc-cat-btn i,
-.pc-cat-item.active .pc-cat-btn i {
-    transform: rotate(180deg);
-    color: var(--T);
-}
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0 14px;
+            height: 46px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .nav-link i { font-size: 11px; color: var(--gray-400); }
 
-/* ─── MEGA DROPDOWN ──────────────────────────────── */
-.pc-mega {
-    position: fixed;
-    top: var(--mega-top, 144px);
-    left: 0;
-    right: 0;
-    z-index: 998;
-    padding: 0 28px;
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: all .22s cubic-bezier(0.16,1,0.3,1);
-}
-.pc-mega.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-.pc-mega-inner {
-    max-width: 1360px;
-    margin: 0 auto;
-    background: var(--WH);
-    border: 1.5px solid var(--CR-dk);
-    border-top: 3px solid var(--T);
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 24px 60px rgba(28,14,6,0.14);
-    overflow: hidden;
-    display: flex;
-}
+        /* Mega dropdown */
+        .nav-drop {
+            position: absolute;
+            top: calc(100% + 1px);
+            left: 0;
+            min-width: 220px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: all 0.2s ease;
+            z-index: 999;
+            padding: 8px 0;
+        }
+        .nav-item:hover .nav-drop {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .nav-drop-link {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 18px;
+            font-size: 13.5px;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: background 0.15s, color 0.15s;
+        }
+        .nav-drop-link i { color: var(--primary); font-size: 12px; width: 16px; text-align: center; }
+        .nav-drop-link:hover {
+            background: var(--primary-xlight);
+            color: var(--primary-dark);
+        }
 
-/* Left: Category title panel */
-.pc-mega-left {
-    width: 240px;
-    flex-shrink: 0;
-    background: var(--CR);
-    border-right: 1px solid var(--CR-dk);
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.pc-mega-cat-name {
-    font-family: var(--FN);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--T);
-    margin-bottom: 4px;
-    line-height: 1.2;
-}
-.pc-mega-cat-desc {
-    font-size: 12px;
-    color: var(--FOG);
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
-.pc-mega-view-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--T);
-    color: var(--WH);
-    text-decoration: none;
-    font-family: var(--FN);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 9px 16px;
-    border-radius: 8px;
-    letter-spacing: 0.03em;
-    transition: all .2s;
-    width: fit-content;
-    margin-top: auto;
-}
-.pc-mega-view-all:hover {
-    background: var(--T-dk);
-    gap: 10px;
-}
+        /* Nav right side */
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+        .nav-badge i { color: var(--primary); }
 
-/* Right: Subcategories grid */
-.pc-mega-right {
-    flex: 1;
-    padding: 28px 32px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 6px;
-    align-content: start;
-    max-height: 380px;
-    overflow-y: auto;
-}
-.pc-mega-right::-webkit-scrollbar { width: 4px; }
-.pc-mega-right::-webkit-scrollbar-thumb { background: var(--CR-dr); border-radius: 4px; }
+        /* ==============================
+           MOBILE MENU
+        ============================== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(15,23,42,0.5);
+            backdrop-filter: blur(4px);
+        }
+        .mobile-nav-panel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: min(320px, 88vw);
+            background: var(--white);
+            overflow-y: auto;
+            padding: 0 0 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 1;
+        }
+        .mobile-nav-close {
+            width: 34px;
+            height: 34px;
+            border: none;
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            cursor: pointer;
+            color: var(--gray-600);
+        }
+        .mobile-search {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .mobile-search input {
+            width: 100%;
+            height: 40px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 100px;
+            padding: 0 16px 0 38px;
+            font-size: 13px;
+            font-family: var(--font-body);
+            background: var(--gray-100);
+            outline: none;
+        }
+        .mobile-search { position: relative; }
+        .mobile-search i {
+            position: absolute;
+            left: 34px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: 12px;
+        }
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .mobile-nav-link:hover { background: var(--primary-xlight); color: var(--primary); }
 
-.pc-sub-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-radius: 9px;
-    text-decoration: none;
-    font-family: var(--FN);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--INK2);
-    border: 1px solid transparent;
-    transition: all .18s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.pc-sub-link::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--CR-dr);
-    flex-shrink: 0;
-    transition: background .18s, transform .18s;
-}
-.pc-sub-link:hover {
-    background: var(--T-xs);
-    border-color: var(--T-md);
-    color: var(--T);
-    transform: translateX(3px);
-}
-.pc-sub-link:hover::before {
-    background: var(--T);
-    transform: scale(1.3);
-}
+        @media (max-width: 768px) {
+            .site-nav { display: none; }
+        }
+    </style>
 
-/* Empty state */
-.pc-mega-empty {
-    grid-column: 1/-1;
-    padding: 32px 0;
-    text-align: center;
-    color: var(--FOG);
-    font-size: 13px;
-    font-family: var(--FN);
-}
 
-/* Backdrop */
-.pc-mega-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(28,14,6,0.25);
-    z-index: 997;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .22s;
-}
-.pc-mega-backdrop.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* ─── ACCENT LINE ────────────────────────────────── */
-.pc-accent-line {
-    height: 3px;
-    background: linear-gradient(90deg, var(--T-dk) 0%, var(--T) 40%, var(--T-lt) 70%, transparent 100%);
-}
-
-/* ─── MOBILE ─────────────────────────────────────── */
-@media (max-width: 768px) {
-    .pc-nav { display: none; }
-    .pc-uname { display: none; }
-    .pc-topbar { display: none; }
-    .pc-megabar-inner { overflow-x: auto; }
-    .pc-megabar-inner::-webkit-scrollbar { display: none; }
-    .pc-mega { padding: 0 12px; }
-    .pc-mega-inner { flex-direction: column; }
-    .pc-mega-left { width: 100%; border-right: none; border-bottom: 1px solid var(--CR-dk); }
-    .pc-mega-right { grid-template-columns: repeat(2, 1fr); }
-}
-</style>
-
-<!-- ── ACCENT ── -->
-<div class="pc-accent-line"></div>
-
-<!-- ── TOPBAR ── -->
-<div class="pc-topbar">
-    <div class="pc-topbar-inner">
-        <div class="pc-top-item">
-            <i class="fas fa-phone-alt"></i>
-            <span>+44 123 444 0530</span>
-        </div>
-        <div class="pc-top-item">
-            <i class="fas fa-clock"></i>
-            <span>Mon–Sun · 9:00 AM – 7:00 PM</span>
-        </div>
-        <div class="pc-top-item">
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:sales@petchemparts.com">sales@petchemparts.com</a>
-        </div>
-        <div class="pc-top-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Loughton, IG10 3TS, UK</span>
-        </div>
-        <div class="pc-top-socials">
-            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+    {{-- Announcement Bar --}}
+    <div class="announce-bar">
+        <div class="announce-inner">
+            <div class="announce-scroll">
+                <div class="announce-scroll-inner">
+                    <span class="announce-item"><i class="fas fa-shield-alt"></i> 100% Genuine OEM Parts</span>
+                    <span class="announce-item"><i class="fas fa-shipping-fast"></i> Express Worldwide Shipping</span>
+                    <span class="announce-item"><i class="fas fa-headset"></i> Expert Technical Support 7 Days</span>
+                    <span class="announce-item"><i class="fas fa-boxes"></i> 50,000+ Part Numbers in Stock</span>
+                    <span class="announce-item"><i class="fas fa-globe"></i> Serving 45+ Countries Globally</span>
+                    <span class="announce-item"><i class="fas fa-award"></i> 20+ Years Industry Experience</span>
+                    {{-- duplicate for seamless loop --}}
+                    <span class="announce-item"><i class="fas fa-shield-alt"></i> 100% Genuine OEM Parts</span>
+                    <span class="announce-item"><i class="fas fa-shipping-fast"></i> Express Worldwide Shipping</span>
+                    <span class="announce-item"><i class="fas fa-headset"></i> Expert Technical Support 7 Days</span>
+                    <span class="announce-item"><i class="fas fa-boxes"></i> 50,000+ Part Numbers in Stock</span>
+                    <span class="announce-item"><i class="fas fa-globe"></i> Serving 45+ Countries Globally</span>
+                    <span class="announce-item"><i class="fas fa-award"></i> 20+ Years Industry Experience</span>
+                </div>
+            </div>
+            <div class="announce-right">
+                <a href="tel:+441234440530"><i class="fas fa-phone-alt"></i> +44 123 444 0530</a>
+                <a href="mailto:sales@petchemparts.com"><i class="fas fa-envelope"></i> sales@petchemparts.com</a>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- ── MAIN HEADER ── -->
-<header class="pc-header" id="pcHeader">
-    <div class="pc-header-inner">
-
-        <a href="/" class="pc-logo">
-            <img src="/brands/logo.png" alt="Petchemparts">
-        </a>
-
-        <nav class="pc-nav">
-            <a href="{{ url('/') }}">Home</a>
-            <a href="{{ url('/frontend/aboutus') }}">About Us</a>
-            <a href="{{ url('/frontend/termcondition') }}">Terms & Conditions</a>
-            <a href="{{ url('/frontend/contact') }}">Contact Us</a>
-        </nav>
-
-        <div class="pc-actions">
-            <a href="{{ url('/checkout') }}" class="pc-cart-btn">
-                <i class="fas fa-file-invoice" style="font-size:13px;"></i>
-                Request Quote
-                <span class="pc-cart-badge">{{ Helper::cartCount() }}</span>
+    {{-- Main Header --}}
+    <header class="site-header">
+        <div class="header-main">
+            {{-- Logo --}}
+            <a href="/" class="header-logo">
+                <img src="/brands/logo.png" alt="Petchemparts" onerror="this.style.display='none'">
+                <div class="header-logo-text">
+                    <span class="logo-name">Petchemparts</span>
+                    <span class="logo-tag">Industrial Specialists</span>
+                </div>
             </a>
 
-            @if(auth()->check())
-                <div class="pc-user-wrap">
-                    <button class="pc-user-btn" id="pcUserBtn" type="button">
-                        <img class="pc-avatar"
-                             src="{{ auth()->user()->photo ?? asset('backend/img/avatar.png') }}"
-                             alt="{{ auth()->user()->name }}">
-                        <span class="pc-uname">{{ auth()->user()->name }}</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="pcUserDrop">
-                        <div class="pc-drop-head">
-                            <i class="fas fa-user-circle"></i>
-                            <span>{{ auth()->user()->name }}</span>
-                        </div>
-                        <a href="{{ url('/user/order') }}">
-                            <i class="fas fa-th-large"></i> Dashboard
-                        </a>
-                        <a href="{{ route('user.logout') }}" class="pc-logout">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </div>
-                </div>
-            @else
-                <a href="/user/login" class="pc-login-btn">
-                    <i class="fas fa-sign-in-alt" style="font-size:12px;"></i>
-                    Login
+            {{-- Search --}}
+            <form method="GET" action="{{ route('shop') }}" class="header-search">
+                <i class="fas fa-search header-search-icon"></i>
+                <input
+                    type="text"
+                    id="headerSearch"
+                    name="search"
+                    class="header-search-input"
+                    placeholder="Search by part number, brand, model…"
+                    autocomplete="off"
+                    value="{{ request('search') }}"
+                >
+                <button type="submit" class="header-search-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="header-search-drop" id="headerSearchDrop"></div>
+            </form>
+
+            {{-- Actions --}}
+            <div class="header-actions">
+                @auth
+                <a href="{{ route('frontend.profile') }}" class="h-action" title="My Account">
+                    <i class="fas fa-user"></i>
                 </a>
-            @endif
-        </div>
-
-    </div>
-</header>
-
-<!-- ── MEGA MENU BAR ── -->
-@php
-    $navCategories = DB::table('categories')
-        ->where('status', 'active')
-        ->whereNull('parent_id')
-        ->orderBy('title','asc')
-        ->get();
-
-    $allSubcategories = DB::table('categories')
-        ->where('status', 'active')
-        ->whereNotNull('parent_id')
-        ->orderBy('title','asc')
-        ->get()
-        ->groupBy('parent_id');
-@endphp
-
-<nav class="pc-megabar" id="pcMegabar">
-    <div class="pc-megabar-inner">
-        @foreach($navCategories as $cat)
-            <div class="pc-cat-item" data-cat-id="{{ $cat->id }}">
-                <button class="pc-cat-btn" type="button">
-                    {{ $cat->title }}
-                    @if(isset($allSubcategories[$cat->id]))
-                        <i class="fas fa-chevron-down"></i>
+                @else
+                <a href="{{ route('login') }}" class="h-action" title="Login">
+                    <i class="fas fa-user"></i>
+                </a>
+                @endauth
+                <a  class="h-action" title="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    @if(session('cart') && count(session('cart')) > 0)
+                    <span class="h-action-badge">{{ count(session('cart')) }}</span>
                     @endif
+                </a>
+                <a href="{{ url('/frontend/contact') }}" class="btn-quote">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Request Quote</span>
+                </a>
+                <button class="h-menu-toggle" id="mobileMenuBtn" aria-label="Open menu">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
-        @endforeach
-    </div>
-</nav>
-
-<!-- ── MEGA DROPDOWN PANEL ── -->
-<div class="pc-mega-backdrop" id="pcBackdrop"></div>
-
-<div class="pc-mega" id="pcMega">
-    <div class="pc-mega-inner">
-        <div class="pc-mega-left">
-            <div class="pc-mega-cat-name" id="pcMegaName">Category</div>
-            <div class="pc-mega-cat-desc" id="pcMegaDesc">Browse all products in this category</div>
-            <a href="#" class="pc-mega-view-all" id="pcMegaLink">
-                View All <i class="fas fa-arrow-right"></i>
-            </a>
         </div>
-        <div class="pc-mega-right" id="pcMegaSubs">
-            <!-- filled by JS -->
+    </header>
+
+    {{-- Navigation Bar --}}
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-item">
+                <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url('/shop') }}" class="nav-link {{ request()->is('shop*') ? 'active' : '' }}">
+                    Shop <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="nav-drop">
+                    @php $navCats = DB::table('categories')->where('status','active')->whereNull('parent_id')->limit(8)->get(); @endphp
+                    @foreach($navCats as $nc)
+                    <a href="{{ route('product-cat', $nc->slug) }}" class="nav-drop-link">
+                        <i class="fas fa-cog"></i> {{ $nc->title }}
+                    </a>
+                    @endforeach
+                    <a href="{{ url('/shop') }}" class="nav-drop-link" style="border-top:1px solid var(--gray-100); margin-top:4px; padding-top:12px; color:var(--primary); font-weight:600;">
+                        <i class="fas fa-th-large"></i> View All Products
+                    </a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/frontend/showcategory" class="nav-link">Categories</a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url('/frontend/aboutus') }}" class="nav-link">About Us</a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url('/frontend/contact') }}" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url('/frontend/termcondition') }}" class="nav-link">Terms</a>
+            </div>
+
+            <div class="nav-right">
+                <span class="nav-badge"><i class="fas fa-circle" style="font-size:7px; color:#22C55E;"></i> Currently Open</span>
+                <span class="nav-badge"><i class="fas fa-lock"></i> Secure Checkout</span>
+            </div>
+        </div>
+    </nav>
+
+    {{-- Mobile Menu Drawer --}}
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+        <div class="mobile-nav-panel">
+            <div class="mobile-nav-header">
+                <span class="logo-name" style="font-family:var(--font-display);font-size:16px;font-weight:800;color:var(--gray-900);">Petchemparts</span>
+                <button class="mobile-nav-close" id="mobileNavClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mobile-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search parts…">
+            </div>
+            <a href="/" class="mobile-nav-link">Home <i class="fas fa-chevron-right" style="font-size:11px;color:var(--gray-400);"></i></a>
+            <a href="{{ url('/shop') }}" class="mobile-nav-link">Shop All Parts <i class="fas fa-chevron-right" style="font-size:11px;color:var(--gray-400);"></i></a>
+            <a href="/frontend/showcategory" class="mobile-nav-link">Categories <i class="fas fa-chevron-right" style="font-size:11px;color:var(--gray-400);"></i></a>
+            <a href="{{ url('/frontend/aboutus') }}" class="mobile-nav-link">About Us <i class="fas fa-chevron-right" style="font-size:11px;color:var(--gray-400);"></i></a>
+            <a href="{{ url('/frontend/contact') }}" class="mobile-nav-link">Contact Us <i class="fas fa-chevron-right" style="font-size:11px;color:var(--gray-400);"></i></a>
+            <a href="{{ url('/frontend/contact') }}" class="mobile-nav-link" style="color:var(--primary);">Request a Quote <i class="fas fa-chevron-right" style="font-size:11px;"></i></a>
+            <div style="padding:20px;">
+                <p style="font-size:12.5px;color:var(--gray-400);margin-bottom:10px;">Contact Us</p>
+                <p style="font-size:13px;color:var(--gray-700);"><i class="fas fa-phone-alt" style="color:var(--primary);margin-right:7px;"></i>+44 123 444 0530</p>
+                <p style="font-size:13px;color:var(--gray-700);margin-top:6px;"><i class="fas fa-envelope" style="color:var(--primary);margin-right:7px;"></i>sales@petchemparts.com</p>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Subcategory data for JS -->
-<script>
-const PC_SUBS = {
-    @foreach($navCategories as $cat)
-    "{{ $cat->id }}": {
-        name: "{{ addslashes($cat->title) }}",
-        slug: "{{ $cat->slug }}",
-        link: "{{ route('product-cat', $cat->slug) }}",
-        subs: [
-            @if(isset($allSubcategories[$cat->id]))
-                @foreach($allSubcategories[$cat->id] as $sub)
-                { title: "{{ addslashes($sub->title) }}", link: "{{ route('product-sub-cat', ['slug' => $cat->slug, 'sub_slug' => $sub->slug]) }}" },
-                @endforeach
-            @endif
-        ]
-    },
-    @endforeach
-};
-
-(function() {
-    const header = document.getElementById('pcHeader');
-    const megabar = document.getElementById('pcMegabar');
-    const mega    = document.getElementById('pcMega');
-    const backdrop= document.getElementById('pcBackdrop');
-    const megaName= document.getElementById('pcMegaName');
-    const megaDesc= document.getElementById('pcMegaDesc');
-    const megaLink= document.getElementById('pcMegaLink');
-    const megaSubs= document.getElementById('pcMegaSubs');
-    const userBtn = document.getElementById('pcUserBtn');
-    const userDrop= document.getElementById('pcUserDrop');
-    let activeItem = null;
-
-    function setMegaTop() {
-        const barRect = megabar.getBoundingClientRect();
-        mega.style.top = (barRect.bottom) + 'px';
-    }
-
-    function openMega(catId, item) {
-        const data = PC_SUBS[catId];
-        if (!data) return;
-
-        // Deactivate previous
-        if (activeItem) activeItem.classList.remove('active');
-        activeItem = item;
-        item.classList.add('active');
-
-        megaName.textContent = data.name;
-        megaDesc.textContent = 'Browse all products in ' + data.name;
-        megaLink.href = data.link;
-
-        let html = '';
-        if (data.subs.length > 0) {
-            data.subs.forEach(s => {
-                html += `<a href="${s.link}" class="pc-sub-link">${s.title}</a>`;
-            });
-        } else {
-            html = `<div class="pc-mega-empty"><i class="fas fa-folder-open" style="font-size:24px;margin-bottom:8px;display:block;"></i>No subcategories found.</div>`;
-        }
-        megaSubs.innerHTML = html;
-
-        setMegaTop();
-        mega.classList.add('visible');
-        backdrop.classList.add('visible');
-    }
-
-    function closeMega() {
-        mega.classList.remove('visible');
-        backdrop.classList.remove('visible');
-        if (activeItem) activeItem.classList.remove('active');
-        activeItem = null;
-    }
-
-    // Attach hover to each cat item
-    document.querySelectorAll('.pc-cat-item').forEach(item => {
-        const catId = item.dataset.catId;
-        const hasSubs = PC_SUBS[catId] && PC_SUBS[catId].subs.length >= 0;
-
-        item.addEventListener('mouseenter', () => {
-            openMega(catId, item);
-        });
-    });
-
-    // Keep open when hovering mega panel
-    mega.addEventListener('mouseenter', () => {});
-    document.getElementById('pcMegabar').addEventListener('mouseleave', (e) => {
-        if (!mega.contains(e.relatedTarget)) {
-            // check if going into mega panel
-        }
-    });
-
-    // Close when mouse leaves both megabar and mega panel
-    let leaveTimer;
-    function scheduleClose() { leaveTimer = setTimeout(closeMega, 120); }
-    function cancelClose()   { clearTimeout(leaveTimer); }
-
-    document.getElementById('pcMegabar').addEventListener('mouseleave', scheduleClose);
-    document.getElementById('pcMegabar').addEventListener('mouseenter', cancelClose);
-    mega.addEventListener('mouseleave', scheduleClose);
-    mega.addEventListener('mouseenter', cancelClose);
-    backdrop.addEventListener('mouseenter', closeMega);
-
-    // Backdrop click
-    backdrop.addEventListener('click', closeMega);
-
-    // Scroll shadow
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('is-scrolled', window.scrollY > 8);
-        if (mega.classList.contains('visible')) setMegaTop();
-    }, { passive: true });
-
-    // User dropdown
-    if (userBtn) {
-        userBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userBtn.classList.toggle('open');
-            userDrop.classList.toggle('open');
-        });
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.pc-user-wrap')) {
-                userBtn.classList.remove('open');
-                userDrop.classList.remove('open');
+    <script>
+    // Header search autocomplete
+    $(document).on('keyup', '#headerSearch', function(){
+        const q = $(this).val();
+        if (q.length < 2) { $('#headerSearchDrop').hide().html(''); return; }
+        $.ajax({
+            url: "{{ route('product.search') }}", type:'GET', data:{q},
+            success: data => {
+                if (!data.length) {
+                    $('#headerSearchDrop').html(`<div style="padding:14px 16px;font-size:13.5px;color:var(--gray-400);">No results for "<strong>${q}</strong>"</div>`).show();
+                    return;
+                }
+                let html = '';
+                data.forEach(item => {
+                    html += `<a href="/shop?search=${encodeURIComponent(item.title)}" class="hsd-item">
+                        <i class="fas fa-cog"></i>
+                        <span style="flex:1;">${item.title}</span>
+                        ${item.part_number ? `<span class="hsd-pn">${item.part_number}</span>` : ''}
+                    </a>`;
+                });
+                $('#headerSearchDrop').html(html).show();
             }
         });
-    }
-})();
-</script>
+    });
+    $(document).click(e => { if (!$(e.target).closest('#headerSearch,#headerSearchDrop').length) $('#headerSearchDrop').hide(); });
+
+    // Mobile menu
+    const mobileNav = document.getElementById('mobileNav');
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => mobileNav.classList.add('open'));
+    document.getElementById('mobileNavClose').addEventListener('click', () => mobileNav.classList.remove('open'));
+    document.getElementById('mobileNavBackdrop').addEventListener('click', () => mobileNav.classList.remove('open'));
+    </script>
+

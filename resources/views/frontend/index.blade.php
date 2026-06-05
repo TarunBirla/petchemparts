@@ -4,1274 +4,1185 @@
 
 @section('main-content')
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   PETCHEMPARTS — PRO HOME PAGE
-   Aesthetic: Dark Industrial Luxury
-   Fonts: Syne (display) + DM Sans (body) + JetBrains Mono (labels)
+   PETCHEMPARTS — HOME PAGE
+   Theme: Light Blue / White — Clean Professional
+   Fonts: Sora (display) + Manrope (body)
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --ink:       #060A0F;
-    --ink-2:     #0D1420;
-    --ink-3:     #131C2B;
-    --steel:     #1C2A3F;
-    --wire:      #253348;
-    --slate:     #00D4FF;
-    --mist:      #8A9BB5;
-    --fog:       #C2CFDF;
-    --paper:     #EEF2F7;
-    --white:     #FFFFFF;
-    --acid:      #00D4FF;      /* electric cyan accent */
-    --acid-dim:  rgba(0,212,255,0.12);
-    --acid-glow: rgba(0,212,255,0.25);
-    --amber:     #FFB800;      /* warning amber */
-    --amber-dim: rgba(255,184,0,0.10);
-    --red-hot:   #FF4040;
-    --font-d:    'Poppins', sans-serif;
-    --font-b:    'Poppins', sans-serif;
-    --font-m:    'Poppins', monospace;
-    --r-sm:      8px;
-    --r-md:      14px;
-    --r-lg:      20px;
-    --r-xl:      28px;
-    --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    --sky:        #0EA5E9;
+    --sky-deep:   #0284C7;
+    --sky-navy:   #075985;
+    --sky-pale:   #E0F2FE;
+    --sky-ultra:  #F0F9FF;
+    --sky-mid:    #BAE6FD;
+    --ink:        #0C1B2E;
+    --ink-2:      #1E3A5F;
+    --body-txt:   #374151;
+    --muted:      #6B7280;
+    --border:     #CBD5E1;
+    --border-lt:  #E2E8F0;
+    --white:      #FFFFFF;
+    --bg:         #F8FAFC;
+    --amber:      #F59E0B;
+    --green:      #10B981;
+    --font-d:     'Sora', sans-serif;
+    --font-b:     'Manrope', sans-serif;
+    --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+    --r-sm:       8px;
+    --r-md:       14px;
+    --r-lg:       20px;
+    --shadow-sm:  0 1px 4px rgba(14,165,233,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:  0 4px 20px rgba(14,165,233,0.15), 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-lg:  0 12px 48px rgba(14,165,233,0.18), 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-xl:  0 24px 80px rgba(14,165,233,0.22), 0 8px 24px rgba(0,0,0,0.1);
 }
 
-/* body { background: var(--ink); font-family: var(--font-b); color: var(--fog); } */
+body { font-family: var(--font-b); color: var(--body-txt); background: var(--bg); }
+
+.pg-wrap { overflow-x: hidden; }
 
 /* ── UTILITY ── */
-.container { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
 @media (max-width: 768px) { .container { padding: 0 20px; } }
 
-.label-tag {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: var(--font-m); font-size: 10.5px; font-weight: 500;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--acid); background: var(--acid-dim);
-    border: 1px solid rgba(0,212,255,0.25); border-radius: 4px;
-    padding: 5px 12px;
+.badge-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-b); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sky-deep); background: var(--sky-pale);
+    border: 1px solid var(--sky-mid); border-radius: 100px;
+    padding: 5px 14px;
 }
-.label-tag::before { content: ''; width: 6px; height: 6px; background: var(--acid); border-radius: 50%; animation: blink 2s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.badge-tag i { font-size: 9px; color: var(--sky); }
 
-/* ── SECTION HEADING ── */
-.sec-title {
-    font-family: var(--font-d); font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800; color: var(--white); line-height: 1.08; letter-spacing: -0.02em;
+.sec-label {
+    font-family: var(--font-b); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky);
+    margin-bottom: 10px; display: block;
 }
-.sec-title em { font-style: normal; color: var(--acid); }
-.sec-sub {
-    font-size: 15px; color: var(--mist); line-height: 1.7; max-width: 520px;
+
+.sec-heading {
+    font-family: var(--font-d); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800; color: var(--ink); line-height: 1.12; letter-spacing: -0.02em;
+}
+.sec-heading em { font-style: normal; color: var(--sky); }
+
+.sec-desc {
+    font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 500px;
     margin-top: 12px;
 }
+
+/* ── REVEAL ── */
+[data-rv] {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+[data-rv].vis { opacity: 1; transform: none; }
+[data-rv][data-d="1"] { transition-delay: 0.08s; }
+[data-rv][data-d="2"] { transition-delay: 0.16s; }
+[data-rv][data-d="3"] { transition-delay: 0.24s; }
+[data-rv][data-d="4"] { transition-delay: 0.32s; }
 
 /* ============================================================
    HERO
    ============================================================ */
 .hero {
-    position: relative; min-height: 100vh;
-    display: flex; flex-direction: column;
-    overflow: hidden;
+    position: relative;
     background: var(--ink);
+    min-height: 92vh;
+    display: flex; align-items: stretch;
+    overflow: hidden;
 }
 
-/* background: diagonal grid + gradient */
-.hero::before {
-    content: '';
-    position: absolute; inset: 0;
+/* Grid overlay */
+.hero-grid {
+    position: absolute; inset: 0; z-index: 1;
     background-image:
-        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 70% 70% at 60% 40%, black 0%, transparent 100%);
-}
-.hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 55% 65% at 72% 38%, rgba(0,212,255,0.09) 0%, transparent 65%),
-                radial-gradient(ellipse 40% 50% at 15% 80%, rgba(255,184,0,0.05) 0%, transparent 55%);
-    pointer-events: none;
+        linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
 }
 
-/* Slide system */
-.hero-slides { position: absolute; inset: 0; }
+/* Gradient blobs */
+.hero-blob-1 {
+    position: absolute; top: -120px; right: -80px;
+    width: 600px; height: 600px; z-index: 1;
+    background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 65%);
+    border-radius: 50%;
+}
+.hero-blob-2 {
+    position: absolute; bottom: -100px; left: -120px;
+    width: 500px; height: 500px; z-index: 1;
+    background: radial-gradient(circle, rgba(7,89,133,0.14) 0%, transparent 65%);
+    border-radius: 50%;
+}
+
+/* Slides */
+.hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slide {
     position: absolute; inset: 0;
     background-size: cover; background-position: center;
-    opacity: 0; transition: opacity 1.5s var(--ease-out);
+    opacity: 0; transition: opacity 1.6s ease;
 }
 .hero-slide.active { opacity: 1; }
 .hero-slide::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(105deg, rgba(6,10,15,0.92) 0%, rgba(6,10,15,0.55) 55%, rgba(6,10,15,0.3) 100%);
+    background: linear-gradient(110deg, rgba(12,27,46,0.93) 0%, rgba(12,27,46,0.65) 50%, rgba(12,27,46,0.35) 100%);
 }
 
-/* Decorative vertical line */
-.hero-vline {
-    position: absolute; left: 80px; top: 0; bottom: 0; width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(0,212,255,0.3) 30%, rgba(0,212,255,0.15) 70%, transparent);
-    z-index: 3;
+.hero-inner {
+    position: relative; z-index: 5;
+    display: grid; grid-template-columns: 1fr 380px;
+    gap: 60px; align-items: center;
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    width: 100%; min-height: 92vh;
 }
-@media (max-width: 768px) { .hero-vline { display: none; } }
+@media (max-width: 1100px) { .hero-inner { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .hero-inner { padding: 80px 20px; } }
 
-/* Content */
-.hero-body {
-    position: relative; z-index: 4;
-    display: flex; flex-direction: column; justify-content: center;
-    flex: 1; padding: 120px 80px 80px 120px;
-    max-width: 760px;
+/* Left content */
+.hero-content { padding: 60px 0; }
+
+.hero-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(14,165,233,0.14); border: 1px solid rgba(14,165,233,0.3);
+    color: #7DD3FC; border-radius: 100px;
+    font-family: var(--font-b); font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 16px; margin-bottom: 28px;
+    animation: fadeUp 0.7s var(--ease) both;
 }
-@media (max-width: 1024px) { .hero-body { padding: 100px 40px 80px; max-width: 100%; } }
-@media (max-width: 768px) { .hero-body { padding: 80px 20px 60px; } }
+.hero-chip-dot { width: 6px; height: 6px; background: #38BDF8; border-radius: 50%; animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
 
-.hero-eyebrow { margin-bottom: 24px; animation: fadeUp 0.8s var(--ease-out) both; }
-
-.hero-heading {
+.hero-h1 {
     font-family: var(--font-d); font-weight: 800;
-    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
-    color: var(--white); line-height: 1.05; letter-spacing: -0.03em;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: #FFFFFF; line-height: 1.06; letter-spacing: -0.03em;
     margin-bottom: 22px;
-    animation: fadeUp 0.8s 0.1s var(--ease-out) both;
+    animation: fadeUp 0.7s 0.1s var(--ease) both;
 }
-.hero-heading span {
-    display: inline-block; position: relative;
-    background: linear-gradient(90deg, var(--acid), #38E8FF);
+.hero-h1 .hl {
+    background: linear-gradient(90deg, #38BDF8, #0EA5E9);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-.hero-para {
-    font-size: 16px; color: var(--mist); line-height: 1.75; max-width: 500px;
+.hero-p {
+    font-size: 16px; color: #94A3B8; line-height: 1.8; max-width: 480px;
     margin-bottom: 40px;
-    animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+    animation: fadeUp 0.7s 0.2s var(--ease) both;
 }
 
-.hero-actions {
+.hero-btns {
     display: flex; gap: 14px; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.3s var(--ease-out) both;
+    animation: fadeUp 0.7s 0.3s var(--ease) both;
 }
-.btn-prime {
-    display: inline-flex; align-items: center; gap: 9px;
-    background: var(--acid); color: var(--ink);
-    font-family: var(--font-d); font-weight: 700; font-size: 14px;
-    padding: 14px 28px; border-radius: var(--r-sm);
-    text-decoration: none; letter-spacing: 0.01em;
-    transition: all 0.25s var(--ease-out);
-    box-shadow: 0 0 0 0 var(--acid-glow);
-}
-.btn-prime:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 32px var(--acid-glow), 0 8px 24px rgba(0,212,255,0.25);
-    color: var(--ink);
-}
-.btn-ghost {
-    display: inline-flex; align-items: center; gap: 9px;
-    background: transparent; color: var(--white);
-    font-family: var(--font-d); font-weight: 600; font-size: 14px;
+.btn-sky {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sky); color: white;
+    font-family: var(--font-b); font-weight: 700; font-size: 14px;
     padding: 13px 28px; border-radius: var(--r-sm);
     text-decoration: none; letter-spacing: 0.01em;
-    border: 1.5px solid rgba(255,255,255,0.18);
-    transition: all 0.25s var(--ease-out);
+    transition: all 0.25s var(--ease);
+    box-shadow: 0 4px 20px rgba(14,165,233,0.4);
 }
-.btn-ghost:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.35);
+.btn-sky:hover {
+    background: var(--sky-deep); color: white;
     transform: translateY(-3px);
-    color: var(--white);
+    box-shadow: 0 8px 32px rgba(14,165,233,0.5);
+}
+.btn-outline-w {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: white;
+    font-family: var(--font-b); font-weight: 600; font-size: 14px;
+    padding: 12px 28px; border-radius: var(--r-sm);
+    text-decoration: none; letter-spacing: 0.01em;
+    border: 1.5px solid rgba(255,255,255,0.22);
+    transition: all 0.25s var(--ease);
+}
+.btn-outline-w:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.5); color: white;
+    transform: translateY(-3px);
 }
 
-/* Floating stat cards */
-.hero-stats {
-    position: absolute; right: 64px; bottom: 80px;
-    z-index: 5; display: flex; flex-direction: column; gap: 12px;
-}
-@media (max-width: 1024px) { .hero-stats { display: none; } }
+/* Hero right: search + stats */
+.hero-right { display: flex; flex-direction: column; gap: 16px; }
+@media (max-width: 1100px) { .hero-right { display: none; } }
 
-.stat-card {
-    background: rgba(13,20,32,0.75);
-    border: 1px solid rgba(255,255,255,0.09);
+.hero-search-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
     backdrop-filter: blur(20px);
-    border-radius: var(--r-md);
-    padding: 18px 24px; min-width: 210px;
-    animation: fadeLeft 0.8s var(--ease-out) both;
-    transition: transform 0.3s var(--ease-out), border-color 0.3s;
+    border-radius: var(--r-lg); padding: 24px;
+    animation: fadeLeft 0.7s 0.4s var(--ease) both;
 }
-.stat-card:hover {
-    transform: translateX(-4px);
-    border-color: rgba(0,212,255,0.3);
+.hs-label {
+    font-family: var(--font-b); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #7DD3FC;
+    margin-bottom: 12px; display: block;
 }
-.stat-card:nth-child(1) { animation-delay: 0.4s; }
-.stat-card:nth-child(2) { animation-delay: 0.55s; }
-.stat-card:nth-child(3) { animation-delay: 0.7s; }
-.stat-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-.stat-icon { color: var(--acid); font-size: 13px; }
-.stat-label { font-family: var(--font-m); font-size: 10px; color: var(--mist); letter-spacing: 0.1em; text-transform: uppercase; }
-.stat-val { font-family: var(--font-d); font-size: 28px; font-weight: 800; color: var(--white); line-height: 1; }
-.stat-val sup { font-size: 14px; color: var(--acid); }
+.hs-input-row { display: flex; gap: 8px; }
+.hs-input {
+    flex: 1; height: 44px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--r-sm);
+    padding: 0 16px; font-family: var(--font-b); font-size: 13.5px;
+    color: white; outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+.hs-input::placeholder { color: #64748B; }
+.hs-input:focus { border-color: var(--sky); background: rgba(255,255,255,0.1); }
+.hs-btn {
+    height: 44px; padding: 0 18px;
+    background: var(--sky); color: white; border: none;
+    border-radius: var(--r-sm); font-family: var(--font-b); font-weight: 700;
+    font-size: 13px; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.hs-btn:hover { background: var(--sky-deep); transform: translateY(-1px); }
 
-/* Slide dots */
-.hero-nav {
-    position: absolute; bottom: 36px; left: 120px;
-    z-index: 5; display: flex; gap: 8px; align-items: center;
+/* Stat pills */
+.hero-stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    animation: fadeLeft 0.7s 0.55s var(--ease) both;
 }
-@media (max-width: 768px) { .hero-nav { left: 20px; } }
-.hero-nav-dot {
-    width: 8px; height: 8px;
-    border-radius: 4px; background: rgba(255,255,255,0.25);
-    cursor: pointer; border: none;
-    transition: all 0.35s var(--ease-out);
+.hstat {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px); border-radius: var(--r-md);
+    padding: 16px; text-align: center;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
 }
-.hero-nav-dot.active { background: var(--acid); width: 32px; }
+.hstat:hover { background: rgba(14,165,233,0.12); border-color: rgba(14,165,233,0.35); transform: translateY(-3px); }
+.hstat-val { font-family: var(--font-d); font-size: 22px; font-weight: 800; color: #38BDF8; }
+.hstat-lbl { font-size: 10.5px; color: #94A3B8; margin-top: 3px; font-weight: 500; }
 
-/* ── Scroll cue ── */
-.scroll-cue {
-    position: absolute; bottom: 36px; right: 50%;
-    transform: translateX(50%);
-    z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px;
-    font-family: var(--font-m); font-size: 9px; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--mist);
-    animation: fadeUp 1s 1s var(--ease-out) both;
+/* Dots nav */
+.hero-dots {
+    position: absolute; bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 6; display: flex; gap: 8px;
 }
-.scroll-cue-line {
-    width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--acid), transparent);
-    animation: scrollPulse 2s infinite;
+.hero-dot {
+    width: 8px; height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.28); cursor: pointer; border: none;
+    transition: all 0.3s var(--ease);
 }
-@keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.6)} }
+.hero-dot.active { background: var(--sky); width: 28px; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeLeft { from{opacity:0;transform:translateX(24px)} to{opacity:1;transform:translateX(0)} }
 
 /* ============================================================
-   SEARCH BAR
+   SEARCH SECTION (BELOW HERO)
    ============================================================ */
-.search-belt {
-    background: var(--ink-2);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: relative; z-index: 20;
+.search-section {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-lt);
     padding: 0;
 }
-.search-lift {
-    max-width: 1320px; margin: 0 auto; padding: 0 32px;
-    transform: translateY(-52px);
-    margin-bottom: -52px;
+.search-card-wrap {
+    max-width: 1280px; margin: 0 auto; padding: 0 32px;
+    transform: translateY(-36px); margin-bottom: -36px;
 }
-@media (max-width: 768px) { .search-lift { padding: 0 20px; transform: translateY(-32px); margin-bottom: -32px; } }
+@media (max-width: 768px) { .search-card-wrap { padding: 0 20px; transform: translateY(-24px); margin-bottom: -24px; } }
 
-.search-box {
-    background: var(--ink-2);
-    border: 1px solid var(--wire);
+.search-card {
+    background: var(--white);
+    border: 1px solid var(--border);
     border-radius: var(--r-lg);
-    padding: 30px 36px;
-    box-shadow: 0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,212,255,0.06);
-    position: relative;
+    box-shadow: var(--shadow-xl);
+    padding: 32px 36px;
+    position: relative; overflow: hidden;
 }
-.search-box::before {
+.search-card::before {
     content: '';
-    position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--sky), #38BDF8, var(--sky-deep));
 }
-.search-ttl {
-    font-family: var(--font-d); font-size: 19px; font-weight: 700;
-    color: var(--white); margin-bottom: 18px;
+.sc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
 }
-.search-ttl span { color: var(--acid); }
+.sc-title {
+    font-family: var(--font-d); font-size: 18px; font-weight: 700; color: var(--ink);
+}
+.sc-title span { color: var(--sky); }
+.sc-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+.sc-meta-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted); font-weight: 500;
+}
+.sc-meta-item i { color: var(--sky); font-size: 11px; }
 
-.search-row { display: flex; gap: 10px; align-items: stretch; position: relative; }
-
-.search-inp-wrap {
-    flex: 1; position: relative;
+.sc-form { position: relative; }
+.sc-row { display: flex; gap: 10px; }
+.sc-inp-wrap { flex: 1; position: relative; }
+.sc-inp-wrap i.si-icon {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 14px; pointer-events: none;
 }
-.search-inp-wrap i {
-    position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
-    color: var(--mist); font-size: 14px; pointer-events: none;
-    transition: color 0.2s;
-}
-.search-inp-wrap:focus-within i { color: var(--acid); }
-
-.search-inp {
+.sc-inp {
     width: 100%; height: 52px;
-    background: var(--ink-3); border: 1.5px solid var(--wire);
-    border-radius: var(--r-sm); padding: 0 18px 0 46px;
-    font-family: var(--font-b); font-size: 14.5px;
-    color: var(--white); outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 0 16px 0 46px;
+    font-family: var(--font-b); font-size: 14px; color: var(--ink);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
-.search-inp::placeholder { color: var(--slate); }
-.search-inp:focus {
-    border-color: var(--acid);
-    box-shadow: 0 0 0 3px var(--acid-dim);
-    background: var(--ink);
+.sc-inp::placeholder { color: var(--muted); }
+.sc-inp:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+    background: var(--white);
 }
-
-.search-btn {
-    height: 52px; padding: 0 30px;
-    background: var(--acid); color: var(--ink);
-    border: none; border-radius: var(--r-sm);
-    font-family: var(--font-d); font-weight: 700; font-size: 14px;
+.sc-submit {
+    height: 52px; padding: 0 32px;
+    background: var(--sky); color: white; border: none;
+    border-radius: var(--r-sm);
+    font-family: var(--font-b); font-weight: 700; font-size: 14px;
     cursor: pointer; display: flex; align-items: center; gap: 8px;
-    white-space: nowrap; letter-spacing: 0.02em;
-    transition: all 0.2s var(--ease-out);
+    white-space: nowrap; transition: all 0.2s var(--ease);
 }
-.search-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--acid-glow);
-}
+.sc-submit:hover { background: var(--sky-deep); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-/* Search dropdown */
-#searchDrop {
-    position: absolute; top: calc(100% + 10px); left: 0; right: 0;
-    background: var(--ink-2); border: 1.5px solid var(--wire);
-    border-radius: var(--r-md); z-index: 999; display: none;
-    overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-    max-height: 340px; overflow-y: auto;
+/* search dropdown */
+#scDrop {
+    position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--r-md); box-shadow: var(--shadow-lg);
+    z-index: 999; display: none; overflow: hidden;
+    max-height: 300px; overflow-y: auto;
 }
-#searchDrop::-webkit-scrollbar { width: 4px; }
-#searchDrop::-webkit-scrollbar-thumb { background: var(--wire); border-radius: 4px; }
-.drop-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 18px; text-decoration: none;
-    color: var(--fog); font-size: 13.5px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+.sd-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 16px; text-decoration: none;
+    color: var(--body-txt); font-size: 13.5px;
+    border-bottom: 1px solid var(--border-lt);
     transition: background 0.15s;
 }
-.drop-item:hover { background: var(--ink-3); color: var(--acid); }
-.drop-item i { color: var(--acid); font-size: 12px; flex-shrink: 0; }
-.drop-pn {
-    font-family: var(--font-m); font-size: 11px;
-    background: var(--ink-3); color: var(--mist);
-    padding: 2px 8px; border-radius: 4px; border: 1px solid var(--wire);
-    margin-left: auto; flex-shrink: 0;
+.sd-item:last-child { border-bottom: none; }
+.sd-item:hover { background: var(--sky-ultra); color: var(--sky-deep); }
+.sd-item i { color: var(--sky); font-size: 12px; }
+.sd-pn {
+    margin-left: auto; font-size: 11px;
+    background: var(--bg); color: var(--muted);
+    padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);
 }
-.drop-empty { padding: 18px; color: var(--mist); font-size: 13.5px; }
+.sd-empty { padding: 16px; color: var(--muted); font-size: 13.5px; }
 
-@media (max-width: 640px) {
-    .search-row { flex-direction: column; }
-    .search-btn { width: 100%; justify-content: center; }
-    .search-box { padding: 24px 20px; }
+@media (max-width: 600px) {
+    .sc-row { flex-direction: column; }
+    .sc-submit { justify-content: center; }
+    .search-card { padding: 24px 20px; }
 }
-
-/* ============================================================
-   TICKER / ANNOUNCEMENT BAR
-   ============================================================ */
-.ticker-bar {
-    background: var(--acid); padding: 10px 0; overflow: hidden;
-    position: relative; z-index: 10;
-}
-.ticker-inner {
-    display: flex; align-items: center; gap: 0;
-    white-space: nowrap; animation: tickerRoll 30s linear infinite;
-}
-.ticker-item {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-m); font-size: 11px; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink); padding: 0 48px;
-}
-.ticker-dot { width: 5px; height: 5px; background: var(--ink); border-radius: 50%; opacity: 0.4; }
-@keyframes tickerRoll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
 /* ============================================================
-   BRANDS CAROUSEL
+   BRANDS
    ============================================================ */
 .brands-sec {
-    padding: 80px 0 72px;
-    background: var(--ink-2);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: var(--white);
+    border-bottom: 1px solid var(--border-lt);
+    padding: 72px 0 64px;
 }
-.brands-head {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 10px; margin-bottom: 44px;
-}
+.brands-hd { text-align: center; margin-bottom: 40px; }
 
-.brands-runway { position: relative; overflow: hidden; }
-.brands-runway::before,
-.brands-runway::after {
-    content: ''; position: absolute; top: 0; bottom: 0; width: 100px;
-    z-index: 2; pointer-events: none;
+.brands-scroll { overflow: hidden; position: relative; }
+.brands-scroll::before,
+.brands-scroll::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
 }
-.brands-runway::before { left: 0; background: linear-gradient(to right, var(--ink-2), transparent); }
-.brands-runway::after { right: 0; background: linear-gradient(to left, var(--ink-2), transparent); }
-
+.brands-scroll::before { left: 0; background: linear-gradient(to right, white, transparent); }
+.brands-scroll::after  { right: 0; background: linear-gradient(to left, white, transparent); }
 .brands-track {
-    display: flex; gap: 14px;
+    display: flex; gap: 12px;
     transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
 }
-.brand-pill {
-    flex-shrink: 0; min-width: 176px; height: 66px;
-    background: var(--ink-3); border: 1px solid var(--wire);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 22px;
-    font-family: var(--font-d); font-weight: 700; font-size: 13px;
-    color: var(--mist); letter-spacing: 0.04em;
-    transition: all 0.25s var(--ease-out); cursor: default;
+.brand-chip {
+    flex-shrink: 0; height: 58px; min-width: 164px;
+    background: var(--bg); border: 1.5px solid var(--border-lt);
+    border-radius: var(--r-md);
+    display: flex; align-items: center; justify-content: center; padding: 0 20px;
+    font-family: var(--font-b); font-weight: 700; font-size: 13px;
+    color: var(--muted); letter-spacing: 0.03em;
+    transition: all 0.25s var(--ease); cursor: default;
 }
-.brand-pill:hover {
-    border-color: var(--acid);
-    color: var(--acid);
-    background: var(--acid-dim);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,212,255,0.12);
+.brand-chip:hover {
+    border-color: var(--sky); color: var(--sky-deep);
+    background: var(--sky-ultra); transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
 }
 
 /* ============================================================
    CATEGORIES
    ============================================================ */
 .cats-sec {
-    padding: 96px 0;
-    background: var(--ink);
-    position: relative;
+    background: var(--bg);
+    padding: 88px 0;
+    border-bottom: 1px solid var(--border-lt);
 }
-.cats-sec::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.2) 50%, transparent 100%);
-}
-
-.sec-hd {
+.sec-hd-row {
     display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 52px; gap: 20px; flex-wrap: wrap;
+    margin-bottom: 44px; gap: 20px; flex-wrap: wrap;
 }
-.sec-hd-left { display: flex; flex-direction: column; gap: 10px; }
-.sec-hd-right a {
-    font-family: var(--font-m); font-size: 11px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--acid); text-decoration: none;
-    display: flex; align-items: center; gap: 7px;
-    border-bottom: 1px solid var(--acid-dim); padding-bottom: 3px;
-    transition: gap 0.2s, border-color 0.2s;
+.see-all-link {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-b); font-size: 13px; font-weight: 700;
+    color: var(--sky); text-decoration: none;
+    border-bottom: 1.5px solid rgba(14,165,233,0.3);
+    padding-bottom: 2px; transition: gap 0.2s, border-color 0.2s;
 }
-.sec-hd-right a:hover { gap: 12px; border-color: var(--acid); }
+.see-all-link:hover { gap: 12px; border-color: var(--sky); }
 
-.cats-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+/* Category layout: big card left + grid right */
+.cats-layout {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
 }
-@media (max-width: 1024px) { .cats-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .cats-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .cats-layout { grid-template-columns: 1fr; } }
 
-.cat-card {
-    background: var(--ink-2);
-    border: 1px solid var(--wire);
-    border-radius: var(--r-md);
-    padding: 26px;
+/* Featured category card */
+.cat-featured {
+    background: linear-gradient(145deg, var(--sky-navy) 0%, var(--sky-deep) 60%, var(--sky) 100%);
+    border-radius: var(--r-lg); padding: 40px;
     position: relative; overflow: hidden;
-    transition: all 0.3s var(--ease-out);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 380px;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s;
 }
-.cat-card::after {
+.cat-featured:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+.cat-featured::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+.cf-ico {
+    position: absolute; top: 32px; right: 32px;
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--r-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: rgba(255,255,255,0.85);
+}
+.cf-num {
+    position: absolute; top: 32px; left: 40px;
+    font-family: var(--font-d); font-size: 80px; font-weight: 800; line-height: 1;
+    color: rgba(255,255,255,0.06); pointer-events: none;
+}
+.cf-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #7DD3FC; margin-bottom: 10px; display: block;
+}
+.cf-title {
+    font-family: var(--font-d); font-size: 26px; font-weight: 800;
+    color: white; line-height: 1.2; margin-bottom: 12px;
+}
+.cf-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; }
+.cf-sub-list {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;
+}
+.cf-sub-chip {
+    font-size: 11.5px; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85); padding: 4px 10px; border-radius: 100px;
+}
+.cf-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: white; color: var(--sky-deep);
+    font-family: var(--font-b); font-weight: 700; font-size: 13px;
+    padding: 10px 20px; border-radius: var(--r-sm);
+    width: fit-content; transition: all 0.2s;
+}
+.cf-btn:hover { background: var(--sky-pale); }
+
+/* Mini category grid */
+.cats-mini-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.cat-mini {
+    background: var(--white); border: 1.5px solid var(--border-lt);
+    border-radius: var(--r-md); padding: 24px;
+    text-decoration: none;
+    transition: all 0.25s var(--ease);
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative; overflow: hidden;
+}
+.cat-mini::after {
     content: '';
     position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--acid), #38E8FF);
+    background: linear-gradient(90deg, var(--sky), #38BDF8);
     transform: scaleX(0); transform-origin: left;
-    transition: transform 0.35s var(--ease-out);
+    transition: transform 0.3s var(--ease);
 }
-.cat-card:hover {
-    border-color: rgba(0,212,255,0.3);
-    background: var(--ink-3);
-    transform: translateY(-5px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.1);
+.cat-mini:hover {
+    border-color: var(--sky-mid);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
 }
-.cat-card:hover::after { transform: scaleX(1); }
-
-/* Number accent */
-.cat-num {
-    position: absolute; top: 20px; right: 20px;
-    font-family: var(--font-m); font-size: 11px;
-    color: var(--slate); letter-spacing: 0.08em;
-}
-
-.cat-ico {
-    width: 50px; height: 50px;
-    background: var(--acid-dim); border: 1px solid rgba(0,212,255,0.18);
+.cat-mini:hover::after { transform: scaleX(1); }
+.cm-icon {
+    width: 44px; height: 44px;
+    background: var(--sky-ultra); border: 1px solid var(--sky-mid);
     border-radius: var(--r-sm);
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: var(--acid);
-    margin-bottom: 18px;
-    transition: all 0.3s;
+    font-size: 18px; color: var(--sky);
+    transition: all 0.25s;
 }
-.cat-card:hover .cat-ico {
-    background: var(--acid);
-    color: var(--ink);
-    border-color: var(--acid);
-    box-shadow: 0 0 24px var(--acid-glow);
-}
-
-.cat-title {
-    font-family: var(--font-d); font-size: 16px; font-weight: 700;
-    color: var(--white); text-decoration: none; display: block;
-    margin-bottom: 16px;
+.cat-mini:hover .cm-icon { background: var(--sky); color: white; }
+.cm-title {
+    font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--ink);
     transition: color 0.2s;
 }
-.cat-title:hover { color: var(--acid); }
-
-.cat-subs { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-.cat-subs li a {
-    font-size: 13px; color: var(--mist); text-decoration: none;
-    display: flex; align-items: center; gap: 8px;
-    padding: 3px 0; transition: color 0.2s, gap 0.2s;
+.cat-mini:hover .cm-title { color: var(--sky-deep); }
+.cm-count {
+    font-size: 11.5px; color: var(--muted); font-weight: 500;
+    display: flex; align-items: center; gap: 5px;
 }
-.cat-subs li a::before {
-    content: '';
-    width: 14px; height: 1px; background: var(--slate);
-    flex-shrink: 0; transition: background 0.2s, width 0.2s;
-}
-.cat-subs li a:hover { color: var(--acid); }
-.cat-subs li a:hover::before { background: var(--acid); width: 20px; }
-
-.cat-more { font-size: 11.5px; color: var(--slate); padding: 6px 0 0 22px; }
-
-.cat-foot {
-    margin-top: 20px; padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-.cat-foot a {
-    font-family: var(--font-m); font-size: 10.5px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--acid); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 6px;
-    transition: gap 0.2s;
-}
-.cat-foot a:hover { gap: 10px; }
+.cm-count i { color: var(--sky); font-size: 10px; }
 
 /* ============================================================
    PRODUCTS
    ============================================================ */
 .prods-sec {
-    padding: 96px 0;
-    background: var(--ink-2);
-    border-top: 1px solid rgba(255,255,255,0.05);
+    background: var(--white);
+    padding: 88px 0;
+    border-bottom: 1px solid var(--border-lt);
 }
 
 .prods-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
 }
 @media (max-width: 1200px) { .prods-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 860px)  { .prods-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px)  { .prods-grid { grid-template-columns: 1fr; } }
+@media (max-width: 540px)  { .prods-grid { grid-template-columns: 1fr; } }
 
 .prod-card {
-    background: var(--ink-3);
-    border: 1px solid var(--wire);
-    border-radius: var(--r-md);
+    background: var(--white);
+    border: 1.5px solid var(--border-lt);
+    border-radius: var(--r-lg);
     display: flex; flex-direction: column;
     overflow: hidden;
-    transition: all 0.3s var(--ease-out);
+    transition: all 0.28s var(--ease);
     position: relative;
 }
-.prod-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
-    opacity: 0; transition: opacity 0.3s;
-}
 .prod-card:hover {
-    border-color: rgba(0,212,255,0.25);
-    transform: translateY(-5px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,212,255,0.08);
+    border-color: var(--sky-mid);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
 }
-.prod-card:hover::before { opacity: 1; }
 
-/* Badge strip */
-.prod-badge-strip {
-    position: absolute; top: 16px; left: 0;
-    display: flex; flex-direction: column; gap: 4px;
+/* Top color bar */
+.prod-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--sky), #38BDF8);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s var(--ease);
 }
-.prod-badge {
-    font-family: var(--font-m); font-size: 9px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 3px 9px 3px 12px;
-    border-radius: 0 4px 4px 0;
-}
-.badge-new { background: var(--acid); color: var(--ink); }
-.badge-sale { background: var(--amber); color: var(--ink); }
+.prod-card:hover .prod-bar { transform: scaleX(1); }
 
-/* Image area (no image — pattern) */
-.prod-img {
-    height: 170px; position: relative; overflow: hidden;
-    background: var(--ink);
+/* Badge */
+.prod-badges { position: absolute; top: 14px; left: 14px; display: flex; gap: 5px; z-index: 2; }
+.p-badge {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+}
+.p-badge-new  { background: var(--sky); color: white; }
+.p-badge-sale { background: var(--amber); color: white; }
+
+/* Product image area */
+.prod-thumb {
+    height: 160px; background: var(--sky-ultra);
     display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
 }
-.prod-img-pattern {
-    position: absolute; inset: 0;
-    background-image:
-        repeating-linear-gradient(45deg, rgba(0,212,255,0.03) 0px, rgba(0,212,255,0.03) 1px, transparent 1px, transparent 18px),
-        repeating-linear-gradient(-45deg, rgba(0,212,255,0.03) 0px, rgba(0,212,255,0.03) 1px, transparent 1px, transparent 18px);
-}
-.prod-img img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
-.prod-img-icon {
-    font-size: 36px; color: var(--wire); position: relative; z-index: 1;
-    transition: color 0.3s, transform 0.3s;
-}
-.prod-card:hover .prod-img-icon { color: var(--slate); transform: scale(1.1); }
+.prod-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.prod-thumb-icon { font-size: 40px; color: var(--sky-mid); transition: transform 0.3s; }
+.prod-card:hover .prod-thumb-icon { transform: scale(1.12); color: var(--sky); }
 
+/* Quick action overlay */
+.prod-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,165,233,0.08);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s;
+}
+.prod-card:hover .prod-overlay { opacity: 1; }
+.po-view {
+    background: white; color: var(--sky-deep);
+    border: none; padding: 9px 20px; border-radius: 100px;
+    font-family: var(--font-b); font-weight: 700; font-size: 12.5px;
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    box-shadow: var(--shadow-md); text-decoration: none;
+    transition: background 0.2s;
+}
+.po-view:hover { background: var(--sky-pale); }
+
+/* Body */
 .prod-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
 
-.prod-bc {
+.prod-cats {
     display: flex; align-items: center; gap: 5px;
-    font-family: var(--font-m); font-size: 10px;
-    color: var(--slate); margin-bottom: 10px; flex-wrap: wrap;
-    letter-spacing: 0.05em;
+    font-size: 10.5px; color: var(--muted); margin-bottom: 10px;
+    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
 }
-.prod-bc i { font-size: 8px; }
+.prod-cats i { font-size: 8px; color: var(--sky); }
 
 .prod-name {
-    font-family: var(--font-d); font-size: 15px; font-weight: 700;
-    color: var(--white); line-height: 1.4; margin-bottom: 8px;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.prod-desc {
-    font-size: 12.5px; color: var(--mist); line-height: 1.6;
-    margin-bottom: 14px; flex: 1;
+    font-family: var(--font-d); font-size: 14.5px; font-weight: 700;
+    color: var(--ink); line-height: 1.4; margin-bottom: 10px;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
-/* Meta table */
-.prod-meta { margin-bottom: 16px; display: flex; flex-direction: column; gap: 5px; }
-.prod-meta-row {
-    display: flex; align-items: center; gap: 8px;
-    font-family: var(--font-m); font-size: 11px; color: var(--mist);
+.prod-specs { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; flex: 1; }
+.spec-row {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 11.5px; color: var(--muted);
 }
-.prod-meta-row i { color: var(--acid); font-size: 10px; width: 12px; }
-.meta-k { color: var(--slate); margin-right: 2px; }
+.spec-row i { color: var(--sky); font-size: 10px; width: 12px; flex-shrink: 0; }
+.spec-key { color: var(--muted); font-weight: 600; margin-right: 2px; }
+.spec-val { color: var(--body-txt); }
 
-/* PDF link */
-.prod-pdf a {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-m); font-size: 10.5px; color: var(--amber);
-    text-decoration: none;
-    transition: color 0.2s;
+.prod-pdf-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--amber); font-weight: 600;
+    text-decoration: none; margin-bottom: 14px;
 }
-.prod-pdf a:hover { color: #FFD54F; }
+.prod-pdf-link:hover { color: #D97706; }
 
-/* Price */
-.prod-price {
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px;
+/* Price row */
+.prod-price-row {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px;
 }
-.price-now {
-    font-family: var(--font-d); font-size: 22px; font-weight: 800;
-    color: var(--acid);
+.price-main {
+    font-family: var(--font-d); font-size: 22px; font-weight: 800; color: var(--sky-deep);
 }
-.price-was {
-    font-family: var(--font-m); font-size: 13px;
-    color: var(--slate); text-decoration: line-through;
+.price-old {
+    font-size: 13px; color: var(--muted); text-decoration: line-through; font-weight: 500;
 }
-.price-save {
-    font-family: var(--font-m); font-size: 10px;
-    background: var(--amber-dim); color: var(--amber);
-    padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(255,184,0,0.2);
+.price-save-tag {
+    font-size: 10px; font-weight: 700;
+    background: #FEF3C7; color: #92400E;
+    padding: 2px 7px; border-radius: 4px; border: 1px solid #FDE68A;
 }
 
 /* Actions */
-.prod-actions { display: flex; gap: 8px; }
-.pa-icon {
+.prod-acts { display: flex; gap: 8px; }
+.pa-view-btn {
     width: 42px; height: 42px; flex-shrink: 0;
-    background: var(--ink); border: 1px solid var(--wire);
+    background: var(--sky-ultra); border: 1.5px solid var(--sky-mid);
     border-radius: var(--r-sm);
     display: flex; align-items: center; justify-content: center;
-    color: var(--mist); font-size: 14px; text-decoration: none;
+    color: var(--sky); font-size: 15px; text-decoration: none;
     transition: all 0.2s;
 }
-.pa-icon:hover {
-    background: var(--acid-dim); border-color: var(--acid); color: var(--acid);
-}
-.pa-btn {
+.pa-view-btn:hover { background: var(--sky); color: white; border-color: var(--sky); }
+.pa-cart-btn {
     flex: 1; height: 42px;
-    background: var(--acid); color: var(--ink);
-    border: none; border-radius: var(--r-sm);
-    font-family: var(--font-d); font-weight: 700; font-size: 13px;
+    background: var(--sky); color: white; border: none;
+    border-radius: var(--r-sm);
+    font-family: var(--font-b); font-weight: 700; font-size: 13px;
     cursor: pointer; text-decoration: none;
     display: flex; align-items: center; justify-content: center; gap: 6px;
-    letter-spacing: 0.02em;
-    transition: all 0.2s var(--ease-out);
+    transition: all 0.2s var(--ease);
 }
-.pa-btn:hover {
-    background: #33DAFF; color: var(--ink);
-    box-shadow: 0 6px 20px var(--acid-glow);
-    transform: translateY(-1px);
-}
+.pa-cart-btn:hover { background: var(--sky-deep); color: white; box-shadow: var(--shadow-md); transform: translateY(-1px); }
 
-/* ============================================================
-   SHOW ALL BUTTON
-   ============================================================ */
+/* All products btn */
 .center-cta { display: flex; justify-content: center; margin-top: 48px; }
-.cta-all {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 40px;
-    background: transparent; color: var(--acid);
-    border: 1.5px solid rgba(0,212,255,0.35);
-    border-radius: 100px;
-    font-family: var(--font-d); font-weight: 700; font-size: 14px;
-    text-decoration: none; letter-spacing: 0.04em;
-    transition: all 0.25s var(--ease-out);
+.all-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 40px;
+    background: var(--sky-ultra); color: var(--sky-deep);
+    border: 1.5px solid var(--sky-mid); border-radius: 100px;
+    font-family: var(--font-b); font-weight: 700; font-size: 14px;
+    text-decoration: none; transition: all 0.25s var(--ease);
 }
-.cta-all:hover {
-    background: var(--acid-dim);
-    border-color: var(--acid);
-    color: var(--acid);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px var(--acid-glow);
+.all-btn:hover {
+    background: var(--sky); color: white; border-color: var(--sky);
+    box-shadow: var(--shadow-md); transform: translateY(-3px);
 }
 
 /* ============================================================
-   TRUST STRIP
+   TRUST STRIP — HORIZONTAL CARDS
    ============================================================ */
 .trust-sec {
-    background: var(--ink);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 80px 0;
+    background: var(--sky-ultra);
+    border-top: 1px solid var(--sky-pale);
+    border-bottom: 1px solid var(--sky-pale);
+    padding: 72px 0;
+}
+.trust-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+}
+@media (max-width: 960px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .trust-grid { grid-template-columns: 1fr; } }
+
+.trust-card {
+    background: var(--white); border: 1.5px solid var(--sky-pale);
+    border-radius: var(--r-lg); padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 0;
+    transition: all 0.25s var(--ease);
     position: relative; overflow: hidden;
 }
-.trust-sec::before {
+.trust-card::after {
     content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,212,255,0.04) 0%, transparent 70%);
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, var(--sky), #38BDF8);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.3s var(--ease);
 }
+.trust-card:hover { border-color: var(--sky-mid); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.trust-card:hover::after { transform: scaleY(1); }
 
-.trust-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-    border: 1px solid var(--wire);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    position: relative;
-}
-@media (max-width: 768px) {
-    .trust-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.trust-cell {
-    background: var(--ink-2);
-    padding: 40px 32px;
-    display: flex; flex-direction: column; align-items: flex-start;
-    gap: 0; position: relative;
-    transition: background 0.3s;
-}
-.trust-cell::after {
-    content: '';
-    position: absolute; right: 0; top: 20%; bottom: 20%;
-    width: 1px; background: var(--wire);
-}
-.trust-cell:last-child::after { display: none; }
-@media (max-width: 768px) {
-    .trust-cell:nth-child(2)::after { display: none; }
-}
-
-.trust-cell:hover { background: var(--ink-3); }
-
-.trust-ico-wrap {
-    width: 52px; height: 52px; margin-bottom: 20px;
-    background: var(--acid-dim); border: 1px solid rgba(0,212,255,0.2);
+.tc-icon {
+    width: 50px; height: 50px;
+    background: var(--sky-ultra); border: 1px solid var(--sky-mid);
     border-radius: var(--r-sm);
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; color: var(--acid);
-    transition: all 0.3s;
+    font-size: 20px; color: var(--sky);
+    margin-bottom: 16px; transition: all 0.25s;
 }
-.trust-cell:hover .trust-ico-wrap {
-    background: var(--acid); color: var(--ink);
-    box-shadow: 0 0 24px var(--acid-glow);
-}
+.trust-card:hover .tc-icon { background: var(--sky); color: white; }
 
-.trust-h {
-    font-family: var(--font-d); font-size: 17px; font-weight: 700;
-    color: var(--white); margin-bottom: 8px;
-}
-.trust-p { font-size: 13px; color: var(--mist); line-height: 1.65; }
-.trust-accent {
-    margin-top: 16px; padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-family: var(--font-m); font-size: 22px; font-weight: 500;
-    color: var(--acid);
-}
+.tc-title { font-family: var(--font-d); font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.tc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+.tc-stat { font-family: var(--font-d); font-size: 26px; font-weight: 800; color: var(--sky); }
 
 /* ============================================================
-   WHY US — FEATURE STRIP
+   WHY CHOOSE US — SPLIT LAYOUT
    ============================================================ */
 .why-sec {
+    background: var(--white);
     padding: 96px 0;
-    background: var(--ink-2);
 }
-.why-layout {
+.why-split {
     display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
 }
-@media (max-width: 900px) { .why-layout { grid-template-columns: 1fr; gap: 48px; } }
+@media (max-width: 900px) { .why-split { grid-template-columns: 1fr; gap: 52px; } }
 
-.why-left { display: flex; flex-direction: column; gap: 10px; }
-.why-left .sec-sub { max-width: 460px; }
+.why-left {}
+.why-features { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
 
-.why-list { margin-top: 32px; display: flex; flex-direction: column; gap: 0; }
-.why-item {
+.wf-item {
     display: flex; align-items: flex-start; gap: 16px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: padding-left 0.2s var(--ease-out);
-    cursor: default;
+    padding: 20px 0; border-bottom: 1px solid var(--border-lt);
+    cursor: default; transition: padding-left 0.25s var(--ease);
 }
-.why-item:last-child { border-bottom: none; }
-.why-item:hover { padding-left: 8px; }
-
-.why-item-ico {
-    width: 38px; height: 38px; flex-shrink: 0;
-    background: var(--acid-dim);
-    border: 1px solid rgba(0,212,255,0.2);
+.wf-item:last-child { border-bottom: none; }
+.wf-item:hover { padding-left: 6px; }
+.wf-ico {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--sky-ultra); border: 1.5px solid var(--sky-mid);
     border-radius: var(--r-sm);
     display: flex; align-items: center; justify-content: center;
-    color: var(--acid); font-size: 14px;
-    transition: all 0.2s;
+    color: var(--sky); font-size: 16px; transition: all 0.2s;
 }
-.why-item:hover .why-item-ico { background: var(--acid); color: var(--ink); }
+.wf-item:hover .wf-ico { background: var(--sky); color: white; }
+.wf-title { font-family: var(--font-d); font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.wf-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
-.why-item-h {
-    font-family: var(--font-d); font-size: 15px; font-weight: 700;
-    color: var(--white); margin-bottom: 4px;
-}
-.why-item-p { font-size: 13px; color: var(--mist); line-height: 1.6; }
-
-/* Right: big number panel */
-.why-right {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-}
-.num-card {
-    background: var(--ink-3); border: 1px solid var(--wire);
-    border-radius: var(--r-md); padding: 32px 24px;
+/* Right: numbers */
+.why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.wn-card {
+    background: var(--sky-ultra); border: 1.5px solid var(--sky-pale);
+    border-radius: var(--r-lg); padding: 32px 24px;
     position: relative; overflow: hidden;
-    transition: all 0.3s var(--ease-out);
+    transition: all 0.25s var(--ease);
 }
-.num-card::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, transparent 60%);
-    opacity: 0; transition: opacity 0.3s;
+.wn-card:hover { border-color: var(--sky-mid); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.wn-card:nth-child(even) { background: linear-gradient(145deg, var(--sky-deep), var(--sky-navy)); border-color: transparent; }
+.wn-num {
+    font-family: var(--font-d); font-size: 44px; font-weight: 800; line-height: 1;
+    color: var(--sky-deep); margin-bottom: 6px;
 }
-.num-card:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-4px); }
-.num-card:hover::before { opacity: 1; }
-
-.num-card .big {
-    font-family: var(--font-d); font-size: 48px; font-weight: 800;
-    color: var(--white); line-height: 1;
-    margin-bottom: 6px;
-}
-.num-card .big span { color: var(--acid); }
-.num-card .lbl { font-size: 13px; color: var(--mist); }
+.wn-card:nth-child(even) .wn-num { color: #7DD3FC; }
+.wn-num sup { font-size: 20px; }
+.wn-label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.wn-card:nth-child(even) .wn-label { color: rgba(255,255,255,0.65); }
 
 /* ============================================================
-   KEYFRAMES
+   CONTACT BAND
    ============================================================ */
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
+.cta-band {
+    background: linear-gradient(135deg, var(--sky-deep) 0%, var(--sky-navy) 50%, var(--ink-2) 100%);
+    padding: 72px 0; position: relative; overflow: hidden;
 }
-@keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(28px); }
-    to   { opacity: 1; transform: translateX(0); }
+.cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
 }
+.cta-inner {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+}
+.cta-text {}
+.cta-text h2 {
+    font-family: var(--font-d); font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.02em;
+}
+.cta-text p { font-size: 15px; color: rgba(255,255,255,0.7); max-width: 480px; line-height: 1.7; }
+.cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-btn-w {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; color: var(--sky-deep);
+    font-family: var(--font-b); font-weight: 700; font-size: 14px;
+    padding: 13px 28px; border-radius: var(--r-sm);
+    text-decoration: none; transition: all 0.2s var(--ease);
+}
+.cta-btn-w:hover { background: var(--sky-pale); color: var(--sky-deep); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.cta-btn-border {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: white;
+    font-family: var(--font-b); font-weight: 600; font-size: 14px;
+    padding: 12px 28px; border-radius: var(--r-sm);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    text-decoration: none; transition: all 0.2s var(--ease);
+}
+.cta-btn-border:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); color: white; transform: translateY(-3px); }
 
-/* AOS-like scroll reveal */
-[data-reveal] {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
-}
-[data-reveal].revealed { opacity: 1; transform: none; }
-[data-reveal-delay="1"] { transition-delay: 0.1s; }
-[data-reveal-delay="2"] { transition-delay: 0.2s; }
-[data-reveal-delay="3"] { transition-delay: 0.3s; }
-[data-reveal-delay="4"] { transition-delay: 0.4s; }
 </style>
 
+<div class="pg-wrap">
 
-{{-- ════════════════════════════════════════
-     TICKER
-════════════════════════════════════════ --}}
-<!-- <div class="ticker-bar" aria-hidden="true">
-    <div class="ticker-inner">
-        @foreach(range(0,1) as $r)
-        <span class="ticker-item"><span class="ticker-dot"></span> Genuine OEM & Aftermarket Parts</span>
-        <span class="ticker-item"><span class="ticker-dot"></span> 20+ Years Industry Experience</span>
-        <span class="ticker-item"><span class="ticker-dot"></span> Worldwide Shipping Available</span>
-        <span class="ticker-item"><span class="ticker-dot"></span> 50,000+ Part Numbers in Stock</span>
-        <span class="ticker-item"><span class="ticker-dot"></span> Expert Technical Support 7 Days</span>
-        <span class="ticker-item"><span class="ticker-dot"></span> Quality Inspected Before Dispatch</span>
-        @endforeach
-    </div>
-</div> -->
-
-
-{{-- ════════════════════════════════════════
-     HERO
-════════════════════════════════════════ --}}
+{{-- ═══════════════════ HERO ═══════════════════ --}}
 @if(count($banners) > 0)
 <section class="hero">
-    <div class="hero-vline"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
 
     <div class="hero-slides">
-        @foreach($banners as $key => $banner)
-        <div class="hero-slide {{ $key == 0 ? 'active' : '' }}"
+        @foreach($banners as $k => $banner)
+        <div class="hero-slide {{ $k == 0 ? 'active' : '' }}"
              style="background-image: url('{{ $banner->photo }}')"></div>
         @endforeach
     </div>
 
-    <div class="hero-body">
-        <div class="hero-eyebrow">
-            <span class="label-tag">Industrial Parts Specialists</span>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-chip">
+                <span class="hero-chip-dot"></span>
+                Industrial Parts Specialists · Est. 2004
+            </div>
+            <h1 class="hero-h1" id="heroH1">
+                {{ $banners[0]->title ?? 'Precision Parts for' }}<br>
+                <span class="hl">Industrial Excellence</span>
+            </h1>
+            <p class="hero-p">
+                @if(isset($banners[0]) && $banners[0]->description)
+                    {!! html_entity_decode(strip_tags($banners[0]->description)) !!}
+                @else
+                    Sourcing verified components for the world's most demanding petrochemical, refinery, and process plant environments. Trusted by engineers in 45+ countries.
+                @endif
+            </p>
+            <div class="hero-btns">
+                <a href="{{ url('/shop') }}" class="btn-sky">
+                    <i class="fas fa-search"></i> Browse Parts
+                </a>
+                <a href="{{ url('/frontend/contact') }}" class="btn-outline-w">
+                    <i class="fas fa-file-alt"></i> Request Quote
+                </a>
+            </div>
         </div>
 
-        <h1 class="hero-heading" id="heroTitle">
-            {{ $banners[0]->title ?? 'Petrochemical &amp; Industrial Parts' }}
-        </h1>
-
-        @if(isset($banners[0]) && $banners[0]->description)
-        <p class="hero-para">{!! html_entity_decode(strip_tags($banners[0]->description)) !!}</p>
-        @else
-        <p class="hero-para">Sourcing precision-engineered components for the world's most demanding industrial environments. Trusted by process engineers globally.</p>
-        @endif
-
-        <div class="hero-actions">
-            <a href="{{ url('/shop') }}" class="btn-prime">
-                <i class="fas fa-search"></i> Browse Parts
-            </a>
-            <a href="{{ url('/frontend/contact') }}" class="btn-ghost">
-                <i class="fas fa-file-alt"></i> Request Quote
-            </a>
+        <div class="hero-right">
+            <div class="hero-search-box">
+                <span class="hs-label"><i class="fas fa-search" style="margin-right:6px;"></i> Quick Part Search</span>
+                <form method="GET" action="{{ route('shop') }}">
+                    <div class="hs-input-row">
+                        <input type="text" name="search" class="hs-input" placeholder="Part number, brand, model…" autocomplete="off">
+                        <button type="submit" class="hs-btn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="hero-stats-row">
+                <div class="hstat">
+                    <div class="hstat-val">50K+</div>
+                    <div class="hstat-lbl">Parts Stocked</div>
+                </div>
+                <div class="hstat">
+                    <div class="hstat-val">200+</div>
+                    <div class="hstat-lbl">Manufacturers</div>
+                </div>
+                <div class="hstat">
+                    <div class="hstat-val">45+</div>
+                    <div class="hstat-lbl">Countries</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Floating stat cards -->
-    <div class="hero-stats">
-        <div class="stat-card">
-            <div class="stat-top">
-                <i class="fas fa-boxes stat-icon"></i>
-                <span class="stat-label">Parts in Stock</span>
-            </div>
-            <div class="stat-val">50<sup>K+</sup></div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-top">
-                <i class="fas fa-industry stat-icon"></i>
-                <span class="stat-label">Manufacturers</span>
-            </div>
-            <div class="stat-val">200<sup>+</sup></div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-top">
-                <i class="fas fa-globe stat-icon"></i>
-                <span class="stat-label">Countries Served</span>
-            </div>
-            <div class="stat-val">45<sup>+</sup></div>
-        </div>
-    </div>
-
-    <!-- Slide dots -->
-    <div class="hero-nav" role="tablist" aria-label="Hero slides">
-        @foreach($banners as $key => $banner)
-        <button class="hero-nav-dot {{ $key == 0 ? 'active' : '' }}"
-                data-slide="{{ $key }}"
-                role="tab" aria-selected="{{ $key == 0 ? 'true' : 'false' }}"></button>
+    <div class="hero-dots">
+        @foreach($banners as $k => $banner)
+        <button class="hero-dot {{ $k == 0 ? 'active' : '' }}" data-slide="{{ $k }}"></button>
         @endforeach
-    </div>
-
-    <div class="scroll-cue" aria-hidden="true">
-        <div class="scroll-cue-line"></div>
-        <!-- scroll -->
     </div>
 </section>
 
 <script>
 (function(){
     const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.hero-nav-dot');
-    const heroTitle = document.getElementById('heroTitle');
-    const banners = @json($banners->map(fn($b) => ['title' => $b->title]));
+    const dots   = document.querySelectorAll('.hero-dot');
+    const h1     = document.getElementById('heroH1');
+    const data   = @json($banners->map(fn($b) => ['title' => $b->title]));
     let cur = 0;
     if (!slides.length) return;
 
-    function goTo(i) {
-        slides[cur].classList.remove('active');
-        dots[cur].classList.remove('active');
-        dots[cur].setAttribute('aria-selected','false');
+    function go(i){
+        slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
         cur = (i + slides.length) % slides.length;
-        slides[cur].classList.add('active');
-        dots[cur].classList.add('active');
-        dots[cur].setAttribute('aria-selected','true');
-        if (heroTitle && banners[cur]) heroTitle.textContent = banners[cur].title;
+        slides[cur].classList.add('active'); dots[cur].classList.add('active');
+        if (h1 && data[cur]?.title) h1.innerHTML = data[cur].title + '<br><span class="hl">Industrial Excellence</span>';
     }
-
-    dots.forEach((d,i) => d.addEventListener('click', () => { goTo(i); clearInterval(timer); timer = setInterval(() => goTo(cur+1), 6000); }));
-    let timer = setInterval(() => goTo(cur+1), 6000);
+    dots.forEach((d,i) => d.addEventListener('click', () => { go(i); resetTimer(); }));
+    let timer = setInterval(() => go(cur + 1), 6000);
+    function resetTimer(){ clearInterval(timer); timer = setInterval(() => go(cur+1), 6000); }
 })();
 </script>
 @endif
 
 
-{{-- ════════════════════════════════════════
-     SEARCH CARD
-════════════════════════════════════════ --}}
-<div style="background: var(--ink-2); padding-top: 1px;">
-    <div class="search-lift">
-        <div class="search-box" data-reveal>
-            <div class="search-ttl">Find by <span>Part Number</span> or Manufacturer</div>
-            <form method="GET" action="{{ route('shop') }}" style="position:relative;">
-                <div class="search-row">
-                    <div class="search-inp-wrap">
-                        <i class="fas fa-search"></i>
-                        <input
-                            type="text"
-                            id="globalSearch"
-                            name="search"
-                            class="search-inp"
-                            placeholder="Part Number, Model, Product Name, or Brand…"
-                            autocomplete="off"
-                            value="{{ request('search') }}"
-                        >
+{{-- ═══════════════════ SEARCH CARD ═══════════════════ --}}
+<div style="background: var(--white); padding-top: 1px;">
+    <div class="search-card-wrap">
+        <div class="search-card" data-rv>
+            <div class="sc-head">
+                <div class="sc-title">Search by <span>Part Number</span> or Manufacturer</div>
+                <div class="sc-meta">
+                    <div class="sc-meta-item"><i class="fas fa-boxes"></i> 50,000+ Parts</div>
+                    <div class="sc-meta-item"><i class="fas fa-industry"></i> 200+ Brands</div>
+                    <div class="sc-meta-item"><i class="fas fa-shipping-fast"></i> Worldwide Shipping</div>
+                </div>
+            </div>
+            <form method="GET" action="{{ route('shop') }}" class="sc-form">
+                <div class="sc-row">
+                    <div class="sc-inp-wrap">
+                        <i class="fas fa-search si-icon"></i>
+                        <input type="text" id="scInput" name="search" class="sc-inp"
+                               placeholder="Enter part number, product name, model or brand…"
+                               autocomplete="off" value="{{ request('search') }}">
                     </div>
-                    <button type="submit" class="search-btn">
+                    <button type="submit" class="sc-submit">
                         <i class="fas fa-search"></i> Search Parts
                     </button>
                 </div>
-                <div id="searchDrop"></div>
+                <div id="scDrop"></div>
             </form>
         </div>
     </div>
 </div>
 
 <script>
-$(document).on('keyup','#globalSearch', function(){
+$(document).on('keyup','#scInput', function(){
     const q = $(this).val();
-    if (q.length < 2) { $('#searchDrop').hide().html(''); return; }
+    if (q.length < 2) { $('#scDrop').hide().html(''); return; }
     $.ajax({
         url: "{{ route('product.search') }}", type:'GET', data:{q},
         success: data => {
             if (!data.length) {
-                $('#searchDrop').html(`<div class="drop-empty">No results found for "<strong>${q}</strong>"</div>`).show();
+                $('#scDrop').html(`<div class="sd-empty">No results for "<strong>${q}</strong>"</div>`).show();
                 return;
             }
             let html = '';
             data.forEach(item => {
-                html += `<a href="/shop?search=${encodeURIComponent(item.title)}" class="drop-item">
+                html += `<a href="/shop?search=${encodeURIComponent(item.title)}" class="sd-item">
                     <i class="fas fa-cog"></i>
                     <span style="flex:1;">${item.title}</span>
-                    ${item.part_number ? `<span class="drop-pn">${item.part_number}</span>` : ''}
+                    ${item.part_number ? `<span class="sd-pn">${item.part_number}</span>` : ''}
                 </a>`;
             });
-            $('#searchDrop').html(html).show();
+            $('#scDrop').html(html).show();
         }
     });
 });
-$(document).click(e => { if (!$(e.target).closest('#globalSearch,#searchDrop').length) $('#searchDrop').hide(); });
+$(document).click(e => { if (!$(e.target).closest('#scInput,#scDrop').length) $('#scDrop').hide(); });
 </script>
 
 
-{{-- ════════════════════════════════════════
-     BRANDS
-════════════════════════════════════════ --}}
-<section class="brands-sec">
-    <div class="container">
-        <div class="brands-head" data-reveal>
-            <span class="label-tag">Our Partners</span>
-            <h2 class="sec-title" style="margin-top:10px;">Trusted by <em>Top Brands</em></h2>
-        </div>
-    </div>
-    <div class="brands-runway">
-        <div id="brandTrack" class="brands-track">
-            @php $brands = DB::table('brands')->where('status','active')->orderBy('title','asc')->get(); @endphp
-            @foreach($brands as $brand)
-            <div class="brand-pill">{{ $brand->title }}</div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<script>
-(function(){
-    const track = document.getElementById('brandTrack');
-    if (!track) return;
-    const itemW = 190; let idx = 0;
-    const total = track.children.length;
-    setInterval(() => {
-        idx++;
-        track.style.transform = `translateX(-${idx * itemW}px)`;
-        if (idx >= total - 5) {
-            setTimeout(() => {
-                track.style.transition = 'none';
-                track.style.transform = 'translateX(0)';
-                idx = 0;
-                setTimeout(() => track.style.transition = 'transform 700ms cubic-bezier(0.25,0.1,0.25,1)', 50);
-            }, 700);
-        }
-    }, 2500);
-})();
-</script>
 
 
-{{-- ════════════════════════════════════════
-     CATEGORIES
-════════════════════════════════════════ --}}
+
+{{-- ═══════════════════ CATEGORIES ═══════════════════ --}}
 @php
-$categories = DB::table('categories')->where('status','active')->whereNull('parent_id')->limit(4)->get();
+$categories   = DB::table('categories')->where('status','active')->whereNull('parent_id')->limit(5)->get();
 $subcategories = DB::table('categories')->where('status','active')->whereNotNull('parent_id')->get()->groupBy('parent_id');
 $catIcons = ['fa-cogs','fa-bolt','fa-tint','fa-thermometer-half','fa-wrench','fa-industry','fa-cube','fa-filter'];
 @endphp
 
 <section class="cats-sec">
     <div class="container">
-        <div class="sec-hd" data-reveal>
-            <div class="sec-hd-left">
-                <span class="label-tag">Browse by Type</span>
-                <h2 class="sec-title" style="margin-top:10px;">Product <em>Categories</em></h2>
+        <div class="sec-hd-row" data-rv>
+            <div>
+                <span class="sec-label">Browse by Type</span>
+                <h2 class="sec-heading">Product <em>Categories</em></h2>
             </div>
-            <div class="sec-hd-right">
-                <a href="/frontend/showcategory">All Categories <i class="fas fa-arrow-right"></i></a>
-            </div>
+            <a href="/frontend/showcategory" class="see-all-link">All Categories <i class="fas fa-arrow-right"></i></a>
         </div>
 
-        <div class="cats-grid">
-            @foreach($categories as $i => $cat)
-            <div class="cat-card" data-reveal data-reveal-delay="{{ $i + 1 }}">
-                <span class="cat-num">0{{ $i + 1 }}</span>
-                <div class="cat-ico"><i class="fas {{ $catIcons[$i % count($catIcons)] }}"></i></div>
-                <a href="{{ route('product-cat', $cat->slug) }}" class="cat-title">{{ $cat->title }}</a>
-                <ul class="cat-subs">
-                    @if(isset($subcategories[$cat->id]))
-                        @foreach($subcategories[$cat->id]->take(5) as $sub)
-                        <li>
-                            <a href="{{ route('product-sub-cat', ['slug' => $cat->slug, 'sub_slug' => $sub->slug]) }}">
-                                {{ $sub->title }}
-                            </a>
-                        </li>
-                        @endforeach
-                        @if(count($subcategories[$cat->id]) > 5)
-                        <li class="cat-more">+{{ count($subcategories[$cat->id]) - 5 }} more</li>
-                        @endif
-                    @else
-                        <li style="font-size:12.5px;color:var(--slate);padding:3px 0;">No subcategories</li>
-                    @endif
-                </ul>
-                <div class="cat-foot">
-                    <a href="{{ route('product-cat', $cat->slug) }}">
-                        View All <i class="fas fa-arrow-right" style="font-size:9px;"></i>
-                    </a>
+        @if(count($categories) > 0)
+        <div class="cats-layout" data-rv>
+            {{-- Featured: first category --}}
+            @php $fc = $categories[0]; @endphp
+            <a href="{{ route('product-cat', $fc->slug) }}" class="cat-featured">
+                <span class="cf-num">01</span>
+                <div class="cf-ico"><i class="fas {{ $catIcons[0] }}"></i></div>
+                <span class="cf-label">Featured Category</span>
+                <div class="cf-title">{{ $fc->title }}</div>
+                <div class="cf-desc">Explore our complete range of {{ $fc->title }} components, sourced from leading manufacturers worldwide.</div>
+                @if(isset($subcategories[$fc->id]) && $subcategories[$fc->id]->count() > 0)
+                <div class="cf-sub-list">
+                    @foreach($subcategories[$fc->id]->take(4) as $sub)
+                    <span class="cf-sub-chip">{{ $sub->title }}</span>
+                    @endforeach
                 </div>
+                @endif
+                <span class="cf-btn">Browse Category <i class="fas fa-arrow-right"></i></span>
+            </a>
+
+            {{-- Mini grid: remaining categories --}}
+            <div class="cats-mini-grid">
+                @foreach($categories->skip(1)->take(4) as $i => $cat)
+                <a href="{{ route('product-cat', $cat->slug) }}" class="cat-mini" data-rv data-d="{{ $i + 1 }}">
+                    <div class="cm-icon"><i class="fas {{ $catIcons[($i+1) % count($catIcons)] }}"></i></div>
+                    <div class="cm-title">{{ $cat->title }}</div>
+                    <div class="cm-count">
+                        <i class="fas fa-layer-group"></i>
+                        {{ isset($subcategories[$cat->id]) ? $subcategories[$cat->id]->count() : 0 }} Subcategories
+                    </div>
+                </a>
+                @endforeach
             </div>
-            @endforeach
         </div>
+        @endif
     </div>
 </section>
 
 
-{{-- ════════════════════════════════════════
-     PRODUCTS
-════════════════════════════════════════ --}}
+{{-- ═══════════════════ PRODUCTS ═══════════════════ --}}
 @php
 $products = DB::table('products')
-    ->leftJoin('categories as parent_cat', 'products.cat_id', '=', 'parent_cat.id')
-    ->leftJoin('categories as child_cat', 'products.child_cat_id', '=', 'child_cat.id')
+    ->leftJoin('categories as pc', 'products.cat_id', '=', 'pc.id')
+    ->leftJoin('categories as cc', 'products.child_cat_id', '=', 'cc.id')
     ->leftJoin('manufacturers', 'products.manufacturer_id', '=', 'manufacturers.id')
     ->leftJoin('pdfs', 'products.pdf_id', '=', 'pdfs.id')
     ->where('products.status','active')
     ->orderBy('products.id','DESC')
-    ->select('products.*','parent_cat.title as category_name','child_cat.title as subcategory_name','manufacturers.name as manufacturer_name','pdfs.file as pdf_file')
+    ->select('products.*','pc.title as category_name','cc.title as subcategory_name',
+             'manufacturers.name as manufacturer_name','pdfs.file as pdf_file')
     ->limit(8)->get();
 @endphp
 
 <section class="prods-sec">
     <div class="container">
-        <div class="sec-hd" data-reveal>
-            <div class="sec-hd-left">
-                <span class="label-tag">Our Inventory</span>
-                <h2 class="sec-title" style="margin-top:10px;">Latest <em>Products</em></h2>
+        <div class="sec-hd-row" data-rv>
+            <div>
+                <span class="sec-label">Our Inventory</span>
+                <h2 class="sec-heading">Latest <em>Products</em></h2>
             </div>
-            <div class="sec-hd-right">
-                <a href="/frontend/showproduct">All Products <i class="fas fa-arrow-right"></i></a>
-            </div>
+            <a href="/frontend/showproduct" class="see-all-link">All Products <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <div class="prods-grid">
             @foreach($products as $i => $product)
             @php
                 $photos = json_decode($product->photo, true);
-                $image = $photos[0] ?? null;
-                $discountedPrice = $product->discount > 0
+                $image  = $photos[0] ?? null;
+                $disc   = $product->discount > 0
                     ? $product->price - ($product->price * $product->discount / 100)
                     : $product->price;
-                $isNew = \Carbon\Carbon::parse($product->created_at)->diffInDays(now()) < 30;
+                $isNew  = \Carbon\Carbon::parse($product->created_at)->diffInDays(now()) < 30;
             @endphp
-            <div class="prod-card" data-reveal data-reveal-delay="{{ ($i % 4) + 1 }}">
+            <div class="prod-card" data-rv data-d="{{ ($i % 4) + 1 }}">
+                <div class="prod-bar"></div>
 
-                <!-- @if($isNew || $product->discount > 0)
-                <div class="prod-badge-strip">
-                    @if($isNew)<span class="prod-badge badge-new">New</span>@endif
-                    @if($product->discount > 0)<span class="prod-badge badge-sale">-{{ $product->discount }}%</span>@endif
+                @if($isNew || $product->discount > 0)
+                <div class="prod-badges">
+                    @if($isNew)<span class="p-badge p-badge-new">New</span>@endif
+                    @if($product->discount > 0)<span class="p-badge p-badge-sale">-{{ $product->discount }}%</span>@endif
                 </div>
-                @endif -->
+                @endif
 
-                <!-- <div class="prod-img">
-                    <div class="prod-img-pattern"></div>
+                <div class="prod-thumb">
                     @if($image)
                         <img src="{{ $image }}" alt="{{ $product->title }}" loading="lazy">
                     @else
-                        <i class="fas fa-cog prod-img-icon"></i>
+                        <i class="fas fa-cog prod-thumb-icon"></i>
                     @endif
-                </div> -->
+                    <div class="prod-overlay">
+                        <a href="{{ route('product-detail', $product->slug) }}" class="po-view">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
 
                 <div class="prod-body">
-                    <div class="prod-bc">
+                    <div class="prod-cats">
                         @if($product->category_name)<span>{{ $product->category_name }}</span>@endif
                         @if($product->subcategory_name)<i class="fas fa-chevron-right"></i><span>{{ $product->subcategory_name }}</span>@endif
                     </div>
 
                     <div class="prod-name">{{ $product->title }}</div>
 
-                    @if($product->summary)
-                    <div class="prod-desc">{{ \Illuminate\Support\Str::limit(strip_tags($product->summary), 90) }}</div>
-                    @endif
-
-                    <div class="prod-meta">
+                    <div class="prod-specs">
                         @if($product->manufacturer_name)
-                        <div class="prod-meta-row">
+                        <div class="spec-row">
                             <i class="fas fa-industry"></i>
-                            <span class="meta-k">MFR:</span>{{ $product->manufacturer_name }}
+                            <span class="spec-key">MFR:</span>
+                            <span class="spec-val">{{ $product->manufacturer_name }}</span>
                         </div>
                         @endif
                         @if($product->part_number)
-                        <div class="prod-meta-row">
+                        <div class="spec-row">
                             <i class="fas fa-barcode"></i>
-                            <span class="meta-k">Part#:</span>{{ $product->part_number }}
+                            <span class="spec-key">Part#:</span>
+                            <span class="spec-val">{{ $product->part_number }}</span>
                         </div>
                         @endif
                         @if($product->model_number)
-                        <div class="prod-meta-row">
+                        <div class="spec-row">
                             <i class="fas fa-tag"></i>
-                            <span class="meta-k">Model:</span>{{ $product->model_number }}
-                        </div>
-                        @endif
-                        @if($product->pdf_file)
-                        <div class="prod-meta-row prod-pdf">
-                            <i class="fas fa-file-pdf" style="color:var(--amber);"></i>
-                            <a href="{{ asset($product->pdf_file) }}" target="_blank" rel="noopener">
-                                <i class="fas fa-file-pdf"></i> {{ basename($product->pdf_file) }}
-                            </a>
+                            <span class="spec-key">Model:</span>
+                            <span class="spec-val">{{ $product->model_number }}</span>
                         </div>
                         @endif
                     </div>
 
-                    <div class="prod-price">
-                        <span class="price-now">£{{ number_format($discountedPrice, 2) }}</span>
+                    @if($product->pdf_file)
+                    <a href="{{ asset($product->pdf_file) }}" target="_blank" class="prod-pdf-link">
+                        <i class="fas fa-file-pdf"></i> {{ basename($product->pdf_file) }}
+                    </a>
+                    @endif
+
+                    <div class="prod-price-row">
+                        <span class="price-main">£{{ number_format($disc, 2) }}</span>
                         @if($product->discount > 0)
-                        <span class="price-was">£{{ number_format($product->price, 2) }}</span>
-                        <span class="price-save">Save {{ $product->discount }}%</span>
+                        <span class="price-old">£{{ number_format($product->price, 2) }}</span>
+                        <span class="price-save-tag">Save {{ $product->discount }}%</span>
                         @endif
                     </div>
 
-                    <div class="prod-actions">
-                        <a href="{{ route('product-detail', $product->slug) }}" class="pa-icon" title="View Details" aria-label="View Details">
+                    <div class="prod-acts">
+                        <a href="{{ route('product-detail', $product->slug) }}" class="pa-view-btn" title="View Details">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="{{ route('add-to-cart', $product->slug) }}" class="pa-btn" aria-label="Request Quote for {{ $product->title }}">
+                        <a href="{{ route('add-to-cart', $product->slug) }}" class="pa-cart-btn">
                             <i class="fas fa-file-invoice"></i> Request Quote
                         </a>
                     </div>
@@ -1280,130 +1191,184 @@ $products = DB::table('products')
             @endforeach
         </div>
 
-        <div class="center-cta" data-reveal>
-            <a href="/frontend/showproduct" class="cta-all">
-                View All Products <i class="fas fa-arrow-right"></i>
+        <div class="center-cta" data-rv>
+            <a href="/frontend/showproduct" class="all-btn">
+                <i class="fas fa-th-large"></i> View All Products <i class="fas fa-arrow-right"></i>
             </a>
         </div>
     </div>
 </section>
 
-
-{{-- ════════════════════════════════════════
-     WHY US
-════════════════════════════════════════ --}}
-<section class="why-sec">
+{{-- ═══════════════════ BRANDS ═══════════════════ --}}
+<section class="brands-sec">
     <div class="container">
-        <div class="why-layout">
-            <div class="why-left" data-reveal>
-                <span class="label-tag">Why Petchemparts</span>
-                <h2 class="sec-title" style="margin-top:10px;">The <em>Trusted</em> Partner for Critical Parts</h2>
-                <p class="sec-sub">From upstream exploration to downstream refining, we supply verified industrial components that keep your operations running without interruption.</p>
-
-                <div class="why-list">
-                    <div class="why-item">
-                        <div class="why-item-ico"><i class="fas fa-shield-alt"></i></div>
-                        <div>
-                            <div class="why-item-h">100% Genuine Parts</div>
-                            <div class="why-item-p">All components sourced directly from authorized distributors and OEM manufacturers. No counterfeits, no compromise.</div>
-                        </div>
-                    </div>
-                    <div class="why-item">
-                        <div class="why-item-ico"><i class="fas fa-microscope"></i></div>
-                        <div>
-                            <div class="why-item-h">Rigorous Quality Control</div>
-                            <div class="why-item-p">Every part passes multi-point inspection before dispatch. Full traceability documentation available on request.</div>
-                        </div>
-                    </div>
-                    <div class="why-item">
-                        <div class="why-item-ico"><i class="fas fa-shipping-fast"></i></div>
-                        <div>
-                            <div class="why-item-h">Fast Global Shipping</div>
-                            <div class="why-item-p">Express worldwide delivery with real-time tracking. Emergency same-day dispatch available for critical spares.</div>
-                        </div>
-                    </div>
-                    <div class="why-item">
-                        <div class="why-item-ico"><i class="fas fa-headset"></i></div>
-                        <div>
-                            <div class="why-item-h">Expert Technical Support</div>
-                            <div class="why-item-p">Our specialist engineers are on hand 7 days a week to assist with part identification, specification, and selection.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="why-right" data-reveal data-reveal-delay="2">
-                <div class="num-card">
-                    <div class="big">20<span>+</span></div>
-                    <div class="lbl">Years of Industry Experience</div>
-                </div>
-                <div class="num-card">
-                    <div class="big">50<span>K</span></div>
-                    <div class="lbl">Part Numbers in Inventory</div>
-                </div>
-                <div class="num-card">
-                    <div class="big">200<span>+</span></div>
-                    <div class="lbl">Global Manufacturers</div>
-                </div>
-                <div class="num-card">
-                    <div class="big">45<span>+</span></div>
-                    <div class="lbl">Countries Served Worldwide</div>
-                </div>
-            </div>
+        <div class="brands-hd" data-rv>
+            <span class="sec-label">Our Partners</span>
+            <h2 class="sec-heading">Trusted by <em>Top Manufacturers</em></h2>
+        </div>
+    </div>
+    <div class="brands-scroll">
+        <div id="brandTrack" class="brands-track" style="padding: 0 80px;">
+            @php $brands = DB::table('brands')->where('status','active')->orderBy('title','asc')->get(); @endphp
+            @foreach($brands as $b)
+            <div class="brand-chip">{{ $b->title }}</div>
+            @endforeach
         </div>
     </div>
 </section>
 
-
-{{-- ════════════════════════════════════════
-     TRUST STRIP
-════════════════════════════════════════ --}}
-<section class="trust-sec">
-    <div class="container">
-        <div style="text-align:center; margin-bottom:52px;" data-reveal>
-            <span class="label-tag">Our Commitment</span>
-            <h2 class="sec-title" style="margin-top:12px;">Built on <em>Trust</em></h2>
-        </div>
-        <div class="trust-grid" data-reveal>
-            <div class="trust-cell">
-                <div class="trust-ico-wrap"><i class="fas fa-certificate"></i></div>
-                <div class="trust-h">Certified Authentic</div>
-                <div class="trust-p">Every product carries full certification and traceability back to the original manufacturer.</div>
-                <div class="trust-accent">100%</div>
-            </div>
-            <div class="trust-cell">
-                <div class="trust-ico-wrap"><i class="fas fa-award"></i></div>
-                <div class="trust-h">Two Decades</div>
-                <div class="trust-p">Serving global process industries since 2004 with unbroken commitment to quality and reliability.</div>
-                <div class="trust-accent">20 Yrs</div>
-            </div>
-            <div class="trust-cell">
-                <div class="trust-ico-wrap"><i class="fas fa-check-double"></i></div>
-                <div class="trust-h">Verified Quality</div>
-                <div class="trust-p">Multi-point inspection on every single part. If it doesn't meet spec, it doesn't leave our warehouse.</div>
-                <div class="trust-accent">100%</div>
-            </div>
-            <div class="trust-cell">
-                <div class="trust-ico-wrap"><i class="fas fa-headset"></i></div>
-                <div class="trust-h">7-Day Support</div>
-                <div class="trust-p">Technical experts available every day of the week. No waiting, no bots — real engineers on call.</div>
-                <div class="trust-accent">7/7</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ════════════════════════════════════════
-     SCROLL REVEAL SCRIPT
-════════════════════════════════════════ --}}
 <script>
 (function(){
-    const els = document.querySelectorAll('[data-reveal]');
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
+    const track = document.getElementById('brandTrack');
+    if (!track || !track.children.length) return;
+    const W = 176; let idx = 0;
+    const total = track.children.length;
+    setInterval(function(){
+        idx++;
+        track.style.transition = 'transform 700ms cubic-bezier(0.25,0.1,0.25,1)';
+        track.style.transform = `translateX(-${idx * W}px)`;
+        if (idx >= total - 4){
+            setTimeout(function(){
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(0)';
+                idx = 0;
+            }, 720);
+        }
+    }, 2600);
+})();
+</script>
+{{-- ═══════════════════ TRUST ═══════════════════ --}}
+<section class="trust-sec">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:48px;" data-rv>
+            <span class="sec-label">Our Commitment</span>
+            <h2 class="sec-heading">Why Engineers <em>Trust</em> Us</h2>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-card" data-rv data-d="1">
+                <div class="tc-icon"><i class="fas fa-certificate"></i></div>
+                <div class="tc-title">100% Genuine Parts</div>
+                <div class="tc-desc">Every component sourced directly from authorized distributors. Full OEM traceability on every order.</div>
+                <div class="tc-stat">100%</div>
+            </div>
+            <div class="trust-card" data-rv data-d="2">
+                <div class="tc-icon"><i class="fas fa-award"></i></div>
+                <div class="tc-title">20+ Years Experience</div>
+                <div class="tc-desc">Trusted by process engineers and procurement teams globally since 2004. Consistent, reliable, professional.</div>
+                <div class="tc-stat">Since 2004</div>
+            </div>
+            <div class="trust-card" data-rv data-d="3">
+                <div class="tc-icon"><i class="fas fa-microscope"></i></div>
+                <div class="tc-title">Quality Inspected</div>
+                <div class="tc-desc">Multi-point inspection before every dispatch. If it doesn't meet specification, it stays in our warehouse.</div>
+                <div class="tc-stat">Zero Defects</div>
+            </div>
+            <div class="trust-card" data-rv data-d="4">
+                <div class="tc-icon"><i class="fas fa-headset"></i></div>
+                <div class="tc-title">7-Day Expert Support</div>
+                <div class="tc-desc">Real engineers available 7 days a week. Part identification, spec matching, and technical guidance on demand.</div>
+                <div class="tc-stat">7 Days/Week</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- ═══════════════════ WHY US ═══════════════════ --}}
+<section class="why-sec">
+    <div class="container">
+        <div class="why-split">
+            <div class="why-left" data-rv>
+                <span class="sec-label">Why Petchemparts</span>
+                <h2 class="sec-heading">The <em>Trusted Choice</em> for Critical Industrial Parts</h2>
+                <p class="sec-desc">From upstream exploration to downstream refining, we supply verified components that keep your operations running without interruption.</p>
+
+                <div class="why-features">
+                    <div class="wf-item">
+                        <div class="wf-ico"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <div class="wf-title">Genuine OEM & Aftermarket</div>
+                            <div class="wf-desc">No grey market, no counterfeits. Every part comes with full certification and provenance documentation.</div>
+                        </div>
+                    </div>
+                    <div class="wf-item">
+                        <div class="wf-ico"><i class="fas fa-shipping-fast"></i></div>
+                        <div>
+                            <div class="wf-title">Express Global Delivery</div>
+                            <div class="wf-desc">Emergency same-day dispatch for critical spares. Real-time tracking across all major shipping networks.</div>
+                        </div>
+                    </div>
+                    <div class="wf-item">
+                        <div class="wf-ico"><i class="fas fa-file-contract"></i></div>
+                        <div>
+                            <div class="wf-title">Competitive Quote System</div>
+                            <div class="wf-desc">Request a quote online in minutes. Our team responds with pricing and availability within hours.</div>
+                        </div>
+                    </div>
+                    <div class="wf-item">
+                        <div class="wf-ico"><i class="fas fa-globe"></i></div>
+                        <div>
+                            <div class="wf-title">Serving 45+ Countries</div>
+                            <div class="wf-desc">A trusted international partner with established logistics routes across Europe, Middle East, Asia, and beyond.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-right" data-rv data-d="2">
+                <div class="wn-card">
+                    <div class="wn-num">20<sup>+</sup></div>
+                    <div class="wn-label">Years of Industry Experience</div>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">50<sup>K</sup></div>
+                    <div class="wn-label">Part Numbers in Inventory</div>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">200<sup>+</sup></div>
+                    <div class="wn-label">Global Manufacturers</div>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">45<sup>+</sup></div>
+                    <div class="wn-label">Countries Served Worldwide</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- ═══════════════════ CTA BAND ═══════════════════ --}}
+<section class="cta-band">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="cta-text" data-rv>
+                <h2>Ready to Source Your Parts?</h2>
+                <p>Our team of specialists is available 7 days a week to help you find exactly what you need, at the right price, shipped anywhere in the world.</p>
+            </div>
+            <div class="cta-btns" data-rv data-d="2">
+                <a href="{{ url('/frontend/contact') }}" class="cta-btn-w">
+                    <i class="fas fa-file-invoice"></i> Request a Quote
+                </a>
+                <a href="tel:+441234440530" class="cta-btn-border">
+                    <i class="fas fa-phone-alt"></i> +44 123 444 0530
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</div>{{-- .pg-wrap --}}
+
+{{-- Scroll reveal --}}
+<script>
+(function(){
+    const els = document.querySelectorAll('[data-rv]');
+    const io  = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 

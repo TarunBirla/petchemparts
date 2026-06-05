@@ -426,7 +426,7 @@
     gap: 8px;
 }
 .pc-mega-cat-name {
-    font-family: var(--FN);
+    font-family: var(--T);
     font-size: 18px;
     font-weight: 800;
     color: var(--INK);

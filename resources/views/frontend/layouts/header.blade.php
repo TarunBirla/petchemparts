@@ -4,27 +4,29 @@
      Font: Plus Jakarta Sans
 ══════════════════════════════════════════════════════ --}}
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
 :root {
-    --T:     #C25A2A;
-    --T-dk:  #9E4420;
-    --T-lt:  #D97040;
-    --T-xs:  rgba(194,90,42,0.08);
-    --T-sm:  rgba(194,90,42,0.14);
-    --T-md:  rgba(194,90,42,0.22);
-    --T-gl:  rgba(194,90,42,0.30);
+   
+    --T:     #00D4FF;
+    --T-dk:  #0056B9;
+    --T-lt:  #4DBAF7;
+    
+    --T-xs:  rgba(76, 98, 171, 0.08);
+    --T-sm:  rgba(47, 90, 198, 0.14);
+    --T-md:  rgba(38, 89, 208, 0.22);
+    --T-gl:  rgba(105, 134, 221, 0.3);
     --CR:    #F6F1E9;
     --CR-dk: #EDE5D8;
     --CR-dr: #D9CEBC;
     --WH:    #FFFFFF;
-    --INK:   #1C0E06;
-    --INK2:  #2E1A0E;
-    --MID:   #7A5840;
-    --FOG:   #A8896E;
-    --FN:    'Plus Jakarta Sans', sans-serif;
+    --INK:   #FFFFFF;
+    --INK2:  #408dcc;
+    --MID:   #497cdc;
+    --FOG:   #1568e4;
+    --FN:    'Poppins', sans-serif;
     --sh-sm: 0 2px 12px rgba(28,14,6,0.08);
     --sh-md: 0 8px 32px rgba(28,14,6,0.12);
     --sh-lg: 0 20px 60px rgba(28,14,6,0.16);
@@ -38,7 +40,7 @@
     height: 36px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(194,90,42,0.20);
+    border-bottom: 1px solid rgba(76, 98, 171, 0.08);
 }
 .pc-topbar-inner {
     max-width: 1360px;
@@ -59,7 +61,7 @@
     align-items: center;
     gap: 6px;
     padding: 0 14px;
-    border-right: 1px solid rgba(194,90,42,0.18);
+    border-right: 1px solid rgba(76, 98, 171, 0.08);
     height: 36px;
     white-space: nowrap;
 }
@@ -82,10 +84,10 @@
     color: var(--FOG);
     font-size: 11px;
     text-decoration: none;
-    border-left: 1px solid rgba(194,90,42,0.18);
+    border-left: 1px solid rgba(76, 98, 171, 0.08);
     transition: all .18s;
 }
-.pc-top-socials a:hover { color: var(--T-lt); background: rgba(194,90,42,0.10); }
+.pc-top-socials a:hover { color: var(--T-lt); background: rgba(76, 98, 171, 0.08); }
 
 /* ─── MAIN HEADER ────────────────────────────────── */
 .pc-header {
@@ -97,7 +99,7 @@
     transition: box-shadow .25s;
 }
 .pc-header.is-scrolled {
-    box-shadow: 0 4px 28px rgba(194,90,42,0.12);
+    box-shadow: 0 4px 28px rgba(76, 98, 171, 0.08)
 }
 .pc-header-inner {
     max-width: 1360px;

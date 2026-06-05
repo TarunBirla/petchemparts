@@ -3,6 +3,7 @@
     background: #ffffff !important;
     border-right: 1px solid #e8edf3;
     min-height: 100vh;
+    width: 260px !important;
 }
 .sidebar-brand {
     padding: 22px 20px 18px;

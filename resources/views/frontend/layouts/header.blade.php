@@ -597,7 +597,9 @@
             {{-- Actions --}}
             <div class="header-actions">
                 @auth
-                <a href="{{ route('frontend.profile') }}" class="h-action" title="My Account">
+                <a 
+                href="/profile" 
+                class="h-action" title="My Account">
                     <i class="fas fa-user"></i>
                 </a>
                 @else

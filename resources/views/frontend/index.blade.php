@@ -1,1375 +1,1702 @@
+<!-- New code -->
+
 @extends('frontend.layouts.master')
 
-@section('title', 'Petchemparts — Industrial & Petrochemical Parts Specialists')
+@section('title', 'Petchemparts || Home')
 
 @section('main-content')
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-/* ============================================================
-   PETCHEMPARTS — HOME PAGE
-   Theme: Light Blue / White — Clean Professional
-   Fonts: Sora (display) + Manrope (body)
-   ============================================================ */
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-    --sky:        #0EA5E9;
-    --sky-deep:   #0284C7;
-    --sky-navy:   #075985;
-    --sky-pale:   #E0F2FE;
-    --sky-ultra:  #F0F9FF;
-    --sky-mid:    #BAE6FD;
-    --ink:        #0C1B2E;
-    --ink-2:      #1E3A5F;
-    --body-txt:   #374151;
-    --muted:      #6B7280;
-    --border:     #CBD5E1;
-    --border-lt:  #E2E8F0;
-    --white:      #FFFFFF;
-    --bg:         #F8FAFC;
-    --amber:      #F59E0B;
-    --green:      #10B981;
-    --font-d:     'Sora', sans-serif;
-    --font-b:     'Manrope', sans-serif;
-    --ease:       cubic-bezier(0.16, 1, 0.3, 1);
-    --r-sm:       8px;
-    --r-md:       14px;
-    --r-lg:       20px;
-    --shadow-sm:  0 1px 4px rgba(14,165,233,0.08), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md:  0 4px 20px rgba(14,165,233,0.15), 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-lg:  0 12px 48px rgba(14,165,233,0.18), 0 4px 16px rgba(0,0,0,0.08);
-    --shadow-xl:  0 24px 80px rgba(14,165,233,0.22), 0 8px 24px rgba(0,0,0,0.1);
-}
-
-body { font-family: var(--font-b); color: var(--body-txt); background: var(--bg); }
-
-.pg-wrap { overflow-x: hidden; }
-
-/* ── UTILITY ── */
-.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-@media (max-width: 768px) { .container { padding: 0 20px; } }
-
-.badge-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-b); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--sky-deep); background: var(--sky-pale);
-    border: 1px solid var(--sky-mid); border-radius: 100px;
-    padding: 5px 14px;
-}
-.badge-tag i { font-size: 9px; color: var(--sky); }
-
-.sec-label {
-    font-family: var(--font-b); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky);
-    margin-bottom: 10px; display: block;
-}
-
-.sec-heading {
-    font-family: var(--font-d); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 800; color: var(--ink); line-height: 1.12; letter-spacing: -0.02em;
-}
-.sec-heading em { font-style: normal; color: var(--sky); }
-
-.sec-desc {
-    font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 500px;
-    margin-top: 12px;
-}
-
-/* ── REVEAL ── */
-[data-rv] {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-}
-[data-rv].vis { opacity: 1; transform: none; }
-[data-rv][data-d="1"] { transition-delay: 0.08s; }
-[data-rv][data-d="2"] { transition-delay: 0.16s; }
-[data-rv][data-d="3"] { transition-delay: 0.24s; }
-[data-rv][data-d="4"] { transition-delay: 0.32s; }
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero {
-    position: relative;
-    background: var(--ink);
-    min-height: 92vh;
-    display: flex; align-items: stretch;
-    overflow: hidden;
-}
-
-/* Grid overlay */
-.hero-grid {
-    position: absolute; inset: 0; z-index: 1;
-    background-image:
-        linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px);
-    background-size: 56px 56px;
-}
-
-/* Gradient blobs */
-.hero-blob-1 {
-    position: absolute; top: -120px; right: -80px;
-    width: 600px; height: 600px; z-index: 1;
-    background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 65%);
-    border-radius: 50%;
-}
-.hero-blob-2 {
-    position: absolute; bottom: -100px; left: -120px;
-    width: 500px; height: 500px; z-index: 1;
-    background: radial-gradient(circle, rgba(7,89,133,0.14) 0%, transparent 65%);
-    border-radius: 50%;
-}
-
-/* Slides */
-.hero-slides { position: absolute; inset: 0; z-index: 0; }
-.hero-slide {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    opacity: 0; transition: opacity 1.6s ease;
-}
-.hero-slide.active { opacity: 1; }
-.hero-slide::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(110deg, rgba(12,27,46,0.93) 0%, rgba(12,27,46,0.65) 50%, rgba(12,27,46,0.35) 100%);
-}
-
-.hero-inner {
-    position: relative; z-index: 5;
-    display: grid; grid-template-columns: 1fr 380px;
-    gap: 60px; align-items: center;
-    max-width: 1280px; margin: 0 auto; padding: 0 32px;
-    width: 100%; min-height: 92vh;
-}
-@media (max-width: 1100px) { .hero-inner { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .hero-inner { padding: 80px 20px; } }
-
-/* Left content */
-.hero-content { padding: 60px 0; }
-
-.hero-chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(14,165,233,0.14); border: 1px solid rgba(14,165,233,0.3);
-    color: #7DD3FC; border-radius: 100px;
-    font-family: var(--font-b); font-size: 11.5px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 6px 16px; margin-bottom: 28px;
-    animation: fadeUp 0.7s var(--ease) both;
-}
-.hero-chip-dot { width: 6px; height: 6px; background: #38BDF8; border-radius: 50%; animation: pulse-dot 2s infinite; }
-@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
-
-.hero-h1 {
-    font-family: var(--font-d); font-weight: 800;
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    color: #FFFFFF; line-height: 1.06; letter-spacing: -0.03em;
-    margin-bottom: 22px;
-    animation: fadeUp 0.7s 0.1s var(--ease) both;
-}
-.hero-h1 .hl {
-    background: linear-gradient(90deg, #38BDF8, #0EA5E9);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-.hero-p {
-    font-size: 16px; color: #94A3B8; line-height: 1.8; max-width: 480px;
-    margin-bottom: 40px;
-    animation: fadeUp 0.7s 0.2s var(--ease) both;
-}
-
-.hero-btns {
-    display: flex; gap: 14px; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.3s var(--ease) both;
-}
-.btn-sky {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--sky); color: white;
-    font-family: var(--font-b); font-weight: 700; font-size: 14px;
-    padding: 13px 28px; border-radius: var(--r-sm);
-    text-decoration: none; letter-spacing: 0.01em;
-    transition: all 0.25s var(--ease);
-    box-shadow: 0 4px 20px rgba(14,165,233,0.4);
-}
-.btn-sky:hover {
-    background: var(--sky-deep); color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(14,165,233,0.5);
-}
-.btn-outline-w {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: transparent; color: white;
-    font-family: var(--font-b); font-weight: 600; font-size: 14px;
-    padding: 12px 28px; border-radius: var(--r-sm);
-    text-decoration: none; letter-spacing: 0.01em;
-    border: 1.5px solid rgba(255,255,255,0.22);
-    transition: all 0.25s var(--ease);
-}
-.btn-outline-w:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.5); color: white;
-    transform: translateY(-3px);
-}
-
-/* Hero right: search + stats */
-.hero-right { display: flex; flex-direction: column; gap: 16px; }
-@media (max-width: 1100px) { .hero-right { display: none; } }
-
-.hero-search-box {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.14);
-    backdrop-filter: blur(20px);
-    border-radius: var(--r-lg); padding: 24px;
-    animation: fadeLeft 0.7s 0.4s var(--ease) both;
-}
-.hs-label {
-    font-family: var(--font-b); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; color: #7DD3FC;
-    margin-bottom: 12px; display: block;
-}
-.hs-input-row { display: flex; gap: 8px; }
-.hs-input {
-    flex: 1; height: 44px;
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
-    border-radius: var(--r-sm);
-    padding: 0 16px; font-family: var(--font-b); font-size: 13.5px;
-    color: white; outline: none;
-    transition: border-color 0.2s, background 0.2s;
-}
-.hs-input::placeholder { color: #64748B; }
-.hs-input:focus { border-color: var(--sky); background: rgba(255,255,255,0.1); }
-.hs-btn {
-    height: 44px; padding: 0 18px;
-    background: var(--sky); color: white; border: none;
-    border-radius: var(--r-sm); font-family: var(--font-b); font-weight: 700;
-    font-size: 13px; cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-}
-.hs-btn:hover { background: var(--sky-deep); transform: translateY(-1px); }
-
-/* Stat pills */
-.hero-stats-row {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    animation: fadeLeft 0.7s 0.55s var(--ease) both;
-}
-.hstat {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(16px); border-radius: var(--r-md);
-    padding: 16px; text-align: center;
-    transition: border-color 0.25s, background 0.25s, transform 0.25s;
-}
-.hstat:hover { background: rgba(14,165,233,0.12); border-color: rgba(14,165,233,0.35); transform: translateY(-3px); }
-.hstat-val { font-family: var(--font-d); font-size: 22px; font-weight: 800; color: #38BDF8; }
-.hstat-lbl { font-size: 10.5px; color: #94A3B8; margin-top: 3px; font-weight: 500; }
-
-/* Dots nav */
-.hero-dots {
-    position: absolute; bottom: 32px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 6; display: flex; gap: 8px;
-}
-.hero-dot {
-    width: 8px; height: 8px; border-radius: 4px;
-    background: rgba(255,255,255,0.28); cursor: pointer; border: none;
-    transition: all 0.3s var(--ease);
-}
-.hero-dot.active { background: var(--sky); width: 28px; }
-
-@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeLeft { from{opacity:0;transform:translateX(24px)} to{opacity:1;transform:translateX(0)} }
-
-/* ============================================================
-   SEARCH SECTION (BELOW HERO)
-   ============================================================ */
-.search-section {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-lt);
-    padding: 0;
-}
-.search-card-wrap {
-    max-width: 1280px; margin: 0 auto; padding: 0 32px;
-    transform: translateY(-36px); margin-bottom: -36px;
-}
-@media (max-width: 768px) { .search-card-wrap { padding: 0 20px; transform: translateY(-24px); margin-bottom: -24px; } }
-
-.search-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    box-shadow: var(--shadow-xl);
-    padding: 32px 36px;
-    position: relative; overflow: hidden;
-}
-.search-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--sky), #38BDF8, var(--sky-deep));
-}
-.sc-head {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
-}
-.sc-title {
-    font-family: var(--font-d); font-size: 18px; font-weight: 700; color: var(--ink);
-}
-.sc-title span { color: var(--sky); }
-.sc-meta { display: flex; gap: 20px; flex-wrap: wrap; }
-.sc-meta-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: var(--muted); font-weight: 500;
-}
-.sc-meta-item i { color: var(--sky); font-size: 11px; }
-
-.sc-form { position: relative; }
-.sc-row { display: flex; gap: 10px; }
-.sc-inp-wrap { flex: 1; position: relative; }
-.sc-inp-wrap i.si-icon {
-    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-    color: var(--muted); font-size: 14px; pointer-events: none;
-}
-.sc-inp {
-    width: 100%; height: 52px;
-    background: var(--bg); border: 1.5px solid var(--border);
-    border-radius: var(--r-sm);
-    padding: 0 16px 0 46px;
-    font-family: var(--font-b); font-size: 14px; color: var(--ink);
-    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-}
-.sc-inp::placeholder { color: var(--muted); }
-.sc-inp:focus {
-    border-color: var(--sky);
-    box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
-    background: var(--white);
-}
-.sc-submit {
-    height: 52px; padding: 0 32px;
-    background: var(--sky); color: white; border: none;
-    border-radius: var(--r-sm);
-    font-family: var(--font-b); font-weight: 700; font-size: 14px;
-    cursor: pointer; display: flex; align-items: center; gap: 8px;
-    white-space: nowrap; transition: all 0.2s var(--ease);
-}
-.sc-submit:hover { background: var(--sky-deep); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
-/* search dropdown */
-#scDrop {
-    position: absolute; top: calc(100% + 8px); left: 0; right: 0;
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: var(--r-md); box-shadow: var(--shadow-lg);
-    z-index: 999; display: none; overflow: hidden;
-    max-height: 300px; overflow-y: auto;
-}
-.sd-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 11px 16px; text-decoration: none;
-    color: var(--body-txt); font-size: 13.5px;
-    border-bottom: 1px solid var(--border-lt);
-    transition: background 0.15s;
-}
-.sd-item:last-child { border-bottom: none; }
-.sd-item:hover { background: var(--sky-ultra); color: var(--sky-deep); }
-.sd-item i { color: var(--sky); font-size: 12px; }
-.sd-pn {
-    margin-left: auto; font-size: 11px;
-    background: var(--bg); color: var(--muted);
-    padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);
-}
-.sd-empty { padding: 16px; color: var(--muted); font-size: 13.5px; }
-
-@media (max-width: 600px) {
-    .sc-row { flex-direction: column; }
-    .sc-submit { justify-content: center; }
-    .search-card { padding: 24px 20px; }
-}
-
-/* ============================================================
-   BRANDS
-   ============================================================ */
-.brands-sec {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-lt);
-    padding: 72px 0 64px;
-}
-.brands-hd { text-align: center; margin-bottom: 40px; }
-
-.brands-scroll { overflow: hidden; position: relative; }
-.brands-scroll::before,
-.brands-scroll::after {
-    content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
-}
-.brands-scroll::before { left: 0; background: linear-gradient(to right, white, transparent); }
-.brands-scroll::after  { right: 0; background: linear-gradient(to left, white, transparent); }
-.brands-track {
-    display: flex; gap: 12px;
-    transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
-}
-.brand-chip {
-    flex-shrink: 0; height: 58px; min-width: 164px;
-    background: var(--bg); border: 1.5px solid var(--border-lt);
-    border-radius: var(--r-md);
-    display: flex; align-items: center; justify-content: center; padding: 0 20px;
-    font-family: var(--font-b); font-weight: 700; font-size: 13px;
-    color: var(--muted); letter-spacing: 0.03em;
-    transition: all 0.25s var(--ease); cursor: default;
-}
-.brand-chip:hover {
-    border-color: var(--sky); color: var(--sky-deep);
-    background: var(--sky-ultra); transform: translateY(-3px);
-    box-shadow: var(--shadow-sm);
-}
-
-/* ============================================================
-   CATEGORIES
-   ============================================================ */
-.cats-sec {
-    background: var(--bg);
-    padding: 88px 0;
-    border-bottom: 1px solid var(--border-lt);
-}
-.sec-hd-row {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 44px; gap: 20px; flex-wrap: wrap;
-}
-.see-all-link {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: var(--font-b); font-size: 13px; font-weight: 700;
-    color: var(--sky); text-decoration: none;
-    border-bottom: 1.5px solid rgba(14,165,233,0.3);
-    padding-bottom: 2px; transition: gap 0.2s, border-color 0.2s;
-}
-.see-all-link:hover { gap: 12px; border-color: var(--sky); }
-
-/* Category layout: big card left + grid right */
-.cats-layout {
-    display: grid; grid-template-columns: 1.1fr 1fr;
-    gap: 20px;
-}
-@media (max-width: 900px) { .cats-layout { grid-template-columns: 1fr; } }
-
-/* Featured category card */
-.cat-featured {
-    background: linear-gradient(145deg, var(--sky-navy) 0%, var(--sky-deep) 60%, var(--sky) 100%);
-    border-radius: var(--r-lg); padding: 40px;
-    position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    min-height: 380px;
-    text-decoration: none;
-    transition: transform 0.3s var(--ease), box-shadow 0.3s;
-}
-.cat-featured:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
-.cat-featured::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
-}
-.cf-ico {
-    position: absolute; top: 32px; right: 32px;
-    width: 64px; height: 64px;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
-    border-radius: var(--r-md);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px; color: rgba(255,255,255,0.85);
-}
-.cf-num {
-    position: absolute; top: 32px; left: 40px;
-    font-family: var(--font-d); font-size: 80px; font-weight: 800; line-height: 1;
-    color: rgba(255,255,255,0.06); pointer-events: none;
-}
-.cf-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-    color: #7DD3FC; margin-bottom: 10px; display: block;
-}
-.cf-title {
-    font-family: var(--font-d); font-size: 26px; font-weight: 800;
-    color: white; line-height: 1.2; margin-bottom: 12px;
-}
-.cf-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; }
-.cf-sub-list {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;
-}
-.cf-sub-chip {
-    font-size: 11.5px; background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.85); padding: 4px 10px; border-radius: 100px;
-}
-.cf-btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: white; color: var(--sky-deep);
-    font-family: var(--font-b); font-weight: 700; font-size: 13px;
-    padding: 10px 20px; border-radius: var(--r-sm);
-    width: fit-content; transition: all 0.2s;
-}
-.cf-btn:hover { background: var(--sky-pale); }
-
-/* Mini category grid */
-.cats-mini-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-}
-.cat-mini {
-    background: var(--white); border: 1.5px solid var(--border-lt);
-    border-radius: var(--r-md); padding: 24px;
-    text-decoration: none;
-    transition: all 0.25s var(--ease);
-    display: flex; flex-direction: column; gap: 12px;
-    position: relative; overflow: hidden;
-}
-.cat-mini::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--sky), #38BDF8);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.3s var(--ease);
-}
-.cat-mini:hover {
-    border-color: var(--sky-mid);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-.cat-mini:hover::after { transform: scaleX(1); }
-.cm-icon {
-    width: 44px; height: 44px;
-    background: var(--sky-ultra); border: 1px solid var(--sky-mid);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; color: var(--sky);
-    transition: all 0.25s;
-}
-.cat-mini:hover .cm-icon { background: var(--sky); color: white; }
-.cm-title {
-    font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--ink);
-    transition: color 0.2s;
-}
-.cat-mini:hover .cm-title { color: var(--sky-deep); }
-.cm-count {
-    font-size: 11.5px; color: var(--muted); font-weight: 500;
-    display: flex; align-items: center; gap: 5px;
-}
-.cm-count i { color: var(--sky); font-size: 10px; }
-
-/* ============================================================
-   PRODUCTS
-   ============================================================ */
-.prods-sec {
-    background: var(--white);
-    padding: 88px 0;
-    border-bottom: 1px solid var(--border-lt);
-}
-
-.prods-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
-}
-@media (max-width: 1200px) { .prods-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 860px)  { .prods-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 540px)  { .prods-grid { grid-template-columns: 1fr; } }
-
-.prod-card {
-    background: var(--white);
-    border: 1.5px solid var(--border-lt);
-    border-radius: var(--r-lg);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-    transition: all 0.28s var(--ease);
-    position: relative;
-}
-.prod-card:hover {
-    border-color: var(--sky-mid);
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* Top color bar */
-.prod-bar {
-    height: 4px;
-    background: linear-gradient(90deg, var(--sky), #38BDF8);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.35s var(--ease);
-}
-.prod-card:hover .prod-bar { transform: scaleX(1); }
-
-/* Badge */
-.prod-badges { position: absolute; top: 14px; left: 14px; display: flex; gap: 5px; z-index: 2; }
-.p-badge {
-    font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
-}
-.p-badge-new  { background: var(--sky); color: white; }
-.p-badge-sale { background: var(--amber); color: white; }
-
-/* Product image area */
-.prod-thumb {
-    height: 160px; background: var(--sky-ultra);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-}
-.prod-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.prod-thumb-icon { font-size: 40px; color: var(--sky-mid); transition: transform 0.3s; }
-.prod-card:hover .prod-thumb-icon { transform: scale(1.12); color: var(--sky); }
-
-/* Quick action overlay */
-.prod-overlay {
-    position: absolute; inset: 0;
-    background: rgba(14,165,233,0.08);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.2s;
-}
-.prod-card:hover .prod-overlay { opacity: 1; }
-.po-view {
-    background: white; color: var(--sky-deep);
-    border: none; padding: 9px 20px; border-radius: 100px;
-    font-family: var(--font-b); font-weight: 700; font-size: 12.5px;
-    cursor: pointer; display: flex; align-items: center; gap: 6px;
-    box-shadow: var(--shadow-md); text-decoration: none;
-    transition: background 0.2s;
-}
-.po-view:hover { background: var(--sky-pale); }
-
-/* Body */
-.prod-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-
-.prod-cats {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 10.5px; color: var(--muted); margin-bottom: 10px;
-    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-}
-.prod-cats i { font-size: 8px; color: var(--sky); }
-
-.prod-name {
-    font-family: var(--font-d); font-size: 14.5px; font-weight: 700;
-    color: var(--ink); line-height: 1.4; margin-bottom: 10px;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-
-.prod-specs { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; flex: 1; }
-.spec-row {
-    display: flex; align-items: center; gap: 7px;
-    font-size: 11.5px; color: var(--muted);
-}
-.spec-row i { color: var(--sky); font-size: 10px; width: 12px; flex-shrink: 0; }
-.spec-key { color: var(--muted); font-weight: 600; margin-right: 2px; }
-.spec-val { color: var(--body-txt); }
-
-.prod-pdf-link {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11px; color: var(--amber); font-weight: 600;
-    text-decoration: none; margin-bottom: 14px;
-}
-.prod-pdf-link:hover { color: #D97706; }
-
-/* Price row */
-.prod-price-row {
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px;
-}
-.price-main {
-    font-family: var(--font-d); font-size: 22px; font-weight: 800; color: var(--sky-deep);
-}
-.price-old {
-    font-size: 13px; color: var(--muted); text-decoration: line-through; font-weight: 500;
-}
-.price-save-tag {
-    font-size: 10px; font-weight: 700;
-    background: #FEF3C7; color: #92400E;
-    padding: 2px 7px; border-radius: 4px; border: 1px solid #FDE68A;
-}
-
-/* Actions */
-.prod-acts { display: flex; gap: 8px; }
-.pa-view-btn {
-    width: 42px; height: 42px; flex-shrink: 0;
-    background: var(--sky-ultra); border: 1.5px solid var(--sky-mid);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--sky); font-size: 15px; text-decoration: none;
-    transition: all 0.2s;
-}
-.pa-view-btn:hover { background: var(--sky); color: white; border-color: var(--sky); }
-.pa-cart-btn {
-    flex: 1; height: 42px;
-    background: var(--sky); color: white; border: none;
-    border-radius: var(--r-sm);
-    font-family: var(--font-b); font-weight: 700; font-size: 13px;
-    cursor: pointer; text-decoration: none;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    transition: all 0.2s var(--ease);
-}
-.pa-cart-btn:hover { background: var(--sky-deep); color: white; box-shadow: var(--shadow-md); transform: translateY(-1px); }
-
-/* All products btn */
-.center-cta { display: flex; justify-content: center; margin-top: 48px; }
-.all-btn {
-    display: inline-flex; align-items: center; gap: 9px;
-    padding: 13px 40px;
-    background: var(--sky-ultra); color: var(--sky-deep);
-    border: 1.5px solid var(--sky-mid); border-radius: 100px;
-    font-family: var(--font-b); font-weight: 700; font-size: 14px;
-    text-decoration: none; transition: all 0.25s var(--ease);
-}
-.all-btn:hover {
-    background: var(--sky); color: white; border-color: var(--sky);
-    box-shadow: var(--shadow-md); transform: translateY(-3px);
-}
-
-/* ============================================================
-   TRUST STRIP — HORIZONTAL CARDS
-   ============================================================ */
-.trust-sec {
-    background: var(--sky-ultra);
-    border-top: 1px solid var(--sky-pale);
-    border-bottom: 1px solid var(--sky-pale);
-    padding: 72px 0;
-}
-.trust-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
-}
-@media (max-width: 960px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .trust-grid { grid-template-columns: 1fr; } }
-
-.trust-card {
-    background: var(--white); border: 1.5px solid var(--sky-pale);
-    border-radius: var(--r-lg); padding: 28px 24px;
-    display: flex; flex-direction: column; gap: 0;
-    transition: all 0.25s var(--ease);
-    position: relative; overflow: hidden;
-}
-.trust-card::after {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: linear-gradient(to bottom, var(--sky), #38BDF8);
-    transform: scaleY(0); transform-origin: top;
-    transition: transform 0.3s var(--ease);
-}
-.trust-card:hover { border-color: var(--sky-mid); box-shadow: var(--shadow-md); transform: translateY(-4px); }
-.trust-card:hover::after { transform: scaleY(1); }
-
-.tc-icon {
-    width: 50px; height: 50px;
-    background: var(--sky-ultra); border: 1px solid var(--sky-mid);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: var(--sky);
-    margin-bottom: 16px; transition: all 0.25s;
-}
-.trust-card:hover .tc-icon { background: var(--sky); color: white; }
-
-.tc-title { font-family: var(--font-d); font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.tc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 16px; }
-.tc-stat { font-family: var(--font-d); font-size: 26px; font-weight: 800; color: var(--sky); }
-
-/* ============================================================
-   WHY CHOOSE US — SPLIT LAYOUT
-   ============================================================ */
-.why-sec {
-    background: var(--white);
-    padding: 96px 0;
-}
-.why-split {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-}
-@media (max-width: 900px) { .why-split { grid-template-columns: 1fr; gap: 52px; } }
-
-.why-left {}
-.why-features { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
-
-.wf-item {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 20px 0; border-bottom: 1px solid var(--border-lt);
-    cursor: default; transition: padding-left 0.25s var(--ease);
-}
-.wf-item:last-child { border-bottom: none; }
-.wf-item:hover { padding-left: 6px; }
-.wf-ico {
-    width: 42px; height: 42px; flex-shrink: 0;
-    background: var(--sky-ultra); border: 1.5px solid var(--sky-mid);
-    border-radius: var(--r-sm);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--sky); font-size: 16px; transition: all 0.2s;
-}
-.wf-item:hover .wf-ico { background: var(--sky); color: white; }
-.wf-title { font-family: var(--font-d); font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-.wf-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-/* Right: numbers */
-.why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.wn-card {
-    background: var(--sky-ultra); border: 1.5px solid var(--sky-pale);
-    border-radius: var(--r-lg); padding: 32px 24px;
-    position: relative; overflow: hidden;
-    transition: all 0.25s var(--ease);
-}
-.wn-card:hover { border-color: var(--sky-mid); box-shadow: var(--shadow-md); transform: translateY(-4px); }
-.wn-card:nth-child(even) { background: linear-gradient(145deg, var(--sky-deep), var(--sky-navy)); border-color: transparent; }
-.wn-num {
-    font-family: var(--font-d); font-size: 44px; font-weight: 800; line-height: 1;
-    color: var(--sky-deep); margin-bottom: 6px;
-}
-.wn-card:nth-child(even) .wn-num { color: #7DD3FC; }
-.wn-num sup { font-size: 20px; }
-.wn-label { font-size: 13px; font-weight: 500; color: var(--muted); }
-.wn-card:nth-child(even) .wn-label { color: rgba(255,255,255,0.65); }
-
-/* ============================================================
-   CONTACT BAND
-   ============================================================ */
-.cta-band {
-    background: linear-gradient(135deg, var(--sky-deep) 0%, var(--sky-navy) 50%, var(--ink-2) 100%);
-    padding: 72px 0; position: relative; overflow: hidden;
-}
-.cta-band::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-}
-.cta-inner {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 40px; flex-wrap: wrap;
-}
-.cta-text {}
-.cta-text h2 {
-    font-family: var(--font-d); font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.02em;
-}
-.cta-text p { font-size: 15px; color: rgba(255,255,255,0.7); max-width: 480px; line-height: 1.7; }
-.cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.cta-btn-w {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: white; color: var(--sky-deep);
-    font-family: var(--font-b); font-weight: 700; font-size: 14px;
-    padding: 13px 28px; border-radius: var(--r-sm);
-    text-decoration: none; transition: all 0.2s var(--ease);
-}
-.cta-btn-w:hover { background: var(--sky-pale); color: var(--sky-deep); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-.cta-btn-border {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: transparent; color: white;
-    font-family: var(--font-b); font-weight: 600; font-size: 14px;
-    padding: 12px 28px; border-radius: var(--r-sm);
-    border: 1.5px solid rgba(255,255,255,0.3);
-    text-decoration: none; transition: all 0.2s var(--ease);
-}
-.cta-btn-border:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); color: white; transform: translateY(-3px); }
-
-</style>
-
-<div class="pg-wrap">
-
-{{-- ═══════════════════ HERO ═══════════════════ --}}
-@if(count($banners) > 0)
-<section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-blob-1"></div>
-    <div class="hero-blob-2"></div>
-
-    <div class="hero-slides">
-        @foreach($banners as $k => $banner)
-        <div class="hero-slide {{ $k == 0 ? 'active' : '' }}"
-             style="background-image: url('{{ $banner->photo }}')"></div>
-        @endforeach
-    </div>
-
-    <div class="hero-inner">
-        <div class="hero-content">
-            <div class="hero-chip">
-                <span class="hero-chip-dot"></span>
-                Industrial Parts Specialists · Est. 2004
-            </div>
-            <h1 class="hero-h1" id="heroH1">
-                {{ $banners[0]->title ?? 'Precision Parts for' }}<br>
-                <span class="hl">Industrial Excellence</span>
-            </h1>
-            <p class="hero-p">
-                @if(isset($banners[0]) && $banners[0]->description)
-                    {!! html_entity_decode(strip_tags($banners[0]->description)) !!}
-                @else
-                    Sourcing verified components for the world's most demanding petrochemical, refinery, and process plant environments. Trusted by engineers in 45+ countries.
-                @endif
-            </p>
-            <div class="hero-btns">
-                <a href="{{ url('/shop') }}" class="btn-sky">
-                    <i class="fas fa-search"></i> Browse Parts
-                </a>
-                <a href="{{ url('/frontend/contact') }}" class="btn-outline-w">
-                    <i class="fas fa-file-alt"></i> Request Quote
-                </a>
+    <style>
+        /* ---------- hero : color-blocked split ---------- */
+        .hero {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            min-height: 100vh;
+            max-width: 1380px;
+            margin: 0 auto;
+
+        }
+
+        .hero-left {
+            padding: 180px 5vw 80px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            width: fit-content;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--green);
+            border: 1px solid var(--green-dim2);
+            background: var(--green-dim);
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeUp .8s var(--ease) .1s forwards;
+        }
+
+        .eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--brass);
+            animation: pulse 2s infinite;
+        }
+
+        h1.headline {
+            font-family: 'Fraunces', serif;
+            font-weight: 450;
+            color: var(--ink);
+            font-size: clamp(42px, 5vw, 76px);
+            line-height: 1.02;
+            letter-spacing: -1.5px;
+            opacity: 0;
+            animation: fadeUp .9s var(--ease) .25s forwards;
+        }
+
+        h1.headline em {
+            font-style: italic;
+            font-weight: 450;
+            color: var(--green);
+        }
+
+        .hero-sub {
+            margin-top: 28px;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+            max-width: 460px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeUp .9s var(--ease) .4s forwards;
+        }
+
+        .hero-search {
+            margin-top: 40px;
+            display: flex;
+            max-width: 500px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: border-color .25s, box-shadow .25s;
+            box-shadow: var(--shadow-sm);
+            opacity: 0;
+            animation: fadeUp .9s var(--ease) .55s forwards;
+        }
+
+        .hero-search:focus-within {
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px var(--green-dim);
+        }
+
+        .hero-search input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--ink);
+            padding: 17px 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .hero-search input::placeholder {
+            color: var(--muted-2);
+        }
+
+        .hero-search button {
+            background: var(--ink);
+            color: #fff;
+            border: none;
+            padding: 0 24px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            letter-spacing: .3px;
+            transition: background .25s;
+        }
+
+        .hero-search button:hover {
+            background: var(--green);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 38px;
+            margin-top: 52px;
+            opacity: 0;
+            animation: fadeUp .9s var(--ease) .7s forwards;
+        }
+
+        .hero-stats div {
+            border-left: 2px solid var(--brass);
+            padding-left: 14px;
+        }
+
+        .hero-stats .num {
+            font-family: 'Fraunces', serif;
+            font-weight: 560;
+            font-size: 26px;
+            color: var(--ink);
+        }
+
+        .hero-stats .lbl {
+            font-size: 10.5px;
+            color: var(--muted);
+            margin-top: 3px;
+            letter-spacing: .5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* right green panel */
+        .hero-right {
+            position: relative;
+            background: linear-gradient(155deg, var(--green-3), var(--green) 60%, var(--green-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-right .tex {
+            position: absolute;
+            inset: 0;
+            opacity: .5;
+            background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 85%);
+        }
+
+        .hero-right svg {
+            position: relative;
+            width: 88%;
+            max-width: 480px;
+            height: auto;
+        }
+
+        .draw {
+            stroke-dasharray: 1400;
+            stroke-dashoffset: 1400;
+            animation: draw 2.6s var(--ease) .5s forwards;
+        }
+
+        .draw-slow {
+            stroke-dasharray: 2200;
+            stroke-dashoffset: 2200;
+            animation: draw 3.4s var(--ease) .7s forwards;
+        }
+
+        .fade-in-diagram {
+            opacity: 0;
+            animation: fadeIn 1s ease 1.1s forwards;
+        }
+
+        .callout {
+            opacity: 0;
+            animation: fadeIn .8s ease forwards;
+        }
+
+        .callout.c1 {
+            animation-delay: 2.3s;
+        }
+
+        .callout.c2 {
+            animation-delay: 2.55s;
+        }
+
+        .callout.c3 {
+            animation-delay: 2.8s;
+        }
+
+        .spin-slow {
+            animation: spin 44s linear infinite;
+            transform-origin: center;
+        }
+
+        .spin-rev {
+            animation: spinRev 34s linear infinite;
+            transform-origin: center;
+        }
+
+        .float-badge {
+            position: absolute;
+            background: #fff;
+            color: var(--ink);
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: .4px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            z-index: 2;
+            animation: fadeIn .6s ease 2.6s forwards, floatY 4.5s ease-in-out 3.2s infinite;
+        }
+
+        .float-badge.b1 {
+            top: 14%;
+            left: 6%;
+        }
+
+        .float-badge.b2 {
+            bottom: 12%;
+            right: 7%;
+            background: var(--brass);
+            color: #fff;
+        }
+
+        .float-badge .dot2 {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #2E9E5B;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .3;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinRev {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes floatY {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ---------- section shell ---------- */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 50px 48px;
+        }
+
+        .section-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 40px;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            color: var(--brass);
+            margin-bottom: 16px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 450;
+            font-size: clamp(30px, 3.2vw, 46px);
+            letter-spacing: -1px;
+            max-width: 660px;
+            color: var(--ink);
+            line-height: 1.08;
+        }
+
+        .section-title em {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        .section-desc {
+            color: var(--ink-soft);
+            max-width: 360px;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity .9s var(--ease), transform .9s var(--ease);
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- marquee ---------- */
+        .marquee-section {
+            padding: 28px 0;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+            background: var(--paper);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 60px;
+            animation: marquee 300s linear infinite;
+        }
+
+        .marquee-track span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            letter-spacing: 2px;
+            color: var(--muted);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+
+        .marquee-track span::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--brass);
+            border-radius: 50%;
+        }
+
+        /* ---------- category : editorial asymmetric grid ---------- */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 240px);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+
+        .cat-card {
+            background: var(--white);
+            padding: 34px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background .4s var(--ease);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cat-card.big {
+            grid-column: span 2;
+            grid-row: span 2;
+            padding: 44px;
+        }
+
+        .cat-card:hover {
+            background: var(--paper);
+        }
+
+        .cat-card.featured {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .cat-card.featured:hover {
+            background: var(--green-2);
+        }
+
+        .cat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .cat-card.featured .cat-num {
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .cat-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--green-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 22px 0 auto;
+            transition: transform .4s var(--ease);
+        }
+
+        .cat-card.big .cat-icon-wrap {
+            width: 62px;
+            height: 62px;
+            margin-bottom: 0;
+        }
+
+        .cat-card.featured .cat-icon-wrap {
+            background: rgba(255, 255, 255, .14);
+        }
+
+        .cat-card:hover .cat-icon-wrap {
+            transform: rotate(-8deg) scale(1.06);
+        }
+
+        .cat-icon {
+            width: 22px;
+            height: 22px;
+            color: var(--green);
+        }
+
+        .cat-card.big .cat-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cat-card.featured .cat-icon {
+            color: #fff;
+        }
+
+        .cat-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 19px;
+            margin: 18px 0 8px;
+            color: var(--ink);
+        }
+
+        .cat-card.big .cat-title {
+            font-size: 26px;
+            margin-top: 26px;
+        }
+
+        .cat-card.featured .cat-title {
+            color: #fff;
+        }
+
+        .cat-desc {
+            font-size: 13px;
+            color: var(--ink-soft);
+            line-height: 1.55;
+        }
+
+        .cat-card.featured .cat-desc {
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .cat-count-row {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 16px;
+        }
+
+        .cat-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: .5px;
+        }
+
+        .cat-card.featured .cat-count {
+            color: rgba(255, 255, 255, .6);
+        }
+
+        .cat-card .arrow {
+            margin-left: auto;
+            transition: transform .3s var(--ease);
+            color: var(--muted);
+        }
+
+        .cat-card:hover .arrow {
+            transform: translateX(5px);
+            color: var(--brass);
+        }
+
+        .cat-card.featured .arrow {
+            color: rgba(255, 255, 255, .6);
+        }
+
+        /* ---------- product grid ---------- */
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+
+        .prod-card {
+            background: var(--white);
+            padding: 26px;
+            position: relative;
+            transition: background .4s var(--ease);
+        }
+
+        .prod-card:hover {
+            background: var(--paper);
+        }
+
+        .prod-thumb {
+            height: 150px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--paper-2);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prod-thumb svg {
+            width: 56px;
+            height: 56px;
+            color: var(--green);
+            transition: transform .55s var(--ease);
+            opacity: .9;
+        }
+
+        .prod-card:hover .prod-thumb svg {
+            transform: scale(1.14) rotate(-6deg);
+        }
+
+        .stock-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .5px;
+            padding: 4px 9px;
+            border-radius: 12px;
+            background: #fff;
+            color: #1F8F52;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .prod-brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .prod-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 16px;
+            margin: 9px 0 4px;
+            line-height: 1.3;
+            color: var(--ink);
+        }
+
+        .prod-ref {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .prod-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--line-soft);
+            padding-top: 16px;
+        }
+
+        .prod-price {
+            font-family: 'Fraunces', serif;
+            font-weight: 560;
+            font-size: 18px;
+            color: var(--ink);
+        }
+
+        .prod-price span {
+            font-size: 10.5px;
+            color: var(--muted);
+            font-weight: 400;
+            display: block;
+            font-family: 'Inter';
+        }
+
+        .add-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .35s var(--ease);
+        }
+
+        .add-btn:hover {
+            background: var(--brass);
+            border-color: var(--brass);
+            transform: rotate(90deg);
+        }
+
+        .add-btn:hover svg {
+            stroke: #fff;
+        }
+
+        .add-btn svg {
+            width: 15px;
+            height: 15px;
+            stroke: var(--ink);
+            transition: stroke .3s;
+        }
+
+        /* ---------- why : editorial numbered list ---------- */
+        .why-wrap {
+            display: grid;
+            grid-template-columns: 0.9fr 1.6fr;
+            gap: 60px;
+        }
+
+        .why-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .why-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 26px;
+            padding: 36px 0;
+            border-top: 1px solid var(--line);
+            transition: padding-left .4s var(--ease);
+        }
+
+        .why-item:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .why-item:hover {
+            padding-left: 14px;
+        }
+
+        .why-num {
+            font-family: 'Fraunces', serif;
+            font-weight: 450;
+            font-style: italic;
+            font-size: 30px;
+            color: var(--brass);
+        }
+
+        .why-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 20px;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .why-desc {
+            font-size: 14px;
+            color: var(--ink-soft);
+            line-height: 1.65;
+            max-width: 460px;
+        }
+
+        .why-visual {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            background: linear-gradient(160deg, var(--green-3), var(--green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            min-height: 480px;
+        }
+
+        .why-visual .tex {
+            position: absolute;
+            inset: 0;
+            opacity: .4;
+            background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+            background-size: 44px 44px;
+        }
+
+        .why-visual-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+
+        .why-visual-content .big-num {
+            font-family: 'Fraunces', serif;
+            font-size: 96px;
+            font-weight: 450;
+            line-height: 1;
+            color: var(--brass-2);
+        }
+
+        .why-visual-content .cap {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .why-visual-content .sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, .55);
+            margin-top: 20px;
+            max-width: 280px;
+            line-height: 1.6;
+        }
+
+        /* ---------- stats band ---------- */
+        .stats-band {
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-band::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 124, 63, .18), transparent 70%);
+            top: -260px;
+            right: -160px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item {
+            padding: 80px 20px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:first-child {
+            border-left: none;
+        }
+
+        .stat-num {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: clamp(34px, 3.6vw, 52px);
+            color: #fff;
+        }
+
+        .stat-lbl {
+            margin-top: 10px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, .5);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        /* ---------- process : alternating timeline ---------- */
+        .process-list {
+            position: relative;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .process-list::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--line);
+            transform: translateX(-50%);
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 1fr 40px 1fr;
+            align-items: center;
+            gap: 0;
+            padding: 44px 0;
+        }
+
+        .process-col {
+            padding: 0 36px;
+        }
+
+        .process-item:nth-child(even) .process-col.left {
+            grid-column: 1;
+            visibility: hidden;
+        }
+
+        .process-item:nth-child(even) .process-col.right {
+            grid-column: 3;
+            visibility: visible;
+            text-align: left;
+        }
+
+        .process-item:nth-child(odd) .process-col.right {
+            visibility: hidden;
+        }
+
+        .process-item:nth-child(odd) .process-col.left {
+            text-align: right;
+        }
+
+        .process-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1.5px solid var(--brass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--brass);
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 21px;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .process-desc {
+            color: var(--ink-soft);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        /* ---------- cta ---------- */
+        .cta-section {
+            margin: 0 48px;
+            border-radius: 8px;
+            background: linear-gradient(140deg, var(--green-3), var(--green) 55%, var(--green-2));
+            padding: 90px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200, 154, 90, .28), transparent 70%);
+            top: -300px;
+            right: -200px;
+        }
+
+        .cta-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 450;
+            font-size: clamp(30px, 3.8vw, 50px);
+            letter-spacing: -1px;
+            position: relative;
+            color: #fff;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--brass-2);
+        }
+
+        .cta-desc {
+            color: rgba(255, 255, 255, .65);
+            max-width: 480px;
+            margin: 20px auto 36px;
+            font-size: 15.5px;
+            position: relative;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--brass-2);
+            color: var(--ink);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px -10px rgba(200, 154, 90, .55);
+        }
+
+        .btn-ghost {
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            transition: border-color .25s, background .25s;
+        }
+
+        .btn-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, .08);
+        }
+
+
+
+        /* ---------- responsive ---------- */
+        @media(max-width:1100px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 150px 32px 60px;
+            }
+
+            .hero-right {
+                min-height: 60vh;
+                padding: 60px 32px;
+            }
+
+            .cat-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .cat-card.big {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .prod-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .why-visual {
+                min-height: 320px;
+                order: -1;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process-item {
+                grid-template-columns: 1fr;
+                text-align: left !important;
+            }
+
+            .process-list::before {
+                left: 20px;
+            }
+
+            .process-marker {
+                margin-bottom: 16px;
+            }
+
+            .process-item:nth-child(even) .process-col.left,
+            .process-item:nth-child(odd) .process-col.right {
+                display: none;
+                visibility: visible;
+            }
+
+            .process-item:nth-child(even) .process-col.right,
+            .process-item:nth-child(odd) .process-col.left {
+                grid-column: 1;
+                text-align: left !important;
+                padding-left: 56px;
+            }
+        }
+
+        @media(max-width:640px) {
+            header {
+                padding: 16px 22px;
+            }
+
+            section {
+                padding: 80px 22px;
+            }
+
+            .cat-grid,
+            .prod-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cat-card.big {
+                grid-column: span 1;
+            }
+
+            .stat-item {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, .1);
+            }
+
+            .stat-item:first-child {
+                border-top: none;
+            }
+
+            .cta-section {
+                padding: 56px 26px;
+                margin: 0 22px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                row-gap: 22px;
+            }
+
+            .float-badge {
+                display: none;
+            }
+
+            .hero-left {
+                padding: 140px 22px 50px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+
+
+
+
+    <section class="hero" style="padding:0;">
+        <div class="hero-left">
+            <div class="eyebrow"><span class="dot"></span>500+ MANUFACTURER BRANDS · GLOBAL STOCK</div>
+            <h1 class="headline">Every part your<br>plant depends on,<br><em>sourced right.</em></h1>
+            <p class="hero-sub">The global parts platform for petrochemical, oil &amp; gas and industrial maintenance
+                teams — engineered sourcing for electrical, mechanical, process and safety equipment, backed by real
+                engineers.</p>
+            <form class="hero-search" onsubmit="return false;">
+                <input type="text" placeholder="Search by part number, e.g. SRP981 or brand..." />
+                <button type="submit">Search</button>
+            </form>
+            <div class="hero-stats">
+                <div>
+                    <div class="num">2M+</div>
+                    <div class="lbl">PARTS LISTED</div>
+                </div>
+                <div>
+                    <div class="num">500+</div>
+                    <div class="lbl">TRUSTED BRANDS</div>
+                </div>
+                <div>
+                    <div class="num">48HR</div>
+                    <div class="lbl">AVG. DISPATCH</div>
+                </div>
+                <div>
+                    <div class="num">16YR</div>
+                    <div class="lbl">IN OPERATION</div>
+                </div>
             </div>
         </div>
 
         <div class="hero-right">
-            <div class="hero-search-box">
-                <span class="hs-label"><i class="fas fa-search" style="margin-right:6px;"></i> Quick Part Search</span>
-                <form method="GET" action="{{ route('shop') }}">
-                    <div class="hs-input-row">
-                        <input type="text" name="search" class="hs-input" placeholder="Part number, brand, model…" autocomplete="off">
-                        <button type="submit" class="hs-btn"><i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </form>
-            </div>
-            <div class="hero-stats-row">
-                <div class="hstat">
-                    <div class="hstat-val">50K+</div>
-                    <div class="hstat-lbl">Parts Stocked</div>
-                </div>
-                <div class="hstat">
-                    <div class="hstat-val">200+</div>
-                    <div class="hstat-lbl">Manufacturers</div>
-                </div>
-                <div class="hstat">
-                    <div class="hstat-val">45+</div>
-                    <div class="hstat-lbl">Countries</div>
-                </div>
-            </div>
+            <div class="tex"></div>
+            <div class="float-badge b1"><span class="dot2"></span>Verified in stock</div>
+            <div class="float-badge b2">⚡ Quote in &lt; 1 business day</div>
+            <svg viewBox="0 0 500 500" fill="none">
+                <g class="spin-slow" opacity="0.25">
+                    <circle cx="250" cy="250" r="210" stroke="#ffffff" stroke-width="1" stroke-dasharray="2 8" />
+                </g>
+                <g class="spin-rev" opacity="0.18">
+                    <circle cx="250" cy="250" r="175" stroke="#ffffff" stroke-width="1" stroke-dasharray="1 6" />
+                </g>
+                <path class="draw" d="M175 150 L325 150 L325 210 L365 250 L365 330 L135 330 L135 250 L175 210 Z"
+                    stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" />
+                <path class="draw" d="M195 150 L195 100 L305 100 L305 150" stroke="#ffffff" stroke-width="1.6" />
+                <rect class="draw" x="185" y="82" width="130" height="20" stroke="#C89A5A" stroke-width="1.6" />
+                <circle class="fade-in-diagram" cx="198" cy="92" r="4" stroke="#C89A5A" stroke-width="1.2" />
+                <circle class="fade-in-diagram" cx="250" cy="92" r="4" stroke="#C89A5A" stroke-width="1.2" />
+                <circle class="fade-in-diagram" cx="302" cy="92" r="4" stroke="#C89A5A" stroke-width="1.2" />
+                <circle class="draw-slow" cx="250" cy="240" r="46" stroke="#C89A5A" stroke-width="1.8" />
+                <circle class="fade-in-diagram" cx="250" cy="240" r="10" fill="#123822" stroke="#C89A5A"
+                    stroke-width="1.4" />
+                <path class="draw" d="M135 260 L70 260 L70 290 L135 290" stroke="#ffffff" stroke-width="1.6" />
+                <path class="draw" d="M365 260 L430 260 L430 290 L365 290" stroke="#ffffff" stroke-width="1.6" />
+                <line class="fade-in-diagram" x1="30" y1="240" x2="470" y2="240" stroke="rgba(255,255,255,.35)"
+                    stroke-width="1" stroke-dasharray="6 4" />
+                <line class="fade-in-diagram" x1="250" y1="40" x2="250" y2="460" stroke="rgba(255,255,255,.35)"
+                    stroke-width="1" stroke-dasharray="6 4" />
+                <g class="fade-in-diagram" stroke="rgba(255,255,255,.45)" stroke-width="1">
+                    <line x1="135" y1="350" x2="365" y2="350" />
+                    <line x1="135" y1="345" x2="135" y2="355" />
+                    <line x1="365" y1="345" x2="365" y2="355" />
+                </g>
+                <text class="mono fade-in-diagram" x="225" y="372" fill="rgba(255,255,255,.55)" font-size="11"
+                    font-family="JetBrains Mono, monospace">DN230 / PN40</text>
+                <g class="callout c1">
+                    <line x1="365" y1="200" x2="420" y2="170" stroke="#ffffff" stroke-width="1" />
+                    <circle cx="365" cy="200" r="2.5" fill="#ffffff" />
+                    <text x="424" y="174" fill="rgba(255,255,255,.7)" font-size="11"
+                        font-family="JetBrains Mono, monospace">BODY — A216 WCB</text>
+                </g>
+                <g class="callout c2">
+                    <line x1="135" y1="270" x2="55" y2="320" stroke="#C89A5A" stroke-width="1" />
+                    <circle cx="135" cy="270" r="2.5" fill="#C89A5A" />
+                    <text x="10" y="336" fill="rgba(255,255,255,.7)" font-size="11"
+                        font-family="JetBrains Mono, monospace">SEAT — PTFE</text>
+                </g>
+                <g class="callout c3">
+                    <line x1="290" y1="150" x2="340" y2="115" stroke="#ffffff" stroke-width="1" />
+                    <circle cx="290" cy="150" r="2.5" fill="#ffffff" />
+                    <text x="330" y="112" fill="rgba(255,255,255,.7)" font-size="11"
+                        font-family="JetBrains Mono, monospace">FLANGED — ANSI</text>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    @php $brands = DB::table('brands')->where('status','active')->orderBy('title','asc')->get(); @endphp
+
+    <div class="marquee-section">
+        <div class="marquee-track" id="marquee">
+            {{-- Set 1 --}}
+         @foreach($brands as $b)
+
+                <span>{{ strtoupper($b->title) }}</span>
+            @endforeach
+
+            
         </div>
     </div>
 
-    <div class="hero-dots">
-        @foreach($banners as $k => $banner)
-        <button class="hero-dot {{ $k == 0 ? 'active' : '' }}" data-slide="{{ $k }}"></button>
-        @endforeach
-    </div>
-</section>
+    {{-- ======= CATEGORIES SECTION (dynamic) ======= --}}
+    @php
+        $categories = DB::table('categories')
+            ->where('status', 'active')
+            ->whereNull('parent_id')
+            ->limit(9)
+            ->get();
 
-<script>
-(function(){
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots   = document.querySelectorAll('.hero-dot');
-    const h1     = document.getElementById('heroH1');
-    const data   = @json($banners->map(fn($b) => ['title' => $b->title]));
-    let cur = 0;
-    if (!slides.length) return;
+        $catProductCounts = DB::table('products')
+            ->where('status', 'active')
+            ->selectRaw('cat_id, count(*) as total')
+            ->groupBy('cat_id')
+            ->pluck('total', 'cat_id');
 
-    function go(i){
-        slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
-        cur = (i + slides.length) % slides.length;
-        slides[cur].classList.add('active'); dots[cur].classList.add('active');
-        if (h1 && data[cur]?.title) h1.innerHTML = data[cur].title + '<br><span class="hl">Industrial Excellence</span>';
-    }
-    dots.forEach((d,i) => d.addEventListener('click', () => { go(i); resetTimer(); }));
-    let timer = setInterval(() => go(cur + 1), 6000);
-    function resetTimer(){ clearInterval(timer); timer = setInterval(() => go(cur+1), 6000); }
-})();
-</script>
-@endif
+        $catIcons = [
+            '<path d="M9 3h6v4H9zM7 7h10l1 4H6zM6 11h12v10H6z"/>',
+            '<path d="M4 14l6-10 6 10h-4l4 8-9-8h3z"/>',
+            '<circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12M19.07 19.07l-2.12-2.12M7.05 7.05L4.93 4.93"/>',
+            '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4"/><path d="M12 2v3M12 19v3"/>',
+            '<path d="M12 2l7 4v6c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6z"/>',
+            '<path d="M3 18c2 1.2 4 1.2 6 0s4-1.2 6 0 4 1.2 6 0M4 14l1-7h14l1 7"/>',
+        ];
+    @endphp
 
-
-{{-- ═══════════════════ SEARCH CARD ═══════════════════ --}}
-<div style="background: var(--white); padding-top: 1px;">
-    <div class="search-card-wrap">
-        <div class="search-card" data-rv>
-            <div class="sc-head">
-                <div class="sc-title">Search by <span>Part Number</span> or Manufacturer</div>
-                <div class="sc-meta">
-                    <div class="sc-meta-item"><i class="fas fa-boxes"></i> 50,000+ Parts</div>
-                    <div class="sc-meta-item"><i class="fas fa-industry"></i> 200+ Brands</div>
-                    <div class="sc-meta-item"><i class="fas fa-shipping-fast"></i> Worldwide Shipping</div>
+    <section id="categories">
+        <div class="section-inner">
+            <div class="section-head reveal">
+                <div>
+                    <span class="section-tag">01 — Catalog</span>
+                    <h2 class="section-title">{{ $categories->count() }} disciplines. <em>One sourcing desk.</em></h2>
+                    <p class="section-desc">From control-room instrumentation to marine-rated hazardous equipment —
+                        organised the way your plant is organised.</p>
                 </div>
-            </div>
-            <form method="GET" action="{{ route('shop') }}" class="sc-form">
-                <div class="sc-row">
-                    <div class="sc-inp-wrap">
-                        <i class="fas fa-search si-icon"></i>
-                        <input type="text" id="scInput" name="search" class="sc-inp"
-                               placeholder="Enter part number, product name, model or brand…"
-                               autocomplete="off" value="{{ request('search') }}">
-                    </div>
-                    <button type="submit" class="sc-submit">
-                        <i class="fas fa-search"></i> Search Parts
-                    </button>
-                </div>
-                <div id="scDrop"></div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>
-$(document).on('keyup','#scInput', function(){
-    const q = $(this).val();
-    if (q.length < 2) { $('#scDrop').hide().html(''); return; }
-    $.ajax({
-        url: "{{ route('product.search') }}", type:'GET', data:{q},
-        success: data => {
-            if (!data.length) {
-                $('#scDrop').html(`<div class="sd-empty">No results for "<strong>${q}</strong>"</div>`).show();
-                return;
-            }
-            let html = '';
-            data.forEach(item => {
-                html += `<a href="/shop?search=${encodeURIComponent(item.title)}" class="sd-item">
-                    <i class="fas fa-cog"></i>
-                    <span style="flex:1;">${item.title}</span>
-                    ${item.part_number ? `<span class="sd-pn">${item.part_number}</span>` : ''}
-                </a>`;
-            });
-            $('#scDrop').html(html).show();
-        }
-    });
-});
-$(document).click(e => { if (!$(e.target).closest('#scInput,#scDrop').length) $('#scDrop').hide(); });
-</script>
-
-
-
-
-
-{{-- ═══════════════════ CATEGORIES ═══════════════════ --}}
-@php
-$categories   = DB::table('categories')->where('status','active')->whereNull('parent_id')->limit(5)->get();
-$subcategories = DB::table('categories')->where('status','active')->whereNotNull('parent_id')->get()->groupBy('parent_id');
-$catIcons = ['fa-cogs','fa-bolt','fa-tint','fa-thermometer-half','fa-wrench','fa-industry','fa-cube','fa-filter'];
-@endphp
-
-<section class="cats-sec">
-    <div class="container">
-        <div class="sec-hd-row" data-rv>
-            <div>
-                <span class="sec-label">Browse by Type</span>
-                <h2 class="sec-heading">Product <em>Categories</em></h2>
-            </div>
-            <a href="/frontend/showcategory" class="see-all-link">All Categories <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        @if(count($categories) > 0)
-        <div class="cats-layout" data-rv>
-            {{-- Featured: first category --}}
-            @php $fc = $categories[0]; @endphp
-            <a href="{{ route('product-cat', $fc->slug) }}" class="cat-featured">
-                <span class="cf-num">01</span>
-                <div class="cf-ico"><i class="fas {{ $catIcons[0] }}"></i></div>
-                <span class="cf-label">Featured Category</span>
-                <div class="cf-title">{{ $fc->title }}</div>
-                <div class="cf-desc">Explore our complete range of {{ $fc->title }} components, sourced from leading manufacturers worldwide.</div>
-                @if(isset($subcategories[$fc->id]) && $subcategories[$fc->id]->count() > 0)
-                <div class="cf-sub-list">
-                    @foreach($subcategories[$fc->id]->take(4) as $sub)
-                    <span class="cf-sub-chip">{{ $sub->title }}</span>
-                    @endforeach
-                </div>
-                @endif
-                <span class="cf-btn">Browse Category <i class="fas fa-arrow-right"></i></span>
-            </a>
-
-            {{-- Mini grid: remaining categories --}}
-            <div class="cats-mini-grid">
-                @foreach($categories->skip(1)->take(4) as $i => $cat)
-                <a href="{{ route('product-cat', $cat->slug) }}" class="cat-mini" data-rv data-d="{{ $i + 1 }}">
-                    <div class="cm-icon"><i class="fas {{ $catIcons[($i+1) % count($catIcons)] }}"></i></div>
-                    <div class="cm-title">{{ $cat->title }}</div>
-                    <div class="cm-count">
-                        <i class="fas fa-layer-group"></i>
-                        {{ isset($subcategories[$cat->id]) ? $subcategories[$cat->id]->count() : 0 }} Subcategories
-                    </div>
+                {{-- YEH LINE ADD KARO --}}
+                <a href="{{ url('/frontend/showcategory') }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+                        color:var(--brass);text-transform:uppercase;text-decoration:none;
+                        border-bottom:1px solid var(--brass);padding-bottom:2px;">
+                    All Categories →
                 </a>
+
+            </div>
+
+            <div class="cat-grid reveal">
+                @foreach($categories as $i => $cat)
+                    @php
+                        $count = $catProductCounts[$cat->id] ?? 0;
+                        $iconSvg = $catIcons[$i % count($catIcons)];
+                        $refNum = str_pad($i + 1, 2, '0', STR_PAD_LEFT);
+                        $isFeatured = $i === 0;
+                        $isBig = $i === 0;
+                    @endphp
+
+                    <div class="cat-card {{ $isBig ? 'big' : '' }} {{ $isFeatured ? 'featured' : '' }}"
+                        onclick="window.location='{{ route('product-cat', $cat->slug) }}'" style="cursor:pointer;">
+
+                        <div class="cat-num mono">REF. {{ $refNum }}</div>
+
+                        <div class="cat-icon-wrap">
+                            <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                {!! $iconSvg !!}
+                            </svg>
+                        </div>
+
+                        <div class="cat-title">{{ $cat->title }}</div>
+
+                        {{-- FIX: isset se check karo --}}
+                        @if(isset($cat->description) && $cat->description)
+                            <div class="cat-desc">{{ Str::limit(strip_tags($cat->description), 90) }}</div>
+                        @else
+                            <div class="cat-desc">Browse our complete range of {{ $cat->title }} components and equipment.</div>
+                        @endif
+
+                        <div class="cat-count-row">
+                            <div class="cat-count mono">
+                                {{ number_format($count) }} PART{{ $count != 1 ? 'S' : '' }}
+                            </div>
+                            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
-        @endif
-    </div>
-</section>
+    </section>
 
+    {{-- ======= PRODUCTS SECTION (dynamic) ======= --}}
+    @php
+        $featuredProducts = DB::table('products')
+            ->leftJoin('manufacturers', 'products.manufacturer_id', '=', 'manufacturers.id')
+            ->where('products.status', 'active')
+            ->select(
+                'products.id',
+                'products.title',
+                'products.slug',
+                'products.photo',
+                'products.price',
+                'products.discount',
+                'products.part_number',
+                'manufacturers.name as manufacturer_name'
+            )
+            ->orderBy('products.id', 'DESC')
+            ->limit(8)
+            ->get();
+    @endphp
 
-{{-- ═══════════════════ PRODUCTS ═══════════════════ --}}
-@php
-$products = DB::table('products')
-    ->leftJoin('categories as pc', 'products.cat_id', '=', 'pc.id')
-    ->leftJoin('categories as cc', 'products.child_cat_id', '=', 'cc.id')
-    ->leftJoin('manufacturers', 'products.manufacturer_id', '=', 'manufacturers.id')
-    ->leftJoin('pdfs', 'products.pdf_id', '=', 'pdfs.id')
-    ->where('products.status','active')
-    ->orderBy('products.id','DESC')
-    ->select('products.*','pc.title as category_name','cc.title as subcategory_name',
-             'manufacturers.name as manufacturer_name','pdfs.file as pdf_file')
-    ->limit(8)->get();
-@endphp
-
-<section class="prods-sec">
-    <div class="container">
-        <div class="sec-hd-row" data-rv>
-            <div>
-                <span class="sec-label">Our Inventory</span>
-                <h2 class="sec-heading">Latest <em>Products</em></h2>
-            </div>
-            <a href="/frontend/showproduct" class="see-all-link">All Products <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="prods-grid">
-            @foreach($products as $i => $product)
-            @php
-                $photos = json_decode($product->photo, true);
-                $image  = $photos[0] ?? null;
-                $disc   = $product->discount > 0
-                    ? $product->price - ($product->price * $product->discount / 100)
-                    : $product->price;
-                $isNew  = \Carbon\Carbon::parse($product->created_at)->diffInDays(now()) < 30;
-            @endphp
-            <div class="prod-card" data-rv data-d="{{ ($i % 4) + 1 }}">
-                <div class="prod-bar"></div>
-
-                @if($isNew || $product->discount > 0)
-                <div class="prod-badges">
-                    @if($isNew)<span class="p-badge p-badge-new">New</span>@endif
-                    @if($product->discount > 0)<span class="p-badge p-badge-sale">-{{ $product->discount }}%</span>@endif
-                </div>
-                @endif
-
-                <div class="prod-thumb">
-                    @if($image)
-                        <img src="{{ $image }}" alt="{{ $product->title }}" loading="lazy">
-                    @else
-                        <i class="fas fa-cog prod-thumb-icon"></i>
-                    @endif
-                    <div class="prod-overlay">
-                        <a href="{{ route('product-detail', $product->slug) }}" class="po-view">
-                            <i class="fas fa-eye"></i> View Details
-                        </a>
-                    </div>
+    <section id="products" style="background:var(--paper);">
+        <div class="section-inner">
+            <div class="section-head reveal">
+                <div>
+                    <span class="section-tag">02 — Catalog Picks</span>
+                    <h2 class="section-title">Frequently sourced <em>this month.</em></h2>
+                    <p class="section-desc">Live availability across our global partner warehouses — every listing verified
+                        by our engineering desk.</p>
                 </div>
 
-                <div class="prod-body">
-                    <div class="prod-cats">
-                        @if($product->category_name)<span>{{ $product->category_name }}</span>@endif
-                        @if($product->subcategory_name)<i class="fas fa-chevron-right"></i><span>{{ $product->subcategory_name }}</span>@endif
-                    </div>
-
-                    <div class="prod-name">{{ $product->title }}</div>
-
-                    <div class="prod-specs">
-                        @if($product->manufacturer_name)
-                        <div class="spec-row">
-                            <i class="fas fa-industry"></i>
-                            <span class="spec-key">MFR:</span>
-                            <span class="spec-val">{{ $product->manufacturer_name }}</span>
-                        </div>
-                        @endif
-                        @if($product->part_number)
-                        <div class="spec-row">
-                            <i class="fas fa-barcode"></i>
-                            <span class="spec-key">Part#:</span>
-                            <span class="spec-val">{{ $product->part_number }}</span>
-                        </div>
-                        @endif
-                        @if($product->model_number)
-                        <div class="spec-row">
-                            <i class="fas fa-tag"></i>
-                            <span class="spec-key">Model:</span>
-                            <span class="spec-val">{{ $product->model_number }}</span>
-                        </div>
-                        @endif
-                    </div>
-
-                    @if($product->pdf_file)
-                    <a href="{{ asset($product->pdf_file) }}" target="_blank" class="prod-pdf-link">
-                        <i class="fas fa-file-pdf"></i> {{ basename($product->pdf_file) }}
-                    </a>
-                    @endif
-
-                    <div class="prod-price-row">
-                        <span class="price-main">£{{ number_format($disc, 2) }}</span>
-                        @if($product->discount > 0)
-                        <span class="price-old">£{{ number_format($product->price, 2) }}</span>
-                        <span class="price-save-tag">Save {{ $product->discount }}%</span>
-                        @endif
-                    </div>
-
-                    <div class="prod-acts">
-                        <a href="{{ route('product-detail', $product->slug) }}" class="pa-view-btn" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="{{ route('add-to-cart', $product->slug) }}" class="pa-cart-btn">
-                            <i class="fas fa-file-invoice"></i> Request Quote
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <div class="center-cta" data-rv>
-            <a href="/frontend/showproduct" class="all-btn">
-                <i class="fas fa-th-large"></i> View All Products <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- ═══════════════════ BRANDS ═══════════════════ --}}
-<section class="brands-sec">
-    <div class="container">
-        <div class="brands-hd" data-rv>
-            <span class="sec-label">Our Partners</span>
-            <h2 class="sec-heading">Trusted by <em>Top Manufacturers</em></h2>
-        </div>
-    </div>
-    <div class="brands-scroll">
-        <div id="brandTrack" class="brands-track" style="padding: 0 80px;">
-            @php $brands = DB::table('brands')->where('status','active')->orderBy('title','asc')->get(); @endphp
-            @foreach($brands as $b)
-            <div class="brand-chip">{{ $b->title }}</div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<script>
-(function(){
-    const track = document.getElementById('brandTrack');
-    if (!track || !track.children.length) return;
-    const W = 176; let idx = 0;
-    const total = track.children.length;
-    setInterval(function(){
-        idx++;
-        track.style.transition = 'transform 700ms cubic-bezier(0.25,0.1,0.25,1)';
-        track.style.transform = `translateX(-${idx * W}px)`;
-        if (idx >= total - 4){
-            setTimeout(function(){
-                track.style.transition = 'none';
-                track.style.transform = 'translateX(0)';
-                idx = 0;
-            }, 720);
-        }
-    }, 2600);
-})();
-</script>
-{{-- ═══════════════════ TRUST ═══════════════════ --}}
-<section class="trust-sec">
-    <div class="container">
-        <div style="text-align:center; margin-bottom:48px;" data-rv>
-            <span class="sec-label">Our Commitment</span>
-            <h2 class="sec-heading">Why Engineers <em>Trust</em> Us</h2>
-        </div>
-        <div class="trust-grid">
-            <div class="trust-card" data-rv data-d="1">
-                <div class="tc-icon"><i class="fas fa-certificate"></i></div>
-                <div class="tc-title">100% Genuine Parts</div>
-                <div class="tc-desc">Every component sourced directly from authorized distributors. Full OEM traceability on every order.</div>
-                <div class="tc-stat">100%</div>
-            </div>
-            <div class="trust-card" data-rv data-d="2">
-                <div class="tc-icon"><i class="fas fa-award"></i></div>
-                <div class="tc-title">20+ Years Experience</div>
-                <div class="tc-desc">Trusted by process engineers and procurement teams globally since 2004. Consistent, reliable, professional.</div>
-                <div class="tc-stat">Since 2004</div>
-            </div>
-            <div class="trust-card" data-rv data-d="3">
-                <div class="tc-icon"><i class="fas fa-microscope"></i></div>
-                <div class="tc-title">Quality Inspected</div>
-                <div class="tc-desc">Multi-point inspection before every dispatch. If it doesn't meet specification, it stays in our warehouse.</div>
-                <div class="tc-stat">Zero Defects</div>
-            </div>
-            <div class="trust-card" data-rv data-d="4">
-                <div class="tc-icon"><i class="fas fa-headset"></i></div>
-                <div class="tc-title">7-Day Expert Support</div>
-                <div class="tc-desc">Real engineers available 7 days a week. Part identification, spec matching, and technical guidance on demand.</div>
-                <div class="tc-stat">7 Days/Week</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ═══════════════════ WHY US ═══════════════════ --}}
-<section class="why-sec">
-    <div class="container">
-        <div class="why-split">
-            <div class="why-left" data-rv>
-                <span class="sec-label">Why Petchemparts</span>
-                <h2 class="sec-heading">The <em>Trusted Choice</em> for Critical Industrial Parts</h2>
-                <p class="sec-desc">From upstream exploration to downstream refining, we supply verified components that keep your operations running without interruption.</p>
-
-                <div class="why-features">
-                    <div class="wf-item">
-                        <div class="wf-ico"><i class="fas fa-shield-alt"></i></div>
-                        <div>
-                            <div class="wf-title">Genuine OEM & Aftermarket</div>
-                            <div class="wf-desc">No grey market, no counterfeits. Every part comes with full certification and provenance documentation.</div>
-                        </div>
-                    </div>
-                    <div class="wf-item">
-                        <div class="wf-ico"><i class="fas fa-shipping-fast"></i></div>
-                        <div>
-                            <div class="wf-title">Express Global Delivery</div>
-                            <div class="wf-desc">Emergency same-day dispatch for critical spares. Real-time tracking across all major shipping networks.</div>
-                        </div>
-                    </div>
-                    <div class="wf-item">
-                        <div class="wf-ico"><i class="fas fa-file-contract"></i></div>
-                        <div>
-                            <div class="wf-title">Competitive Quote System</div>
-                            <div class="wf-desc">Request a quote online in minutes. Our team responds with pricing and availability within hours.</div>
-                        </div>
-                    </div>
-                    <div class="wf-item">
-                        <div class="wf-ico"><i class="fas fa-globe"></i></div>
-                        <div>
-                            <div class="wf-title">Serving 45+ Countries</div>
-                            <div class="wf-desc">A trusted international partner with established logistics routes across Europe, Middle East, Asia, and beyond.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="why-right" data-rv data-d="2">
-                <div class="wn-card">
-                    <div class="wn-num">20<sup>+</sup></div>
-                    <div class="wn-label">Years of Industry Experience</div>
-                </div>
-                <div class="wn-card">
-                    <div class="wn-num">50<sup>K</sup></div>
-                    <div class="wn-label">Part Numbers in Inventory</div>
-                </div>
-                <div class="wn-card">
-                    <div class="wn-num">200<sup>+</sup></div>
-                    <div class="wn-label">Global Manufacturers</div>
-                </div>
-                <div class="wn-card">
-                    <div class="wn-num">45<sup>+</sup></div>
-                    <div class="wn-label">Countries Served Worldwide</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ═══════════════════ CTA BAND ═══════════════════ --}}
-<section class="cta-band">
-    <div class="container">
-        <div class="cta-inner">
-            <div class="cta-text" data-rv>
-                <h2>Ready to Source Your Parts?</h2>
-                <p>Our team of specialists is available 7 days a week to help you find exactly what you need, at the right price, shipped anywhere in the world.</p>
-            </div>
-            <div class="cta-btns" data-rv data-d="2">
-                <a href="{{ url('/frontend/contact') }}" class="cta-btn-w">
-                    <i class="fas fa-file-invoice"></i> Request a Quote
-                </a>
-                <a href="tel:+441234440530" class="cta-btn-border">
-                    <i class="fas fa-phone-alt"></i> +44 123 444 0530
+                {{-- YEH LINE ADD KARO --}}
+                <a href="{{ url('/frontend/showproduct') }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+                        color:var(--brass);text-transform:uppercase;text-decoration:none;
+                        border-bottom:1px solid var(--brass);padding-bottom:2px;">
+                    All Products →
                 </a>
             </div>
+
+            {{-- Row 1: first 4 products --}}
+            @if($featuredProducts->count() > 0)
+                <div class="prod-grid reveal">
+                    @foreach($featuredProducts->take(4) as $product)
+                        @php
+                            $photos = json_decode($product->photo, true);
+                            $hasImg = !empty($photos[0]);
+                            $discPrice = $product->discount > 0
+                                ? $product->price - ($product->price * $product->discount / 100)
+                                : $product->price;
+                            $isNew = \Carbon\Carbon::parse(
+                                DB::table('products')->where('id', $product->id)->value('created_at')
+                            )->diffInDays(now()) < 30;
+                        @endphp
+                        <div class="prod-card" style="cursor:pointer;"
+                            onclick="window.location='{{ route('product-detail', $product->slug) }}'">
+                            <div class="prod-thumb">
+                                @if($isNew)
+                                    <span class="stock-tag">NEW IN</span>
+                                @elseif($product->discount > 0)
+                                    <span class="stock-tag" style="color:var(--brass);">-{{ $product->discount }}% OFF</span>
+                                @else
+                                    <span class="stock-tag">IN STOCK</span>
+                                @endif
+
+                                @if($hasImg)
+                                    <img src="{{ $photos[0] }}" alt="{{ $product->title }}"
+                                        style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                                        <circle cx="12" cy="12" r="7" />
+                                        <circle cx="12" cy="12" r="2.4" />
+                                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+                                    </svg>
+                                @endif
+                            </div>
+
+                            <div class="prod-brand">{{ $product->manufacturer_name ?? 'Petchemparts' }}</div>
+                            <div class="prod-title">{{ Str::limit($product->title, 55) }}</div>
+
+                            @if($product->part_number)
+                                <div class="prod-ref mono">REF. {{ $product->part_number }}</div>
+                            @else
+                                <div class="prod-ref mono">&nbsp;</div>
+                            @endif
+
+                            <div class="prod-foot">
+                                <div class="prod-price">
+                                    £{{ number_format($discPrice, 0) }}
+                                    <span>excl. VAT</span>
+                                </div>
+                                <a href="{{ route('add-to-cart', $product->slug) }}" class="add-btn" title="Request Quote"
+                                    onclick="event.stopPropagation();">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">
+                                        <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- Row 2: next 4 products --}}
+            @if($featuredProducts->count() > 4)
+                <br>
+                <div class="prod-grid reveal">
+                    @foreach($featuredProducts->skip(4)->take(4) as $product)
+                        @php
+                            $photos = json_decode($product->photo, true);
+                            $hasImg = !empty($photos[0]);
+                            $discPrice = $product->discount > 0
+                                ? $product->price - ($product->price * $product->discount / 100)
+                                : $product->price;
+                            $isNew = \Carbon\Carbon::parse(
+                                DB::table('products')->where('id', $product->id)->value('created_at')
+                            )->diffInDays(now()) < 30;
+                        @endphp
+                        <div class="prod-card" style="cursor:pointer;"
+                            onclick="window.location='{{ route('product-detail', $product->slug) }}'">
+                            <div class="prod-thumb">
+                                @if($isNew)
+                                    <span class="stock-tag">NEW IN</span>
+                                @elseif($product->discount > 0)
+                                    <span class="stock-tag" style="color:var(--brass);">-{{ $product->discount }}% OFF</span>
+                                @else
+                                    <span class="stock-tag">IN STOCK</span>
+                                @endif
+
+                                @if($hasImg)
+                                    <img src="{{ $photos[0] }}" alt="{{ $product->title }}"
+                                        style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                                        <rect x="4" y="8" width="16" height="10" rx="1" />
+                                        <path d="M8 8V6a4 4 0 018 0v2" />
+                                    </svg>
+                                @endif
+                            </div>
+
+                            <div class="prod-brand">{{ $product->manufacturer_name ?? 'Petchemparts' }}</div>
+                            <div class="prod-title">{{ Str::limit($product->title, 55) }}</div>
+
+                            @if($product->part_number)
+                                <div class="prod-ref mono">REF. {{ $product->part_number }}</div>
+                            @else
+                                <div class="prod-ref mono">&nbsp;</div>
+                            @endif
+
+                            <div class="prod-foot">
+                                <div class="prod-price">
+                                    £{{ number_format($discPrice, 0) }}
+                                    <span>excl. VAT</span>
+                                </div>
+                                <a href="{{ route('add-to-cart', $product->slug) }}" class="add-btn" title="Request Quote"
+                                    onclick="event.stopPropagation();">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">
+                                        <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
         </div>
-    </div>
-</section>
+    </section>
+
+    <section id="why">
+        <div class="section-inner">
+            <div class="section-head reveal">
+                <div>
+                    <span class="section-tag">03 — Why Petchem</span>
+                    <h2 class="section-title">An ecommerce platform with <em>an engineering desk</em> behind it.</h2>
+                </div>
+            </div>
+
+            <div class="why-wrap reveal">
+                <div class="why-list">
+                    <div class="why-item">
+                        <div class="why-num">01</div>
+                        <div>
+                            <div class="why-title">Verified Sourcing</div>
+                            <div class="why-desc">Every listing is checked by our technical team against manufacturer
+                                spec before it reaches the catalog.</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-num">02</div>
+                        <div>
+                            <div class="why-title">500+ Brand Network</div>
+                            <div class="why-desc">Direct relationships across Europe, North America and Asia mean
+                                genuine parts, not grey-market substitutes.</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-num">03</div>
+                        <div>
+                            <div class="why-title">48hr Dispatch</div>
+                            <div class="why-desc">Real-time stock across partner warehouses so urgent breakdown orders
+                                move the same day.</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-num">04</div>
+                        <div>
+                            <div class="why-title">Engineer-Led Support</div>
+                            <div class="why-desc">Speak to a technical engineer, not a call centre, when a spec doesn't
+                                quite match your equipment.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-visual">
+                    <div class="tex"></div>
+                    <div class="why-visual-content">
+                        <div class="big-num serif">98%</div>
+                        <div class="cap">ORDER ACCURACY</div>
+                        <div class="sub">Measured across every quote we've fulfilled since 2009 — because the wrong part
+                            costs more than downtime.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding:0 48px;">
+        <div class="stats-band reveal" style="border-radius:8px;">
+            <div class="stats-grid section-inner">
+                <div class="stat-item">
+                    <div class="stat-num">16</div>
+                    <div class="stat-lbl">Years Supplying Plants</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">500+</div>
+                    <div class="stat-lbl">Manufacturer Brands</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">40+</div>
+                    <div class="stat-lbl">Countries Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">98%</div>
+                    <div class="stat-lbl">Order Accuracy Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="section-inner">
+            <div class="section-head reveal" style="justify-content:center;text-align:center;">
+                <div style="margin:0 auto;">
+                    <span class="section-tag">04 — How Sourcing Works</span>
+                    <h2 class="section-title" style="margin:0 auto;">From part number <em>to plant floor.</em></h2>
+                </div>
+            </div>
+            <div class="process-list reveal">
+                <div class="process-item">
+                    <div class="process-col left">
+                        <div class="process-title">Submit the spec</div>
+                        <div class="process-desc">Search by part number, upload a drawing, or describe the equipment.
+                        </div>
+                    </div>
+                    <div class="process-marker">01</div>
+                    <div class="process-col right"></div>
+                </div>
+                <div class="process-item">
+                    <div class="process-col left"></div>
+                    <div class="process-marker">02</div>
+                    <div class="process-col right">
+                        <div class="process-title">Engineer verifies the match</div>
+                        <div class="process-desc">A technical engineer confirms fit, rating and compliance against your
+                            plant's exact requirement.</div>
+                    </div>
+                </div>
+                <div class="process-item">
+                    <div class="process-col left">
+                        <div class="process-title">Quote &amp; source globally</div>
+                        <div class="process-desc">We price across our 500+ brand network and secure stock from the
+                            nearest verified warehouse.</div>
+                    </div>
+                    <div class="process-marker">03</div>
+                    <div class="process-col right"></div>
+                </div>
+                <div class="process-item">
+                    <div class="process-col left"></div>
+                    <div class="process-marker">04</div>
+                    <div class="process-col right">
+                        <div class="process-title">Dispatch &amp; track</div>
+                        <div class="process-desc">Priority orders ship within 48 hours with full tracking through to
+                            site delivery.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="cta-section reveal">
+            <div class="section-tag" style="text-align:center;display:block;color:var(--brass-2);">Get Started</div>
+            <h2 class="cta-title">Send us a spec.<br><em>We'll send back a quote.</em></h2>
+            <p class="cta-desc">No account required to get pricing — our engineering desk responds to most requests
+                within one working day.</p>
+            <div class="cta-buttons">
+                {{-- REPLACE KARO IS SE --}}
+                <a href="{{ url('/frontend/contact') }}" class="btn-primary">Request a Quote →</a>
+                <a href="{{ url('/frontend/showproduct') }}" class="btn-ghost">Browse Full Catalog</a>
+            </div>
+        </div>
+    </section>
 
 
-</div>{{-- .pg-wrap --}}
 
-{{-- Scroll reveal --}}
-<script>
-(function(){
-    const els = document.querySelectorAll('[data-rv]');
-    const io  = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    els.forEach(function(el){ io.observe(el); });
-})();
-</script>
+    <script>
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => io.observe(el));
 
+        const marquee = document.getElementById('marquee');
+        marquee.innerHTML += marquee.innerHTML;
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            header.style.padding = window.scrollY > 40 ? '14px 48px' : '22px 48px';
+            header.classList.toggle('scrolled', window.scrollY > 40);
+        });
+    </script>
 @endsection

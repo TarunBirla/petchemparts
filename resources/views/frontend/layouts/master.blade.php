@@ -13,5 +13,7 @@
 
     @include('frontend.layouts.footer')
 
+    @include('frontend.layouts._quote_modal')
+
 </body>
 </html>

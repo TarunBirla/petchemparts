@@ -16,7 +16,9 @@
                 </ul>
             </nav>
             <div class="nav-right">
-                <a href="{{ url('/frontend/contact') }}" class="btn-quote">Request a Quote →</a>
+                <button id="btnHeaderQuote" type="button" class="btn-quote" onclick="handleHeaderQuoteClick(event)" style="border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                    <i class="fas fa-file-invoice"></i> Request a Quote <span id="headerQuoteBadge" class="quote-badge" style="background:var(--brass);color:#fff;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:700;line-height:1;">0</span>
+                </button>
             </div>
         </div>
         </div>

@@ -26,7 +26,7 @@ body {
 /* LEFT PANEL */
 .left-panel {
     width: 55%;
-    background: linear-gradient(145deg, #0d1b2a 0%, #1a3550 50%, #13A1F3 100%);
+    background: linear-gradient(145deg, #082A1C 0%, #0E3D2A 50%, #1D6146 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +44,7 @@ body {
     right: -80px;
     width: 280px;
     height: 280px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(173, 128, 54, 0.15);
     border-radius: 50%;
 }
 .left-panel::after {
@@ -54,7 +54,7 @@ body {
     left: -60px;
     width: 220px;
     height: 220px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
 }
 
@@ -69,7 +69,7 @@ body {
 .left-brand-icon {
     width: 44px;
     height: 44px;
-    background: #13A1F3;
+    background: #AD8036;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -108,51 +108,31 @@ body {
 }
 .illustration-box i {
     font-size: 60px;
-    color: rgba(255,255,255,0.3);
+    color: #E0B15E;
+}
+.illustration-box p {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    text-align: center;
 }
 
 .left-tagline {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
     text-align: center;
+    margin-bottom: 8px;
     position: relative;
     z-index: 1;
 }
-.left-tagline h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 10px;
-    line-height: 1.3;
-}
-.left-tagline p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-}
-
-/* Feature dots */
-.feature-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 28px;
-    width: 100%;
+.left-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    text-align: center;
     max-width: 300px;
     position: relative;
     z-index: 1;
-}
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: rgba(255,255,255,0.75);
-    font-size: 13px;
-}
-.feature-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #13A1F3;
-    flex-shrink: 0;
+    margin-bottom: 28px;
 }
 
 /* RIGHT PANEL */
@@ -161,11 +141,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 50px;
+    padding: 40px 36px;
     background: #fff;
 }
 
-.login-box {
+.admin-card {
     width: 100%;
     max-width: 380px;
 }
@@ -174,27 +154,28 @@ body {
 .admin-header {
     margin-bottom: 32px;
 }
-.admin-header-badge {
+.admin-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: rgba(14, 61, 42, 0.08);
+    color: #0E3D2A;
     font-size: 12px;
     font-weight: 600;
     padding: 5px 12px;
     border-radius: 20px;
     margin-bottom: 14px;
+    border: 1px solid rgba(14, 61, 42, 0.15);
 }
 .admin-header h2 {
     font-size: 26px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: #0E3D2A;
     margin-bottom: 6px;
 }
 .admin-header p {
     font-size: 14px;
-    color: #9ca3af;
+    color: #83887B;
 }
 
 /* Fields */
@@ -233,9 +214,9 @@ body {
     transition: border 0.2s, box-shadow 0.2s, background 0.2s;
 }
 .field input:focus {
-    border-color: #13A1F3;
+    border-color: #0E3D2A;
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(19,161,243,0.12);
+    box-shadow: 0 0 0 3px rgba(14, 61, 42, 0.12);
 }
 .field input.is-invalid {
     border-color: #ef4444;
@@ -257,7 +238,7 @@ body {
 .remember-row input[type="checkbox"] {
     width: 15px;
     height: 15px;
-    accent-color: #13A1F3;
+    accent-color: #0E3D2A;
 }
 .remember-row label {
     font-size: 13px;
@@ -269,7 +250,7 @@ body {
 .submit-btn {
     width: 100%;
     padding: 13px;
-    background: linear-gradient(135deg, #13A1F3, #0d7ec7);
+    background: linear-gradient(135deg, #0E3D2A, #1D6146);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -283,8 +264,9 @@ body {
     transition: opacity 0.2s, transform 0.15s;
 }
 .submit-btn:hover {
-    opacity: 0.92;
+    opacity: 0.94;
     transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(14, 61, 42, 0.3);
 }
 
 /* Divider */
@@ -312,9 +294,9 @@ body {
 }
 .forgot-link a {
     font-size: 13px;
-    color: #13A1F3;
+    color: #0E3D2A;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 .forgot-link a:hover { text-decoration: underline; }
 
@@ -426,7 +408,7 @@ body {
                 <i class="fas fa-sign-in-alt"></i> Sign In
             </button>
 
-            @if(Route::has('password.request'))
+            <!-- @if(Route::has('password.request'))
                 <div class="or-divider"><span>or</span></div>
                 <div class="forgot-link">
                     <a href="{{ route('password.request') }}">
@@ -434,7 +416,7 @@ body {
                         Forgot your password?
                     </a>
                 </div>
-            @endif
+            @endif -->
 
         </form>
     </div>

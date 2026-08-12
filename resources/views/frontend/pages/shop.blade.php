@@ -758,9 +758,9 @@
                         </div>
                         <div class="p-actions">
                             <a href="{{ route('product-detail', $product->slug) }}" class="p-btn-eye" title="View Details"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('add-to-cart', $product->slug) }}" class="p-btn-quote">
+                            <button type="button" onclick="addToQuote({{ $product->id }})" class="p-btn-quote" style="border:none;cursor:pointer;">
                                 <i class="fas fa-file-invoice"></i> Request Quote
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

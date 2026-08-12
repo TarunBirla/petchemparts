@@ -1460,12 +1460,12 @@
                                     £{{ number_format($discPrice, 0) }}
                                     <span>excl. VAT</span>
                                 </div>
-                                <a href="{{ route('add-to-cart', $product->slug) }}" class="add-btn" title="Request Quote"
-                                    onclick="event.stopPropagation();">
+                                <button type="button" class="add-btn" title="Request Quote"
+                                    onclick="event.stopPropagation(); addToQuote({{ $product->id }});" style="border:none;cursor:pointer;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">
                                         <path d="M12 5v14M5 12h14" />
                                     </svg>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     @endforeach
@@ -1523,12 +1523,12 @@
                                     £{{ number_format($discPrice, 0) }}
                                     <span>excl. VAT</span>
                                 </div>
-                                <a href="{{ route('add-to-cart', $product->slug) }}" class="add-btn" title="Request Quote"
-                                    onclick="event.stopPropagation();">
+                                <button type="button" class="add-btn" title="Request Quote"
+                                    onclick="event.stopPropagation(); addToQuote({{ $product->id }});" style="border:none;cursor:pointer;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">
                                         <path d="M12 5v14M5 12h14" />
                                     </svg>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     @endforeach

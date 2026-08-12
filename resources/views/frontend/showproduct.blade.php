@@ -486,10 +486,9 @@ $products = DB::table('products')
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
                         </a>
-                        <a href="{{ route('add-to-cart', $product->slug) }}"
-                           class="pgp-quote-btn">
+                        <button type="button" onclick="addToQuote({{ $product->id }})" class="pgp-quote-btn" style="border:none;cursor:pointer;">
                             + Quote
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

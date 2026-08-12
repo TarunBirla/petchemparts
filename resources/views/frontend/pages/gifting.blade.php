@@ -695,9 +695,8 @@
                             </a>
                         @endif
                         <div class="product-hover-icons">
-                            <button><a href="{{route('add-to-cart',$product->slug)}}">
-                                <i class="fas fa-shopping-bag"></i>
-                                </a>
+                            <button type="button" onclick="addToQuote({{ $product->id }})" title="Request Quote">
+                                <i class="fas fa-file-invoice"></i>
                             </button>
                             <button>
                                 <a href="{{route('add-to-wishlist',$product->slug)}}">

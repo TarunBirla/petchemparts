@@ -100,6 +100,20 @@
     <!--    </div>-->
     <!--</li>-->
 
+    <!-- Quote Requests -->
+    @php
+        $pendingQuoteCount = \App\Models\QuoteRequest::where('status', 'pending')->count();
+    @endphp
+    <li class="nav-item {{ request()->routeIs('admin.quote_requests.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.quote_requests.index') }}">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Quote Requests</span>
+            @if($pendingQuoteCount > 0)
+                <span class="badge badge-danger badge-counter ml-1">{{ $pendingQuoteCount }}</span>
+            @endif
+        </a>
+    </li>
+
     <!--Orders -->
     <li class="nav-item">
         <a class="nav-link" href="{{route('order.index')}}">

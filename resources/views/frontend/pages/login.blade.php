@@ -17,7 +17,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(135deg, #0d7ec7 0%, #13A1F3 50%, #0ea5e9 100%);
+    background: linear-gradient(135deg, #082A1C 0%, #0E3D2A 50%, #1D6146 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;

@@ -51,7 +51,7 @@
 											<p class="product-des">{!!($wishlist['summary']) !!}</p>
 										</td>
 										<td class="total-amount" data-title="Total"><span>${{$wishlist['amount']}}</span></td>
-										<td><a href="{{route('add-to-cart',$wishlist->product['slug'])}}" class='btn text-white'  style="background-color: #000000;">Add To Cart</a></td>
+										<td><button type="button" onclick="addToQuote({{ $wishlist->product['id'] }})" class='btn text-white' style="background-color: #0E3D2A; border:none; cursor:pointer;">Request Quote</button></td>
 										<td class="action" data-title="Remove"><a href="{{route('wishlist-delete',$wishlist->id)}}"><i class="ti-trash remove-icon"></i></a></td>
 									</tr>
 								@endforeach

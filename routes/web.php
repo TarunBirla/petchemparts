@@ -17,6 +17,8 @@
     use App\Http\Controllers\ManufacturerController;
     use App\Http\Controllers\HomeController;
     use App\Http\Controllers\PdfController;
+    use App\Http\Controllers\QuoteController;
+    use App\Http\Controllers\AdminQuoteRequestController;
     use \UniSharp\LaravelFilemanager\Lfm;
 use App\Models\Category;
     // CACHE CLEAR ROUTE
@@ -85,7 +87,7 @@ Route::get('/get-subcategories/{id}', function ($id) {
     Route::post('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.updated');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::get('/category/{slug}', [FrontendController::class, 'show'])->name('category.details');
-    Route::post('/place-order', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+    // Route::post('/place-order', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
     Route::post('cart/order', [OrderController::class, 'store'])->name('cart.order');
 
     Route::get('newarrival', [FrontendController::class, 'newarrival'])->name('newarrival');
@@ -136,8 +138,15 @@ Route::get('/get-subcategories/{id}', function ($id) {
                 return view('frontend.pages.cart');
             })->name('cart');
 
+            // Quote Request Routes
+            Route::post('/quote/add', [QuoteController::class, 'addToQuote'])->name('quote.add');
+            Route::post('/quote/update', [QuoteController::class, 'updateQuantity'])->name('quote.update');
+            Route::get('/quote/remove/{id}', [QuoteController::class, 'remove'])->name('quote.remove');
+            Route::get('/quote/get-cart', [QuoteController::class, 'getCart'])->name('quote.getCart');
+            Route::post('/quote/submit', [QuoteController::class, 'submit'])->name('quote.submit');
+
     
-            Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+            // Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
         // Wishlist
             Route::get('/wishlist', function () {
                 return view('frontend.pages.wishlist');
@@ -231,6 +240,12 @@ Route::get('/get-subcategories/{id}', function ($id) {
         Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('admin.notification');
         Route::get('/notifications', [NotificationController::class, 'index'])->name('all.notification');
         Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification.delete');
+        // Quote Requests Admin
+        Route::get('/quote-requests', [AdminQuoteRequestController::class, 'index'])->name('admin.quote_requests.index');
+        Route::get('/quote-requests/{id}', [AdminQuoteRequestController::class, 'show'])->name('admin.quote_requests.show');
+        Route::post('/quote-requests/{id}/status', [AdminQuoteRequestController::class, 'updateStatus'])->name('admin.quote_requests.status');
+        Route::delete('/quote-requests/{id}', [AdminQuoteRequestController::class, 'destroy'])->name('admin.quote_requests.destroy');
+
         // Password Change
         Route::get('change-password', [AdminController::class, 'changePassword'])->name('change.password.form');
         Route::post('change-password', [AdminController::class, 'changPasswordStore'])->name('change.password');

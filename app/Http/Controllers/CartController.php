@@ -16,81 +16,60 @@ class CartController extends Controller
     }
 
     
-    public function addToCart(Request $request ,$slug)
+    public function addToCart(Request $request ,$slug = null)
     {
-        if (empty($request->slug)) {
+        $targetSlug = $slug ?? $request->slug;
+        if (empty($targetSlug)) {
             return back()->with('error', 'Invalid product');
         }
 
-        $product = Product::where('slug', $request->slug)->first();
+        $product = Product::where('slug', $targetSlug)->first();
 
         if (!$product) {
             return back()->with('error', 'Invalid product');
         }
 
-        $price = $product->price - ($product->price * $product->discount / 100);
-        $cartItem = [
-            'product_id' => $product->id,
-            'name' => $product->title,
-            'price' => $price,
-            'quantity' => 1,
-            'amount' => $price,
-        ];
+        $qty = (int) $request->input('qty', 1);
+        if ($qty < 1) $qty = 1;
 
-        // Check stock
-        if ($product->stock <= 0) {
-            return back()->with('error', 'Stock not sufficient!');
-        }
+        $quoteCart = session()->get('quote_cart', []);
 
-        if (auth()->check()) {
+        $photos = json_decode($product->photo, true);
+        $firstPhoto = is_array($photos) && count($photos) > 0 ? $photos[0] : $product->photo;
 
-            $already_cart = Cart::where('user_id', auth()->id())
-                                ->where('order_id', null)
-                                ->where('product_id', $product->id)
-                                ->first();
+        $finalPrice = $product->discount > 0
+            ? $product->price - ($product->price * $product->discount / 100)
+            : $product->price;
 
-            if ($already_cart) {
-                if ($product->stock < $already_cart->quantity + 1) {
-                    return back()->with('error', 'Stock not sufficient!');
-                }
-
-                $already_cart->quantity += 1;
-                $already_cart->amount = $already_cart->price * $already_cart->quantity;
-                $already_cart->save();
-            } else {
-                $cart = new Cart;
-                $cart->user_id = auth()->id();
-                $cart->product_id = $product->id;
-                $cart->price = $price;
-                $cart->quantity = 1;
-                $cart->amount = $price;
-                $cart->save();
-
-                Wishlist::where('user_id', auth()->id())
-                    ->whereNull('cart_id')
-                    ->where('product_id', $product->id)
-                    ->update(['cart_id' => $cart->id]);
-            }
+        if (isset($quoteCart[$product->id])) {
+            $quoteCart[$product->id]['quantity'] += $qty;
         } else {
-            
-            $sessionCart = session()->get('cart', []);
-            $productId = $product->id;
-
-            if (isset($sessionCart[$productId])) {
-                if ($product->stock < $sessionCart[$productId]['quantity'] + 1) {
-                    return back()->with('error', 'Stock not sufficient!');
-                }
-
-                $sessionCart[$productId]['quantity'] += 1;
-                $sessionCart[$productId]['amount'] = $sessionCart[$productId]['price'] * $sessionCart[$productId]['quantity'];
-            } else {
-                $sessionCart[$productId] = $cartItem;
-            }
-
-            session()->put('cart', $sessionCart);
+            $quoteCart[$product->id] = [
+                'id' => $product->id,
+                'title' => $product->title,
+                'slug' => $product->slug,
+                'part_number' => $product->part_number,
+                'model_number' => $product->model_number,
+                'manufacturer_name' => optional($product->manufacturer)->name,
+                'price' => $finalPrice,
+                'photo' => $firstPhoto,
+                'quantity' => $qty,
+            ];
         }
 
-        return back()->with('success', 'Product successfully added to cart');
+        session()->put('quote_cart', $quoteCart);
+
+        if ($request->ajax()) {
+            $totalCount = array_sum(array_column($quoteCart, 'quantity'));
+            return response()->json([
+                'status' => true,
+                'message' => 'Product successfully added to your Quote Request!',
+                'count' => $totalCount
+            ]);
+        }
+
+        request()->session()->flash('success', 'Product successfully added to your Quote Request!');
+        return back();
     }
 
     public function singleAddToCart(Request $request){

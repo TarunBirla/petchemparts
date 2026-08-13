@@ -1190,10 +1190,10 @@
             <p class="hero-sub">The global parts platform for petrochemical, oil &amp; gas and industrial maintenance
                 teams — engineered sourcing for electrical, mechanical, process and safety equipment, backed by real
                 engineers.</p>
-            <form class="hero-search" onsubmit="return false;">
+            <!-- <form class="hero-search" onsubmit="return false;">
                 <input type="text" placeholder="Search by part number, e.g. SRP981 or brand..." />
                 <button type="submit">Search</button>
-            </form>
+            </form> -->
             <div class="hero-stats">
                 <div>
                     <div class="num">2M+</div>

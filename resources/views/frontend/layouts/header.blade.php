@@ -8,10 +8,10 @@
         <div class="nav-links-wrap">
             <nav>
                 <ul>
-                    <li><a href="#categories">Catalog</a></li>
-                    <li><a href="#products">Featured Parts</a></li>
-                    <li><a href="#why">Why Petchem</a></li>
-                    <li><a href="#process">How Sourcing Works</a></li>
+                    <li><a href="https://petchemparts.nexteck.uk/#categories">Catalog</a></li>
+                    <li><a href="https://petchemparts.nexteck.uk/#products">Featured Parts</a></li>
+                    <li><a href="https://petchemparts.nexteck.uk/#why">Why Petchem</a></li>
+                    <li><a href="https://petchemparts.nexteck.uk/#process">How Sourcing Works</a></li>
                     <li><a href="{{ url('/frontend/contact') }}">Contact</a></li>
                 </ul>
             </nav>

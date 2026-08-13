@@ -329,7 +329,7 @@
             <!-- Form -->
             <div class="contact-form-card">
                 <div class="form-title">Enquiry Form</div>
-                <div class="form-title-lg">Send Us a Message</div>
+                <div class="form-title-lg">Contact Us</div>
 
                 @if(session('success'))
                 <div style="background: rgba(14, 61, 42, 0.1); border: 1px solid var(--green); color: var(--green); padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 14px; font-weight: 600;">

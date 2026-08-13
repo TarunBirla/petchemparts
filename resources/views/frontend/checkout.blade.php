@@ -117,10 +117,7 @@
                     <button class="w-full theme-bg text-white py-3 rounded-lg font-semibold hover:opacity-90 transition mb-4">
                          Request for Quote
                     </button>
-                    
-                    <!--<button class="w-full border-2 theme-border theme-text py-3 rounded-lg font-semibold hover:bg-gray-50 transition">-->
-                    <!--    Continue Shopping-->
-                    <!--</button>-->
+                 
 
                     <div class="mt-6 pt-6 border-t border-gray-200">
                         <p class="text-sm text-gray-600 flex items-center">

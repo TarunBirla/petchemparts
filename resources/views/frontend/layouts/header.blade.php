@@ -12,7 +12,7 @@
                     <li><a href="#products">Featured Parts</a></li>
                     <li><a href="#why">Why Petchem</a></li>
                     <li><a href="#process">How Sourcing Works</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ url('/frontend/contact') }}">Contact</a></li>
                 </ul>
             </nav>
             <div class="nav-right">

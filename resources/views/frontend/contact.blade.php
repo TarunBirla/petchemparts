@@ -330,38 +330,51 @@
             <div class="contact-form-card">
                 <div class="form-title">Enquiry Form</div>
                 <div class="form-title-lg">Send Us a Message</div>
-                <form>
+
+                @if(session('success'))
+                <div style="background: rgba(14, 61, 42, 0.1); border: 1px solid var(--green); color: var(--green); padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 14px; font-weight: 600;">
+                    <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div style="background: #FEF2F2; border: 1px solid #F87171; color: #991B1B; padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 14px;">
+                    <ul style="margin: 0; padding-left: 18px;">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form method="POST" action="{{ route('contact.store') }}">
                     @csrf
+                    <div class="form-group">
+                        <label>Your Full Name <span>*</span></label>
+                        <input type="text" name="name" class="form-control-custom" placeholder="John Doe" value="{{ old('name') }}" required>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>First Name <span>*</span></label>
-                            <input type="text" class="form-control-custom" placeholder="John" required>
+                            <label>Email Address <span>*</span></label>
+                            <input type="email" name="email" class="form-control-custom" placeholder="john.doe@example.com" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Last Name <span>*</span></label>
-                            <input type="text" class="form-control-custom" placeholder="Doe" required>
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" class="form-control-custom" placeholder="+44 7879 175585" value="{{ old('phone') }}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Email Address <span>*</span></label>
-                        <input type="email" class="form-control-custom" placeholder="john.doe@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" class="form-control-custom" placeholder="+44 123 456 7890">
-                    </div>
-                    <div class="form-group">
-                        <label>Company / Organisation</label>
-                        <input type="text" class="form-control-custom" placeholder="Your Company Ltd.">
-                    </div>
+
                     <div class="form-group">
                         <label>Subject <span>*</span></label>
-                        <input type="text" class="form-control-custom" placeholder="How can we help?" required>
+                        <input type="text" name="subject" class="form-control-custom" placeholder="How can we help you?" value="{{ old('subject') }}" required>
                     </div>
+
                     <div class="form-group">
                         <label>Message <span>*</span></label>
-                        <textarea class="form-control-custom" placeholder="Tell us more about your inquiry, part numbers needed, quantity etc..." required></textarea>
+                        <textarea name="message" class="form-control-custom" placeholder="Tell us more about your inquiry, part numbers needed, quantity etc..." required>{{ old('message') }}</textarea>
                     </div>
+
                     <button type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i>
                         Send Message

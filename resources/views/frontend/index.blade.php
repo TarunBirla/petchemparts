@@ -1675,7 +1675,7 @@
                 within one working day.</p>
             <div class="cta-buttons">
                 {{-- REPLACE KARO IS SE --}}
-                <a href="{{ url('/frontend/contact') }}" class="btn-primary">Request a Quote →</a>
+                <a href="{{ url('/frontend/contact') }}" class="btn-primary">Contact Us →</a>
                 <a href="{{ url('/frontend/showproduct') }}" class="btn-ghost">Browse Full Catalog</a>
             </div>
         </div>

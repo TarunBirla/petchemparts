@@ -134,10 +134,23 @@ button:hover {
 
 <section class="form-section">
   <div class="form-container">
-    <h3>Get in Touch</h3>
-    <p>If you've got great products you're making or looking to work with us then drop us a line.</p>
-    
-    <form class="form-contact form contact_form" method="post" action="{{route('contact.store')}}" id="contactForm" novalidate="novalidate">
+    @if(session('success'))
+    <div style="background: rgba(14, 61, 42, 0.1); border: 1px solid #0E3D2A; color: #0E3D2A; padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 14px; font-weight: 600;">
+        <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div style="background: #FEF2F2; border: 1px solid #F87171; color: #991B1B; padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; font-size: 14px; text-align: left;">
+        <ul style="margin: 0; padding-left: 18px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form class="form-contact form contact_form" method="post" action="{{route('contact.store')}}" id="contactForm">
         @csrf   
        <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Your Name">

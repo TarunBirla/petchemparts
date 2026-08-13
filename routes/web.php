@@ -223,7 +223,7 @@ Route::get('/get-subcategories/{id}', function ($id) {
         // Post
         Route::resource('/post', 'PostController');
         // Message
-        Route::resource('/message', 'MessageController');
+        Route::resource('/message', MessageController::class);
         Route::get('/message/five', [MessageController::class, 'messageFive'])->name('messages.five');
 
         // Order

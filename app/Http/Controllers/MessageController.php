@@ -5,6 +5,10 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Events\MessageSent;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\ContactAdminMail;
+
 class MessageController extends Controller
 {
     /**
@@ -44,25 +48,44 @@ class MessageController extends Controller
             'name'=>'required|min:2',
             'email'=>'email|required',
             'message'=>'required',
-            'subject'=>'required',
-            'phone'=>'required'
+            'subject'=>'nullable',
+            'phone'=>'nullable'
         ]);
 
-        $message=Message::create($request->all());
+        $inputData = $request->all();
+        if (empty($inputData['subject'])) {
+            $inputData['subject'] = 'Website General Inquiry';
+        }
+
+        $messageRecord = Message::create($inputData);
         
-        $data=array();
-        $data['url']=route('message.show',$message->id);
-        $data['date']=$message->created_at->format('F d, Y h:i A');
-        $data['name']=$message->name;
-        $data['email']=$message->email;
-        $data['phone']=$message->phone;
-        $data['message']=$message->message;
-        $data['subject']=$message->subject;
-        // $data['photo']=Auth()->user()->photo;
-        // return $data;    
-        event(new MessageSent($data));
-        // $message = "We Contact you Soon";
-        request()->session()->flash('success','Successfully Sent message');
+        // Send email notification to Admin (tbirla120@gmail.com)
+        $adminEmail = 'mohammednasar.uk@gmail.com';
+        try {
+            if (config('mail.default') === 'smtp' && empty(env('MAIL_USERNAME'))) {
+                config(['mail.default' => 'log']);
+            }
+            Mail::to($adminEmail)->send(new ContactAdminMail($messageRecord));
+        } catch (\Exception $e) {
+            Log::error('Contact Form Admin Email Error: ' . $e->getMessage());
+        }
+
+        try {
+            $data = [
+                'url' => route('message.show', $messageRecord->id),
+                'date' => $messageRecord->created_at ? $messageRecord->created_at->format('F d, Y h:i A') : date('F d, Y h:i A'),
+                'name' => $messageRecord->name,
+                'email' => $messageRecord->email,
+                'phone' => $messageRecord->phone,
+                'message' => $messageRecord->message,
+                'subject' => $messageRecord->subject,
+            ];
+            event(new MessageSent($data));
+        } catch (\Exception $e) {
+            // Event broadcast fallback
+        }
+
+        request()->session()->flash('success', 'Thank you! Your message has been sent successfully. Our team will contact you soon.');
         return back();
     }
 

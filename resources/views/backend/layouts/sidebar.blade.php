@@ -114,6 +114,20 @@
         </a>
     </li>
 
+    <!-- Contact Messages -->
+    @php
+        $unreadMsgCount = \App\Models\Message::whereNull('read_at')->count();
+    @endphp
+    <li class="nav-item {{ request()->routeIs('message.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('message.index') }}">
+            <i class="fas fa-envelope"></i>
+            <span>Contact Messages</span>
+            @if($unreadMsgCount > 0)
+                <span class="badge badge-warning badge-counter ml-1">{{ $unreadMsgCount }}</span>
+            @endif
+        </a>
+    </li>
+
     <!--Orders -->
     <li class="nav-item">
         <a class="nav-link" href="{{route('order.index')}}">

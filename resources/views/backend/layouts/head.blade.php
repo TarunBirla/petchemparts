@@ -7,7 +7,9 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Petchem Parts || Admin Dashboard</title>
-  
+    <link rel="icon" type="image/png" href="{{ asset('brands/logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('brands/logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('brands/logo.png') }}">
     <!-- Custom fonts for this template-->
      <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

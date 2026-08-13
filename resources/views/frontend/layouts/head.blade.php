@@ -3,6 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@yield('title', 'Petchem Parts — Industrial & Petrochemical Parts, Sourced Right.')</title>
 <meta name="description" content="@yield('meta_description', 'Global spare parts sourcing for petrochemical, industrial and oil & gas infrastructure. 500+ manufacturer brands, verified stock, 48hr dispatch.')">
+<link rel="icon" type="image/png" href="{{ asset('brands/logo.png') }}">
+<link rel="shortcut icon" type="image/png" href="{{ asset('brands/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('brands/logo.png') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,560;0,9..144,650;1,9..144,450&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
